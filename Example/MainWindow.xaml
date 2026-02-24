@@ -47,10 +47,41 @@
                     <Grid.RowDefinitions>
                         <!--Logo-->
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                         <!--Buttons-->
-                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="3*"/>
 
                     </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="2">
+
+                        <Grid.RowDefinitions>
+                            <!-- BUTTON 1-->
+                            <RowDefinition Height="*"/>
+                            <!-- BUTTON 2-->
+                            <RowDefinition Height="*"/>
+                            <!-- BUTTON 3-->
+                            <RowDefinition Height="*"/>
+                            <!-- BUTTON 4-->
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0"
+                                Content="VENTANA"
+                                Command="{Binding ShowFirstScreenCommand}">
+                            
+                        </Button>
+
+                        <Button Grid.Row="1"
+                                Content="GOOD HOUSEWIFE"
+                                Command="{Binding ShowSecondScreenCommand}">
+
+                        </Button>
+
+
+                    </Grid>
+                    
+                    
 
 
                 </Grid>

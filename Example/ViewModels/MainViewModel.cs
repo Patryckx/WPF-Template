@@ -12,11 +12,18 @@ namespace Example.ViewModels
 {
     public class MainViewModel :INotifyPropertyChanged
     {
-
+        
+        /// WINDOW FUNCTIONS
+       
         public ICommand MinimizeCommand { get; }
         public ICommand MaximizeCommand { get; }
         public ICommand CloseCommand { get; }
+
+        /// VIEWS NAVIGATION FUNCTIONS
         
+        public ICommand ShowFirstScreenCommand { get; }
+        public ICommand ShowSecondScreenCommand { get; }
+
 
         private object? _currentView;
 
@@ -37,13 +44,17 @@ namespace Example.ViewModels
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
             CloseCommand = new RelayCommand(CloseWindow);
+
+            ShowFirstScreenCommand = new RelayCommand(ShowFirstScreen);
+            ShowSecondScreenCommand = new RelayCommand(ShowSecondScreen);
+
         }
 
 
         /// <summary>
         /// WINDOW FUNCTIONS
         /// </summary>
-        
+
 
         private void MinimizeWindow()
         {
@@ -69,15 +80,24 @@ namespace Example.ViewModels
 
 
 
-        /// <summary>
         /// VIEW FUNCTIONS
-        /// </summary>
+        
+        public void ShowFirstScreen()
+        {
+            CurrentView = new FirstScreenViewModel();
+        }
 
 
         public void ShowSecondScreen()
         {
             CurrentView = new SecondScreenViewModel();
         }
+
+
+
+
+
+
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
