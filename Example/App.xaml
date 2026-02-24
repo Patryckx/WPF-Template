@@ -1,0 +1,36 @@
+﻿<Application x:Class="Example.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             
+             xmlns:views="clr-namespace:Example.Views"
+             xmlns:vm="clr-namespace:Example.ViewModels"
+             
+                  
+             StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+
+            <!-- GLOBAL STYLES -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- VIEW ↔ VIEWMODEL LINK -->
+
+
+                <DataTemplate DataType="{x:Type vm:FirstScreenViewModel}">
+                    <views:FirstScreen/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type vm:SecondScreenViewModel}">
+                    <views:SecondScreen/>
+                </DataTemplate>
+
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+
+</Application>
