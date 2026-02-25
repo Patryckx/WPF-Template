@@ -10,14 +10,27 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\close.png" />
+    <None Remove="Resources\Images\cogwheel.png" />
+    <None Remove="Resources\Images\folder.png" />
+    <None Remove="Resources\Images\logout.png" />
     <None Remove="Resources\Images\maximize.png" />
     <None Remove="Resources\Images\minimize.png" />
+    <None Remove="Resources\Images\nidec-icon.jpeg" />
+    <None Remove="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\cogwheel.png" />
+    <Resource Include="Resources\Images\logout.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Images\close.png" />
+    <Resource Include="Resources\Images\folder.png" />
     <Resource Include="Resources\Images\maximize.png" />
     <Resource Include="Resources\Images\minimize.png" />
+    <Resource Include="Resources\Images\nidec-icon.jpeg" />
+    <Resource Include="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
   </ItemGroup>
 
 </Project>

@@ -25,5 +25,10 @@ namespace Example
 
             DataContext = new MainViewModel();
         }
+
+        private void Button_Click()
+        {
+
+        }
     }
 }

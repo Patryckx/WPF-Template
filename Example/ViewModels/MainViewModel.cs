@@ -1,4 +1,4 @@
-﻿using Example.ViewModels.Functions;
+﻿using Example.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Example.ViewModels
 {
-    public class MainViewModel :INotifyPropertyChanged
+    public class MainViewModel :ViewModelBase 
     {
         
         /// WINDOW FUNCTIONS
@@ -37,6 +37,10 @@ namespace Example.ViewModels
             }
         }
 
+        //****************************************
+        //  CONSTRUCTOR
+        //****************************************
+
         public MainViewModel()
         {
             CurrentView = new FirstScreenViewModel();
@@ -51,9 +55,9 @@ namespace Example.ViewModels
         }
 
 
-        /// <summary>
-        /// WINDOW FUNCTIONS
-        /// </summary>
+        //****************************************
+        //  WINDOW FUNCTIONS
+        //****************************************
 
 
         private void MinimizeWindow()
@@ -68,7 +72,6 @@ namespace Example.ViewModels
             else
                 Application.Current.MainWindow.WindowState = WindowState.Maximized;
 
-
         }
 
         private void CloseWindow()
@@ -76,12 +79,10 @@ namespace Example.ViewModels
             Application.Current.Shutdown();
         }
 
+        //****************************************
+        //    VIEW FUNCTIONS
+        //****************************************
 
-
-
-
-        /// VIEW FUNCTIONS
-        
         public void ShowFirstScreen()
         {
             CurrentView = new FirstScreenViewModel();
@@ -93,20 +94,6 @@ namespace Example.ViewModels
             CurrentView = new SecondScreenViewModel();
         }
 
-
-
-
-
-
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-
+        
     }
 }
