@@ -18,7 +18,9 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!-- VIEW ↔ VIEWMODEL LINK -->
-
+                <DataTemplate DataType="{x:Type vm:InicializeScreenViewModel}">
+                    <views:InicializeScreen/>
+                </DataTemplate>
 
                 <DataTemplate DataType="{x:Type vm:FirstScreenViewModel}">
                     <views:FirstScreen/>

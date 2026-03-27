@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="Example.Views.InicializeScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Example.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" Name="Inicialize_title"/>
+            <ColumnDefinition Width="1*" Name="Inicializa_Content"/>
+
+        </Grid.ColumnDefinitions>
+
+        <!-- ========================================= -->
+        <!-- SCREEN TITLE                             -->
+        <!-- ========================================= -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" Name="Icon_title"/>
+                    <ColumnDefinition Width="4*" Name="App_Title"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Border Padding="5">
+                        <Image
+                        Source="/Resources/Images/lanzadera.png">
+
+                        </Image>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Column="1">
+
+                    <Border Padding="20">
+
+                        <TextBlock FontSize="42"
+ 
+                            FontWeight="Bold"
+                            FontFamily="Segoe UI"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"><Run Language="es-mx" Text="Inicializar App"/></TextBlock>
+
+
+                    </Border>
+
+                </Grid>
+                    
+            </Grid>
+
+            <Grid Grid.Row="1" >
+                <Border Padding="20">
+
+                    <TextBlock FontSize="33"
+ 
+                        FontWeight="Normal"
+                        FontFamily="Segoe UI"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                        <Run Language="es-mx" 
+                            Text="Para inicializar la"/>
+                        <LineBreak/>
+                        <Run Text="aplicación por favor"/>
+                        <LineBreak/>
+                        <Run Text="pulse el siguiente botón"/>
+                        <LineBreak/>
+                        <Run Text="o la barra espaciadora"/>
+
+
+                    </TextBlock>
+
+
+                </Border>
+            </Grid>
+            <Grid Grid.Row="2">
+
+                <Image Source="/Resources/Images/inicialize_app_icons.png"
+                        Height="auto"
+                        Width="auto"
+                       Cursor="Hand">
+                </Image>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1">
+
+            <Image Source="/Resources/Images/Edge.png"
+                   
+                   Height="auto"
+                   Width="auto"
+                   >
+                
+            </Image>
+            
+            
+        </Grid>
+    </Grid>
+</UserControl>

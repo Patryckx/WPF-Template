@@ -1,4 +1,6 @@
-﻿using Example.ViewModels.Base;
+﻿using EthModbus.Services;
+using Example.Models;
+using Example.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +26,10 @@ namespace Example.ViewModels
         public ICommand ShowFirstScreenCommand { get; }
         public ICommand ShowSecondScreenCommand { get; }
 
+        public ICommand ShowInicializeScreenCommand { get; }
+
+
+
 
         private object? _currentView;
 
@@ -38,12 +44,31 @@ namespace Example.ViewModels
         }
 
         //****************************************
+        //  CONNECTION VIEWMODEL
+        //****************************************
+
+        private ConnectionViewModel _connectionVM;
+
+        public ConnectionViewModel ConnectionVM
+        {
+            get => _connectionVM;
+
+            set     
+            {
+                _connectionVM = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+            //****************************************
         //  CONSTRUCTOR
         //****************************************
 
         public MainViewModel()
         {
-            CurrentView = new FirstScreenViewModel();
+            ConnectionVM=new ConnectionViewModel(new ModbusService());
+            CurrentView = new FirstScreenViewModel(ConnectionVM);
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
@@ -51,6 +76,11 @@ namespace Example.ViewModels
 
             ShowFirstScreenCommand = new RelayCommand(ShowFirstScreen);
             ShowSecondScreenCommand = new RelayCommand(ShowSecondScreen);
+
+            ShowInicializeScreenCommand = new RelayCommand(ShowInicializeScreen);
+
+
+
 
         }
 
@@ -85,7 +115,7 @@ namespace Example.ViewModels
 
         public void ShowFirstScreen()
         {
-            CurrentView = new FirstScreenViewModel();
+            CurrentView = new FirstScreenViewModel(ConnectionVM);
         }
 
 
@@ -94,6 +124,12 @@ namespace Example.ViewModels
             CurrentView = new SecondScreenViewModel();
         }
 
-        
+        public void ShowInicializeScreen()
+        {
+            CurrentView = new InicializeScreenViewModel();
+        }
+
+
+
     }
 }

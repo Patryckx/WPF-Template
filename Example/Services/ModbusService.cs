@@ -1,0 +1,111 @@
+﻿using EthModbus.Models.Modbus;
+using EthModbus.Services.Interfaces;
+using ModbusTcpLib;
+using ModbusTcpLib.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EthModbus.Services
+{
+    public class ModbusService : IModbusService
+    {
+        private readonly IModbusClient _client;
+        private readonly byte _slaveId = 1;
+
+        public ModbusService() {
+
+            _client = new ModbusClient();
+
+        }
+
+
+        public void Connect(string host,int port)
+        {
+            _client.Connect(host,port);
+        }
+
+        public bool IsConnected => _client.IsConnected;
+       
+
+        public void Disconnect()
+        {
+            _client.Disconnect();
+        }
+
+
+
+        public DiscreteCoil ReadCoil(ushort address)
+        {
+            var coil = new DiscreteCoil
+            {
+                Address = address,
+                LastUpdated = DateTime.Now
+            };
+
+            try
+            {
+                coil.Value = _client.ReadSingleCoil(_slaveId, address);
+                coil.IsValid = true;
+                coil.Error = null;
+            }
+            catch (Exception ex)
+            {
+                coil.IsValid= false;
+                coil.Error=ex.Message;
+            }
+
+            return coil;
+
+
+        }
+
+
+        public IReadOnlyList<DiscreteCoil> ReadCoils(IEnumerable<ushort> addresses)
+        {
+            var coils= new List<DiscreteCoil>();
+
+            foreach (var address in addresses)
+            {
+                coils.Add(ReadCoil(address));
+            }
+            return coils;
+
+        }
+
+        public void WriteCoil(DiscreteCoil coil,bool value)
+        {
+            if (!coil.IsWritable)
+                throw new InvalidOperationException("Coil is read-only");
+
+            try
+            {
+                _client.WriteSingleCoil(_slaveId, coil.Address, value);
+
+                coil.Value = value;
+                coil.IsValid = true;
+                coil.Error = null;
+                coil.LastUpdated = DateTime.Now;
+            }
+            catch (Exception ex)
+            {
+
+                coil.IsValid= false;
+                coil.Error= ex.Message;
+                throw;
+               
+            }
+
+
+
+
+        }
+
+
+       
+
+    }
+}

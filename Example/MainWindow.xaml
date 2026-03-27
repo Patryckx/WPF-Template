@@ -4,6 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Example" xmlns:viewmodels="clr-namespace:Example.ViewModels"
+        
+        
+        xmlns:controls="clr-namespace:Example.Controls"
+        xmlns:models="clr-namespace:Example.Models"
+        
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         
@@ -21,7 +26,7 @@
             <!--Main & Sidebar -->
             <RowDefinition Height="*"/>
             <!--Status Bar -->
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="10"/>
 
         </Grid.RowDefinitions>
 
@@ -47,21 +52,88 @@
                 
                     <Grid.RowDefinitions>
                         <!--Logo-->
-                        <RowDefinition Height=".7*"/>
+                        <RowDefinition Height=".5*"/>
                         <RowDefinition Height="1*"/>
                         <!--Buttons-->
                         <RowDefinition Height=".7*"/>
 
                     </Grid.RowDefinitions>
                     
-                    <!--LOGO -->
+                    <!-- 1.- LOGO -->
 
                     <Image Grid.Row="0"
                            Source="/Resources/Images/vectorseek.com-Nidec Logo Vector.png"
                            Stretch="Uniform"/>
 
 
-                    <!-- BUTTONS-->
+                    <!-- 2.- PROCESS INFO -->
+
+                    <Grid Grid.Row="1">
+
+                        <Grid.RowDefinitions>   
+                            
+                            <!--Sequence title-->
+                            <RowDefinition Height="*"/>
+                            <!--Step 1-->
+                            <RowDefinition Height="*"/>
+                            <!--Step 2-->
+                            <RowDefinition Height="*"/>
+                            <!--Step 3-->
+                            <RowDefinition Height="*"/>
+
+
+                        </Grid.RowDefinitions>
+                        
+                        <!--Sequence title-->
+
+                        <TextBlock
+                                Grid.Row="0"
+                                   Style="{StaticResource Text.H1}"
+                                   Text="Secuencia"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Margin="20,0,0,0"
+                                   FontSize="34"/>
+
+
+                        <controls:ProcessIndicator 
+                            Grid.Row="1"
+                            
+                            Text="1"
+                            FontSize="24"
+                            Background="#303030"
+                            Status="{Binding ConnectionVM.PlcStatus}"
+                            Width="180"
+                            Height="auto"
+                            Padding="10"/>
+
+                        <controls:ProcessIndicator
+                            Grid.Row="2"
+                            Text="2"
+                            FontSize="24"
+                            Status="{Binding SecondStep}"
+                            Width="180"
+                            Height="auto"
+                            Padding="10"/>
+
+                        <controls:ProcessIndicator
+                            Grid.Row="3"
+                            Text="3"
+                            FontSize="24"
+                            Status="{Binding ThirdStep}"
+                            Width="180"
+                            Height="auto"
+                            Padding="10"/>
+
+
+
+
+                    </Grid>
+                    
+                    
+
+
+                    <!-- 3.- BUTTONS-->
                     <Grid Grid.Row="2">
 
                         <Grid.RowDefinitions>
@@ -95,7 +167,7 @@
 
                         <Button Grid.Row="1"
                                 Style="{StaticResource SidebarMenuStyleButton}"
-                                Command="{Binding ShowSecondScreenCommand}">
+                                Command="{Binding ConnectionVM.ConnectCommand}" Cursor="Hand">
 
                             <StackPanel Orientation="Horizontal">
 

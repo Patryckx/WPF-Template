@@ -11,7 +11,10 @@
   <ItemGroup>
     <None Remove="Resources\Images\close.png" />
     <None Remove="Resources\Images\cogwheel.png" />
+    <None Remove="Resources\Images\Edge.png" />
     <None Remove="Resources\Images\folder.png" />
+    <None Remove="Resources\Images\inicialize_app_icons.png" />
+    <None Remove="Resources\Images\lanzadera.png" />
     <None Remove="Resources\Images\logout.png" />
     <None Remove="Resources\Images\maximize.png" />
     <None Remove="Resources\Images\minimize.png" />
@@ -20,8 +23,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ModbusTcpLib\ModbusTcpLib\ModbusTcpLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Images\cogwheel.png" />
-    <Resource Include="Resources\Images\logout.png" />
+    <Resource Include="Resources\Images\Edge.png" />
+    <Resource Include="Resources\Images\inicialize_app_icons.png" />
+    <Resource Include="Resources\Images\lanzadera.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\logout.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +45,15 @@
     <Resource Include="Resources\Images\minimize.png" />
     <Resource Include="Resources\Images\nidec-icon.jpeg" />
     <Resource Include="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\CoilsIndicator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\InicializeScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

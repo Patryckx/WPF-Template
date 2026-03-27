@@ -3,14 +3,234 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Example.Views"
+             xmlns:local="clr-namespace:Example" xmlns:viewmodels="clr-namespace:Example.ViewModels"
+             
+             xmlns:controls="clr-namespace:Example.Controls"
+             xmlns:models="clr-namespace:Example.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="CONNECTION SCREEN"
-                   FontSize="28"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+             >
+
+
+
+    <Grid Background="White" >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" Name="Title"/>
+            <RowDefinition Height="4*" Name="Content"/>
+
+        </Grid.RowDefinitions>
+
+        <!-- ========================================= -->
+        <!-- SCREEN TITLE                             -->
+        <!-- ========================================= -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" Name="Icon"/>
+                <ColumnDefinition Width="8*" Name="Screen_title"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Icon-->
+            <Grid Grid.Column="0">
+                <Image Source="/Resources/Images/cogwheel.png"
+                       Width="70"
+                       Height="70"/>
+
+
+
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <TextBlock
+                   FontSize="36"
+                    
+                   FontWeight="Bold"
+                   FontFamily="Segoe UI"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"><Run Language="es-mx" Text="Configuración"/></TextBlock>
+
+            </Grid>
+
+
+        </Grid>
+
+        <!-- ========================================= -->
+        <!--  CONTENT                                  -->
+        <!-- ========================================= -->
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" >
+                    <Border Padding="20">
+
+                        <TextBlock FontSize="34"
+ 
+                        FontWeight="Bold"
+                        FontFamily="Segoe UI"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"><Run Language="es-mx" Text="Conectarse a PLC"/></TextBlock>
+
+
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="1" >
+                    <Border Padding="20">
+
+                        <TextBlock FontSize="32"
+ 
+                            FontWeight="Normal"
+                            FontFamily="Segoe UI"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
+                            <Run Language="es-mx" 
+                             Text="Para realizar una conexión"/>
+                            <LineBreak/>
+                            <Run Text="con el PLC por favor"/>
+                            <LineBreak/>
+                            <Run Text="pulsa el siguiente botón"/>
+
+
+                        </TextBlock>
+
+
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="2" >
+                    <Border Padding="20">
+
+                        <Button BorderBrush="DarkBlue" BorderThickness="2"
+                                Content="Conectar"
+                                FontFamily="Segoe UI"
+                                FontSize="22" Cursor="UpArrow">
+
+
+                        </Button>
+
+
+
+                    </Border>
+                </Grid>
+
+
+
+            </Grid>
+            <Grid Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+
+                    <TextBlock
+                        FontSize="36"
+    
+                        FontWeight="Bold"
+                        FontFamily="Segoe UI"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"><Run Language="es-mx" Text="Leer bobinas"/></TextBlock>
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <controls:CoilsIndicator 
+                        Grid.Column="0"
+                        Text=""
+                        FontSize="24"
+                        Status="{Binding ConnectionVM.CoilStatus}"
+                        Width="auto"
+                        Height="auto"
+                        Padding="10"/>
+
+                    <controls:CoilsIndicator 
+                        Grid.Column="1"
+                        Text=""
+                        FontSize="24"
+                        Status="{Binding ConnectionVM.CoilStatus}"
+                        Width="auto"
+                        Height="auto"
+                        Padding="10"/>
+
+                    <controls:CoilsIndicator 
+                        Grid.Column="2"
+                        Text=""
+                        FontSize="24"
+                        Status="{Binding ConnectionVM.CoilStatus}"
+                        Width="auto"
+                        Height="auto"
+                        Padding="10"/>
+
+
+
+
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="91*"/>
+                        <ColumnDefinition Width="309*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        FontSize="36"
+    
+                       FontWeight="Bold"
+                       FontFamily="Segoe UI"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" Grid.ColumnSpan="2"><Run Language="es-mx" Text="Escribir bobinas"/></TextBlock>
+
+
+                </Grid>
+
+
+                <Grid Grid.Row="3"
+                      Background="Aqua">
+                    <TextBlock Text="{Binding ConnectionVM.CoilStatus}" FontSize="20" />
+
+
+                </Grid>
+
+
+
+
+
+
+            </Grid>
+
+
+
+        </Grid>
+
+
+
 
     </Grid>
 </UserControl>
