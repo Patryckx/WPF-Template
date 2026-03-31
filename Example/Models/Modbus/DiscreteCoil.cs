@@ -1,53 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EthModbus.Models.Modbus
 {
-    public class DiscreteCoil
+    public class DiscreteCoil : INotifyPropertyChanged
+
     {
-        ///<summary>
-        ///Direccion coil
-        ///</summary>
-        ///
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string? name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
         public ushort Address { get; set; }
-
-        ///<summary>
-        ///Valor logico coil
-        ///</summary>
-        ///
-        public bool Value { get; set; }
-
-        ///<summary>
-        ///Nombre coil
-        ///</summary>
-        ///
-        public string CoilName { get; set; }
-
-        ///<summary>
-        ///Indica si la coil puede ser manipulada
-        ///</summary>
-        ///
+        public string? CoilName { get; set; }
         public bool IsWritable { get; set; }
 
-        ///<summary>
-        ///Ultima vez que se actualizo el valor
-        ///</summary>
-        ///
-        public DateTime LastUpdated { get; set; }
 
-        ///<summary>
-        ///Indica si el valor es valido (ultima lectura correcta)
-        ///</summary>
-        ///
-        public bool IsValid { get; set; }
+        private bool _value;
+        public bool Value
+        {
+            get => _value;
+            set { _value = value; OnPropertyChanged(); }
 
-        ///<summary>
-        ///Mensaje de error si la lectura falla
-        ///</summary>
-        ///
-        public string? Error { get; set; }
+        }
+
+        private bool _isValid;
+        public bool IsValid 
+        {
+
+            get => _value;
+            set {_value = value; OnPropertyChanged();  }
+        }
+
+
+        private DateTime _latUpdated;
+        public DateTime LastUpdated 
+        
+        {
+
+            get => _latUpdated;
+
+            set { _latUpdated = value;  OnPropertyChanged(); }  
+        
+        
+        }
+
+
+        private string? _error;
+        public string? Error
+        {
+
+            get => _error;
+
+            set { _error = value; OnPropertyChanged(); }        
+
+
+        }
+       
     }
 }
