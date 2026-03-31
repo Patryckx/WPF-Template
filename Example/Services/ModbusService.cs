@@ -104,8 +104,47 @@ namespace EthModbus.Services
 
         }
 
+        public IReadOnlyList<DiscreteCoil> ReadCoilRange(ushort startAddress, ushort count)
+        {
+            var coils = new List<DiscreteCoil>();
+            var now = DateTime.Now;
 
-       
+            try
+            {
+                // Lee todas las bobinas en una sola transacción Modbus
+                bool[] values = _client.ReadMultipleCoils(_slaveId, startAddress, count);
+
+                for (ushort i = 0; i < values.Length; i++)
+                {
+                    coils.Add(new DiscreteCoil
+                    {
+                        Address = (ushort)(startAddress + i),
+                        Value = values[i],
+                        IsValid = true,
+                        LastUpdated = now
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Si falla la lectura en bloque, todas quedan inválidas
+                for (ushort i = 0; i < count; i++)
+                {
+                    coils.Add(new DiscreteCoil
+                    {
+                        Address = (ushort)(startAddress + i),
+                        IsValid = false,
+                        Error = ex.Message,
+                        LastUpdated = now
+                    });
+                }
+            }
+
+            return coils;
+        }
+
+
+
 
     }
 }

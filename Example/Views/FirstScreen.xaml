@@ -164,7 +164,7 @@
                         Grid.Column="0"
                         Text=""
                         FontSize="24"
-                        Status="{Binding ConnectionVM.CoilStatus}"
+                        Status="{Binding ConnectionVM.oil}"
                         Width="auto"
                         Height="auto"
                         Padding="10" Loaded="CoilsIndicator_Loaded"/>

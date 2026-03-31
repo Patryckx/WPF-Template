@@ -5,6 +5,8 @@
              xmlns:views="clr-namespace:Example.Views"
              xmlns:vm="clr-namespace:Example.ViewModels"
              
+              xmlns:converters="clr-namespace:Example.Converters"
+             
                   
              StartupUri="MainWindow.xaml">
 
@@ -29,10 +31,17 @@
                 <DataTemplate DataType="{x:Type vm:SecondScreenViewModel}">
                     <views:SecondScreen/>
                 </DataTemplate>
+            
+         
 
 
         </ResourceDictionary>
+        
+       
 
     </Application.Resources>
+    
+    
+  
 
 </Application>
