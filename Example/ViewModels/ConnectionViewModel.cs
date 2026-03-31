@@ -161,6 +161,13 @@ namespace Example.ViewModels
         }
         private async Task<bool> TryReadCoils(CancellationToken token)
         {
+            // ✅ Verifica el estado del socket antes de intentar leer
+            if (!_modbus.IsConnected)
+            {
+                Debug.WriteLine("Cliente desconectado detectado antes de leer.");
+                return false;
+            }
+
             try
             {
                 var results = await Task.Run(
@@ -175,7 +182,6 @@ namespace Example.ViewModels
                         Coils[i].LastUpdated = results[i].LastUpdated;
                     }
 
-                    // Restaura el estado si venía de un error
                     if (PlcStatus != ProcessStatus.Sucess)
                         PlcStatus = ProcessStatus.Sucess;
                 });
@@ -188,11 +194,11 @@ namespace Example.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error de lectura: {ex.Message}");
+                Debug.WriteLine($"Error de lectura: {ex.GetType().Name} - {ex.Message}");
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    PlcStatus = ProcessStatus.OnProcess; // Indica reintentando
+                    PlcStatus = ProcessStatus.OnProcess;
                     foreach (var coil in Coils)
                         coil.IsValid = false;
                 });
@@ -214,29 +220,45 @@ namespace Example.ViewModels
                 {
                     await Task.Run(() =>
                     {
-                        _modbus.Disconnect();
+                        // Siempre desconecta primero, ignorando cualquier error
+                        // Esto garantiza que _tcpClient quede en null
+                        try { _modbus.Disconnect(); } catch { }
+
+                        // Da tiempo al ESP32 para liberar el socket
+                        // y al TcpClient para cerrarse completamente
+                        Thread.Sleep(1500);
+
+                        // Ahora Connect() no encontrará IsConnected = true
                         _modbus.Connect("192.168.4.1", 502);
+
                     }, token);
 
-                    Debug.WriteLine("Reconexión exitosa.");
+                    Debug.WriteLine($"Reconexión exitosa en intento {attempt}.");
 
                     Application.Current.Dispatcher.Invoke(() =>
                         PlcStatus = ProcessStatus.Sucess);
 
                     return true;
                 }
+                catch (OperationCanceledException)
+                {
+                    return false;
+                }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Intento {attempt} fallido: {ex.Message}");
+                    Debug.WriteLine($"Intento {attempt}/{MAX_RETRIES} fallido:");
+                    Debug.WriteLine($"  Tipo:    {ex.GetType().Name}");
+                    Debug.WriteLine($"  Mensaje: {ex.Message}");
+                    Debug.WriteLine($"  Inner:   {ex.InnerException?.Message}");
 
                     Application.Current.Dispatcher.Invoke(() =>
                         PlcStatus = ProcessStatus.OnProcess);
 
-                    // Espera progresiva entre intentos: 2s, 4s, 6s
                     await Task.Delay(RETRY_DELAY_MS * attempt, token);
                 }
             }
 
+            Debug.WriteLine("Reconexión fallida tras todos los intentos.");
             return false;
         }
     }
