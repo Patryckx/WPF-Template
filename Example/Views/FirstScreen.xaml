@@ -173,7 +173,7 @@
                         Grid.Column="1"
                         Text=""
                         FontSize="24"
-                        Status="{Binding ConnectionVM.CoilStatus}"
+                        Status="{Binding ConnectionVM.Coils[1].Value,Converter={StaticResource BoolToCoilStatusConverter}}"
                         Width="auto"
                         Height="auto"
                         Padding="10"/>
@@ -182,7 +182,7 @@
                         Grid.Column="2"
                         Text=""
                         FontSize="24"
-                        Status="{Binding ConnectionVM.CoilStatus}"
+                        Status="{Binding ConnectionVM.Coils[2].Value,Converter={StaticResource BoolToCoilStatusConverter}}"
                         Width="auto"
                         Height="auto"
                         Padding="10"/>

@@ -40,7 +40,7 @@ namespace Example.ViewModels
 
         private ObservableCollection<DiscreteCoil> _coils;
 
-        private ObservableCollection<DiscreteCoil> Coils
+        public ObservableCollection<DiscreteCoil> Coils
 
         {
             get => _coils;
