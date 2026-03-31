@@ -26,9 +26,6 @@ namespace Example.Controls
             InitializeComponent();
 
         }
-
-
-
         public static readonly DependencyProperty StatusProperty=
             DependencyProperty.Register(
                 nameof(Status),

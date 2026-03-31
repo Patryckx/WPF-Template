@@ -24,5 +24,10 @@ namespace Example.Views
         {
             InitializeComponent();
         }
+
+        private void CoilsIndicator_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

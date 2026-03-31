@@ -167,7 +167,7 @@
                         Status="{Binding ConnectionVM.CoilStatus}"
                         Width="auto"
                         Height="auto"
-                        Padding="10"/>
+                        Padding="10" Loaded="CoilsIndicator_Loaded"/>
 
                     <controls:CoilsIndicator 
                         Grid.Column="1"
