@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace Example.Converters
 {
-    public class BoilToCoilStatusConverter :IValueConverter
+    public class BoolToCoilStatusConverter :IValueConverter
     {
         public object Convert(object value,Type targetType, object parameter, System.Globalization.CultureInfo culture)
 

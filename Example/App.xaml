@@ -19,6 +19,8 @@
                 <ResourceDictionary Source="/Resources/styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <converters:BoolToCoilStatusConverter x:Key="BoolToCoilStatusConverter"/>
+
             <!-- VIEW ↔ VIEWMODEL LINK -->
                 <DataTemplate DataType="{x:Type vm:InicializeScreenViewModel}">
                     <views:InicializeScreen/>
