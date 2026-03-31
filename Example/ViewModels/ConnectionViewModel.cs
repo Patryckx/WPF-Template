@@ -131,51 +131,113 @@ namespace Example.ViewModels
             PlcStatus = ProcessStatus.Idle;
         }
 
+        private const int MAX_RETRIES = 3;
+        private const int RETRY_DELAY_MS = 2000;
 
+        private const int MONITOR_INTERVAL_MS = 500;
 
         private async Task MonitorCoils(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
             {
+                bool readSuccess = await TryReadCoils(token);
+
+                if (!readSuccess)
+                {
+                    // Lectura falló — intenta reconectar
+                    bool reconnected = await TryReconnect(token);
+
+                    if (!reconnected)
+                    {
+                        // No se pudo reconectar tras los reintentos
+                        PlcStatus = ProcessStatus.Failed;
+                        Debug.WriteLine("Monitoreo detenido — sin conexión.");
+                        return;
+                    }
+                }
+
+                await Task.Delay(MONITOR_INTERVAL_MS, token);
+            }
+        }
+        private async Task<bool> TryReadCoils(CancellationToken token)
+        {
+            try
+            {
+                var results = await Task.Run(
+                    () => _modbus.ReadCoilRange(COIL_START_ADDRESS, COIL_COUNT), token);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    for (int i = 0; i < results.Count; i++)
+                    {
+                        Coils[i].Value = results[i].Value;
+                        Coils[i].IsValid = results[i].IsValid;
+                        Coils[i].LastUpdated = results[i].LastUpdated;
+                    }
+
+                    // Restaura el estado si venía de un error
+                    if (PlcStatus != ProcessStatus.Sucess)
+                        PlcStatus = ProcessStatus.Sucess;
+                });
+
+                return true;
+            }
+            catch (OperationCanceledException)
+            {
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error de lectura: {ex.Message}");
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    PlcStatus = ProcessStatus.OnProcess; // Indica reintentando
+                    foreach (var coil in Coils)
+                        coil.IsValid = false;
+                });
+
+                return false;
+            }
+        }
+
+        private async Task<bool> TryReconnect(CancellationToken token)
+        {
+            for (int attempt = 1; attempt <= MAX_RETRIES; attempt++)
+            {
+                if (token.IsCancellationRequested)
+                    return false;
+
+                Debug.WriteLine($"Reconexión intento {attempt}/{MAX_RETRIES}...");
+
                 try
                 {
-                    //var coil = await Task.Run(() => _modbus.ReadCoil(0), token);
-                    var results = await Task.Run(() => _modbus.ReadCoilRange(COIL_START_ADDRESS, COIL_COUNT), token);
+                    await Task.Run(() =>
+                    {
+                        _modbus.Disconnect();
+                        _modbus.Connect("192.168.4.1", 502);
+                    }, token);
 
-
+                    Debug.WriteLine("Reconexión exitosa.");
 
                     Application.Current.Dispatcher.Invoke(() =>
-                    {
+                        PlcStatus = ProcessStatus.Sucess);
 
-                        for (int i = 0; i < results.Count; i++)
-                        {
-                            Coils[i].Value = results[i].Value;
-                            Coils[i].IsValid=results[i].IsValid;
-                            Coils[i].LastUpdated=results[i].LastUpdated;
-
-                        }
-                    });
-                }
-                catch (OperationCanceledException)
-                {
-                    break; // salida limpia
+                    return true;
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Coil error: {ex.Message}");
+                    Debug.WriteLine($"Intento {attempt} fallido: {ex.Message}");
 
-                    // ⚠️ En lugar de romper el loop, espera y reintenta
                     Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        CoilStatus = CoilStatus.Idle; // indica pérdida temporal
-                    });
+                        PlcStatus = ProcessStatus.OnProcess);
 
-                    await Task.Delay(2000, token); // espera más antes de reintentar
-                    continue;
+                    // Espera progresiva entre intentos: 2s, 4s, 6s
+                    await Task.Delay(RETRY_DELAY_MS * attempt, token);
                 }
-
-                await Task.Delay(500, token);
             }
+
+            return false;
         }
     }
 }
