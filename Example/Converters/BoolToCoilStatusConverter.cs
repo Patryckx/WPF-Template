@@ -16,7 +16,7 @@ namespace Example.Converters
             if(value is bool BoolValue)
                 return BoolValue ? CoilStatus.Enabled : CoilStatus.Disabled;
 
-            return CoilStatus.Enabled;
+            return CoilStatus.Idle;
         
     }
 

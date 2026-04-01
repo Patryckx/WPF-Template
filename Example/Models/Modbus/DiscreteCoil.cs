@@ -33,8 +33,8 @@ namespace EthModbus.Models.Modbus
         public bool IsValid 
         {
 
-            get => _value;
-            set {_value = value; OnPropertyChanged();  }
+            get => _isValid;
+            set {_isValid = value; OnPropertyChanged();  }
         }
 
 

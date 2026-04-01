@@ -140,7 +140,7 @@ namespace Example.ViewModels
         {
             if (coil == null) return;
 
-            bool newValue = coil.Value;
+            bool newValue = !coil.Value;
             _modbus.WriteCoil(coil.Address, newValue);
 
             coil.Value = newValue;
