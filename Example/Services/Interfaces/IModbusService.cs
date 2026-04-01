@@ -17,11 +17,15 @@ namespace EthModbus.Services.Interfaces
 
         DiscreteCoil ReadCoil(ushort address);
         
-        IReadOnlyList<DiscreteCoil> ReadCoils(IEnumerable<ushort> addresses);
-
+        IReadOnlyList<DiscreteCoil> ReadCoils(IEnumerable<ushort> addresses); 
+        
         IReadOnlyList<DiscreteCoil> ReadCoilRange(ushort startAddress, ushort count);
-
+        
         void WriteCoil(DiscreteCoil coil,bool value);
+
+
+        void WriteCoil(ushort address,bool value);
+
 
     }
 }

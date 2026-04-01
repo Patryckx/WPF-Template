@@ -31,4 +31,31 @@ namespace Example.ViewModels.Base
             execute();
         }
     }
+
+    public class RelayCommand<T> : ICommand
+    {
+        private readonly Action<T> execute;
+        private readonly Predicate<T> canExecute;
+
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
+        {
+            this.execute = execute;
+            this.canExecute = canExecute;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            if (parameter == null && typeof(T).IsValueType)
+                return canExecute == null;
+
+            return canExecute == null || canExecute((T)parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            execute((T)parameter);
+        }
+    }
 }

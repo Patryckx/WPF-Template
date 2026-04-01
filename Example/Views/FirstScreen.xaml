@@ -212,8 +212,43 @@
 
 
                 <Grid Grid.Row="3"
-                      Background="Aqua">
-                    <TextBlock Text="{Binding ConnectionVM.CoilStatus}" FontSize="20" />
+                      >
+                    <!--<TextBlock Text="{Binding ConnectionVM.CoilStatus}" FontSize="20" />-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Button BorderBrush="DarkBlue" BorderThickness="2"
+                            Content="1"
+                            FontFamily="Segoe UI"
+                            FontSize="36" Cursor="UpArrow" FontWeight="Bold"
+                                Command="{Binding ConnectionVM.ToggleCoilCommand}"
+                                CommandParameter="{Binding ConnectionVM.Coils[0]}"
+                                >
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Button BorderBrush="DarkBlue" BorderThickness="2"
+                            Content="2"
+                            FontFamily="Segoe UI"
+                            FontSize="36" Cursor="Hand" FontWeight="Bold"
+                                >
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                            <Button BorderBrush="DarkBlue" BorderThickness="2"
+                                Content="3"
+                                FontFamily="Segoe UI"
+                                FontSize="36" Cursor="Hand" FontWeight="Bold"
+                                    >
+                            </Button>
+
+                    </Grid>
 
 
                 </Grid>

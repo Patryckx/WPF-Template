@@ -35,6 +35,8 @@ namespace Example.ViewModels
 
         public ICommand DisconnectCommand { get; }
 
+        public ICommand ToggleCoilCommand {  get; }
+
 
         private CoilStatus _coilStatus;
 
@@ -77,6 +79,8 @@ namespace Example.ViewModels
             _modbus = modbus;
             ConnectCommand = new RelayCommand(Connect);
             DisconnectCommand = new RelayCommand(Disconnect);
+
+            ToggleCoilCommand = new RelayCommand<DiscreteCoil>(ToggleCoil);
 
             Coils = new ObservableCollection<DiscreteCoil>(
                     Enumerable.Range(0, COIL_COUNT).Select(i=> new DiscreteCoil
@@ -131,6 +135,18 @@ namespace Example.ViewModels
             PlcStatus = ProcessStatus.Idle;
         }
 
+
+        private void ToggleCoil(DiscreteCoil coil)
+        {
+            if (coil == null) return;
+
+            bool newValue = coil.Value;
+            _modbus.WriteCoil(coil.Address, newValue);
+
+            coil.Value = newValue;
+            
+        }
+
         private const int MAX_RETRIES = 3;
         private const int RETRY_DELAY_MS = 2000;
 
@@ -161,7 +177,7 @@ namespace Example.ViewModels
         }
         private async Task<bool> TryReadCoils(CancellationToken token)
         {
-            // ✅ Verifica el estado del socket antes de intentar leer
+            //  Verifica el estado del socket antes de intentar leer
             if (!_modbus.IsConnected)
             {
                 Debug.WriteLine("Cliente desconectado detectado antes de leer.");

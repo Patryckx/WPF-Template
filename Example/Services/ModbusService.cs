@@ -81,28 +81,29 @@ namespace EthModbus.Services
             if (!coil.IsWritable)
                 throw new InvalidOperationException("Coil is read-only");
 
+            WriteCoil(coil.Address, value);
+
+            coil.Value = value;
+            coil.IsValid = true;
+            coil.Error = null;
+            coil.LastUpdated = DateTime.UtcNow;
+            }
+
+
+        public void WriteCoil(ushort address, bool value)
+        {
             try
             {
-                _client.WriteSingleCoil(_slaveId, coil.Address, value);
-
-                coil.Value = value;
-                coil.IsValid = true;
-                coil.Error = null;
-                coil.LastUpdated = DateTime.Now;
+                _client.WriteSingleCoil(_slaveId, address, value);
             }
             catch (Exception ex)
             {
-
-                coil.IsValid= false;
-                coil.Error= ex.Message;
-                throw;
-               
+                throw new Exception($"Error writing coil {address}: {ex.Message}", ex);
             }
-
-
-
-
         }
+
+
+
 
         public IReadOnlyList<DiscreteCoil> ReadCoilRange(ushort startAddress, ushort count)
         {
