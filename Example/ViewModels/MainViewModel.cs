@@ -71,7 +71,12 @@ namespace Example.ViewModels
 
         public MainViewModel()
         {
-            ConnectionVM=new ConnectionViewModel(new ModbusService());
+
+            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
+            IConfigService config = new AppConfigService(configPath);
+
+
+            ConnectionVM =new ConnectionViewModel(new ModbusService(), config);
             CurrentView = new FirstScreenViewModel(ConnectionVM);
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
@@ -85,8 +90,7 @@ namespace Example.ViewModels
 
             //Configuration
 
-            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
-            IConfigService config =new AppConfigService(configPath);sssssssssss
+           
 
 
         }
