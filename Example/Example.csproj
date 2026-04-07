@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="config.ini" />
     <None Remove="Resources\Images\close.png" />
     <None Remove="Resources\Images\cogwheel.png" />
     <None Remove="Resources\Images\Edge.png" />
@@ -23,6 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Config__ni_lib\Config__ni_lib\ConfigIniLib.csproj" />
     <ProjectReference Include="..\..\ModbusTcpLib\ModbusTcpLib\ModbusTcpLib.csproj" />
   </ItemGroup>
 

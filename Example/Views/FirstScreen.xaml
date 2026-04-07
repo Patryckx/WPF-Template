@@ -236,7 +236,8 @@
                             Content="2"
                             FontFamily="Segoe UI"
                             FontSize="36" Cursor="Hand" FontWeight="Bold"
-                                >
+                            Command="{Binding ConnectionVM.ToggleCoilCommand}"
+                            CommandParameter="{Binding ConnectionVM.Coils[1]}"    >
                         </Button>
                     </Grid>
 
@@ -245,6 +246,8 @@
                                 Content="3"
                                 FontFamily="Segoe UI"
                                 FontSize="36" Cursor="Hand" FontWeight="Bold"
+                                Command="{Binding ConnectionVM.ToggleCoilCommand}"
+                                CommandParameter="{Binding ConnectionVM.Coils[2]}"
                                     >
                             </Button>
 

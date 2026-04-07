@@ -1,9 +1,12 @@
-﻿using EthModbus.Services;
+﻿using ConfigIniLib;
+using ConfigIniLib.interfaces;
+using EthModbus.Services;
 using Example.Models;
 using Example.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +32,7 @@ namespace Example.ViewModels
         public ICommand ShowInicializeScreenCommand { get; }
 
 
+            
 
 
         private object? _currentView;
@@ -79,7 +83,10 @@ namespace Example.ViewModels
 
             ShowInicializeScreenCommand = new RelayCommand(ShowInicializeScreen);
 
+            //Configuration
 
+            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
+            IConfigService config =new AppConfigService(configPath);sssssssssss
 
 
         }

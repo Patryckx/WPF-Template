@@ -1,4 +1,5 @@
-﻿using EthModbus.Models.Modbus;
+﻿using ConfigIniLib.interfaces;
+using EthModbus.Models.Modbus;
 using EthModbus.Services.Interfaces;
 using Example.Models;
 using Example.ViewModels.Base;
@@ -21,6 +22,13 @@ namespace Example.ViewModels
 {
     public class ConnectionViewModel : ViewModelBase
     {
+        //Configuration
+        private readonly IConfigService _config;
+
+        //Banderas
+
+        private bool _connection_inicialized;
+
         //Direcciones fijas bobinas
 
         private const ushort COIL_START_ADDRESS = 0;
@@ -74,9 +82,11 @@ namespace Example.ViewModels
             }
         }
 
-        public ConnectionViewModel(IModbusService modbus)
+        public ConnectionViewModel(IModbusService modbus,IConfigService config)
         {
             _modbus = modbus;
+            _config= config;
+
             ConnectCommand = new RelayCommand(Connect);
             DisconnectCommand = new RelayCommand(Disconnect);
 
@@ -102,28 +112,40 @@ namespace Example.ViewModels
 
         private async void Connect()
         {
-            Debug.WriteLine("Iniciando conexión...");
+            if (_connection_inicialized == false) {
 
-            try
-            {
-                PlcStatus = ProcessStatus.OnProcess;
-                Debug.WriteLine("Estado: Connecting");
 
-                await Task.Run(() => _modbus.Connect("192.168.4.1", 502));
+                Debug.WriteLine("Iniciando conexión...");
 
-                PlcStatus = ProcessStatus.Sucess;
-                Debug.WriteLine("Estado: Connected");
+                try
+                {
+                    PlcStatus = ProcessStatus.OnProcess;
+                    Debug.WriteLine("Estado: Connecting");
 
-                _cts = new CancellationTokenSource();
-                _ = MonitorCoils(_cts.Token);
+                    //await Task.Run(() => _modbus.Connect("192.168.4.1", 502));
+                    await Task.Run(() => _modbus.Connect(_config.Host,_config.Port));
 
-                Debug.WriteLine("Monitoreo iniciado");
+                    PlcStatus = ProcessStatus.Sucess;
+                    Debug.WriteLine("Estado: Connected");
+
+                    _cts = new CancellationTokenSource();
+                    _ = MonitorCoils(_cts.Token);
+
+                    Debug.WriteLine("Monitoreo iniciado");
+
+                    _connection_inicialized = true;
+                }
+                catch (Exception ex)
+                {
+                    PlcStatus = ProcessStatus.Failed;
+                    Debug.WriteLine($"Error: {ex.Message}");
+                    MessageBox.Show("Conexion fallida");
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                PlcStatus = ProcessStatus.Failed;
-                Debug.WriteLine($"Error: {ex.Message}");
-                MessageBox.Show("Conexion fallida");
+                Debug.WriteLine("Connection already inicializaed");
             }
         }
 
@@ -133,6 +155,8 @@ namespace Example.ViewModels
 
             _cts?.Cancel();
             PlcStatus = ProcessStatus.Idle;
+
+            _connection_inicialized = false;
         }
 
 
@@ -172,7 +196,8 @@ namespace Example.ViewModels
                     }
                 }
 
-                await Task.Delay(MONITOR_INTERVAL_MS, token);
+                //await Task.Delay(MONITOR_INTERVAL_MS, token);
+                await Task.Delay(_config.MonitorIntervalMs, token);
             }
         }
         private async Task<bool> TryReadCoils(CancellationToken token)
@@ -186,8 +211,10 @@ namespace Example.ViewModels
 
             try
             {
+                //var results = await Task.Run(
+                //    () => _modbus.ReadCoilRange(COIL_START_ADDRESS, COIL_COUNT), token);
                 var results = await Task.Run(
-                    () => _modbus.ReadCoilRange(COIL_START_ADDRESS, COIL_COUNT), token);
+                    () => _modbus.ReadCoilRange(_config.CoilStartAddress, _config.CoilCount), token);
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
