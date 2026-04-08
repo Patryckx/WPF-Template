@@ -39,11 +39,11 @@ namespace Example.ViewModels
 
         private readonly IModbusService _modbus;
 
-        public ICommand ConnectCommand { get; }
+        public RelayCommand ConnectCommand { get; }
 
-        public ICommand DisconnectCommand { get; }
+        public RelayCommand DisconnectCommand { get; }
 
-        public ICommand ToggleCoilCommand {  get; }
+        public RelayCommand<DiscreteCoil> ToggleCoilCommand {  get; }
 
 
         private CoilStatus _coilStatus;
@@ -148,9 +148,9 @@ namespace Example.ViewModels
 
                     _connection_inicialized = true;
 
-                    ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
-                    ((RelayCommand)DisconnectCommand).RaiseCanExecuteChanged();
-                    ((RelayCommand)ToggleCoilCommand).RaiseCanExecuteChanged();
+                    ConnectCommand.RaiseCanExecuteChanged();
+                    DisconnectCommand.RaiseCanExecuteChanged();
+                    ToggleCoilCommand.RaiseCanExecuteChanged();
 
                 }
                 catch (Exception ex)
@@ -175,9 +175,9 @@ namespace Example.ViewModels
             PlcStatus = ProcessStatus.Idle;
 
             _connection_inicialized = false;
-            ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
-            ((RelayCommand)DisconnectCommand).RaiseCanExecuteChanged();
-            ((RelayCommand)ToggleCoilCommand).RaiseCanExecuteChanged();
+            ConnectCommand.RaiseCanExecuteChanged();
+            DisconnectCommand.RaiseCanExecuteChanged();
+            ToggleCoilCommand.RaiseCanExecuteChanged();
         }
 
 
