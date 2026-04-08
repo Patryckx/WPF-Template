@@ -29,10 +29,7 @@ namespace Example.ViewModels
         public ICommand ShowFirstScreenCommand { get; }
         public ICommand ShowSecondScreenCommand { get; }
 
-        public ICommand ShowInicializeScreenCommand { get; }
-
-
-            
+        public ICommand ShowInicializeScreenCommand { get; }          
 
 
         private object? _currentView;
@@ -140,7 +137,14 @@ namespace Example.ViewModels
             CurrentView = new InicializeScreenViewModel();
         }
 
+        //****************************************
+        //    VIEW FUNCTIONS
+        //****************************************
 
+        private void Block_gui()
+        {
+            
+        }
 
     }
 }

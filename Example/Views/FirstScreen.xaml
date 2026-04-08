@@ -221,7 +221,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <Button BorderBrush="DarkBlue" BorderThickness="2"
+                        <Button BorderBrush="DarkBlue" BorderThickness="2" Name="btnCoil1"
                             Content="1"
                             FontFamily="Segoe UI"
                             FontSize="36" Cursor="UpArrow" FontWeight="Bold"
