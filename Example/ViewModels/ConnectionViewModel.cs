@@ -87,10 +87,23 @@ namespace Example.ViewModels
             _modbus = modbus;
             _config= config;
 
-            ConnectCommand = new RelayCommand(Connect);
-            DisconnectCommand = new RelayCommand(Disconnect);
+            ConnectCommand = new RelayCommand(
+                execute: Connect,
+                canExecute:()=> !_modbus.IsConnected
+                );
+            DisconnectCommand = new RelayCommand(
+                
+                execute:Disconnect,
+                canExecute:()=>_modbus.IsConnected
+                
+                );
 
-            ToggleCoilCommand = new RelayCommand<DiscreteCoil>(ToggleCoil);
+            ToggleCoilCommand = new RelayCommand<DiscreteCoil>(
+                
+                execute:ToggleCoil,
+                canExecute:coil=>_modbus.IsConnected && coil!=null
+                
+                );
 
             Coils = new ObservableCollection<DiscreteCoil>(
                     Enumerable.Range(0, COIL_COUNT).Select(i=> new DiscreteCoil
@@ -134,6 +147,11 @@ namespace Example.ViewModels
                     Debug.WriteLine("Monitoreo iniciado");
 
                     _connection_inicialized = true;
+
+                    ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)DisconnectCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)ToggleCoilCommand).RaiseCanExecuteChanged();
+
                 }
                 catch (Exception ex)
                 {
@@ -157,6 +175,9 @@ namespace Example.ViewModels
             PlcStatus = ProcessStatus.Idle;
 
             _connection_inicialized = false;
+            ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)DisconnectCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)ToggleCoilCommand).RaiseCanExecuteChanged();
         }
 
 
@@ -304,5 +325,9 @@ namespace Example.ViewModels
             Debug.WriteLine("Reconexión fallida tras todos los intentos.");
             return false;
         }
+
+
+
+       
     }
 }

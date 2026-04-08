@@ -30,6 +30,11 @@ namespace Example.ViewModels.Base
         {
             execute();
         }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public class RelayCommand<T> : ICommand
@@ -45,6 +50,11 @@ namespace Example.ViewModels.Base
 
         public event EventHandler CanExecuteChanged;
 
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         public bool CanExecute(object parameter)
         {
             if (parameter == null && typeof(T).IsValueType)
@@ -52,6 +62,8 @@ namespace Example.ViewModels.Base
 
             return canExecute == null || canExecute((T)parameter);
         }
+
+
 
         public void Execute(object parameter)
         {
