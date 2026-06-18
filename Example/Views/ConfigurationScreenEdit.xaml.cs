@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace Example.Views
 {
     /// <summary>
-    /// Lógica de interacción para FirstScreen.xaml
+    /// Lógica de interacción para ConfigurationScreenEdit.xaml
     /// </summary>
-    public partial class FirstScreen : UserControl
+    public partial class ConfigurationScreenEdit : UserControl
     {
-        public FirstScreen()
+        public ConfigurationScreenEdit()
         {
             InitializeComponent();
         }
-
-        private void CoilsIndicator_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
     }
 }

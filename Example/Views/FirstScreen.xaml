@@ -116,7 +116,9 @@
                         <Button BorderBrush="DarkBlue" BorderThickness="2"
                                 Content="Conectar"
                                 FontFamily="Segoe UI"
-                                FontSize="22" Cursor="UpArrow">
+                                FontSize="22" Cursor="Hand" 
+                                Command="{Binding ConnectionVM.ConnectCommand}"
+                                >
 
 
                         </Button>

@@ -33,8 +33,18 @@
                 <DataTemplate DataType="{x:Type vm:SecondScreenViewModel}">
                     <views:SecondScreen/>
                 </DataTemplate>
-            
-         
+
+                <DataTemplate DataType="{x:Type vm:ConfigurationScreenViewModel}">
+                    <views:ConfigurationScreen/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type vm:ConfigurationScreenEditViewModel}">
+                       <views:ConfigurationScreenEdit/>
+                   </DataTemplate>
+
+
+
+
 
 
         </ResourceDictionary>

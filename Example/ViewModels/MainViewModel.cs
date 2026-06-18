@@ -3,6 +3,7 @@ using ConfigIniLib.interfaces;
 using EthModbus.Services;
 using Example.Models;
 using Example.ViewModels.Base;
+using Example.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,8 +29,14 @@ namespace Example.ViewModels
         
         public ICommand ShowFirstScreenCommand { get; }
         public ICommand ShowSecondScreenCommand { get; }
+        public ICommand ShowInicializeScreenCommand { get; }
 
-        public ICommand ShowInicializeScreenCommand { get; }          
+
+        //Configuration
+        public ICommand ShowconfigurationScreenCommand { get; }
+        public ICommand ShowConfigurationEditScreenCommand { get; }
+
+
 
 
         private object? _currentView;
@@ -83,11 +90,18 @@ namespace Example.ViewModels
             ShowFirstScreenCommand = new RelayCommand(ShowFirstScreen);
             ShowSecondScreenCommand = new RelayCommand(ShowSecondScreen);
 
+            
+
             ShowInicializeScreenCommand = new RelayCommand(ShowInicializeScreen);
 
             //Configuration
+            ShowconfigurationScreenCommand = new RelayCommand(ShowConfigurationScreen);
 
-           
+
+            ShowConfigurationEditScreenCommand = new RelayCommand(ShowConfigurationEditScreen);
+
+
+
 
 
         }
@@ -135,6 +149,23 @@ namespace Example.ViewModels
         public void ShowInicializeScreen()
         {
             CurrentView = new InicializeScreenViewModel();
+        }
+
+
+
+
+        public void ShowConfigurationScreen()
+
+        {
+            CurrentView = new ConfigurationScreenViewModel();
+        }
+
+
+
+
+        public void ShowConfigurationEditScreen()
+        {
+            CurrentView = new ConfigurationScreenEditViewModel();
         }
 
         //****************************************

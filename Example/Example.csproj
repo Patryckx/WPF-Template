@@ -16,11 +16,13 @@
     <None Remove="Resources\Images\bookmark.png" />
     <None Remove="Resources\Images\cerrar.png" />
     <None Remove="Resources\Images\check.png" />
+    <None Remove="Resources\Images\circuito.png" />
     <None Remove="Resources\Images\clock.png" />
     <None Remove="Resources\Images\close.png" />
     <None Remove="Resources\Images\cogwheel.png" />
     <None Remove="Resources\Images\correcto.png" />
     <None Remove="Resources\Images\database.png" />
+    <None Remove="Resources\Images\diskette.png" />
     <None Remove="Resources\Images\Edge.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\folder.png" />
@@ -34,6 +36,7 @@
     <None Remove="Resources\Images\microchip.png" />
     <None Remove="Resources\Images\minimize.png" />
     <None Remove="Resources\Images\nidec-icon.jpeg" />
+    <None Remove="Resources\Images\undo.png" />
     <None Remove="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
   </ItemGroup>
 
@@ -67,6 +70,9 @@
     <Resource Include="Resources\Images\check.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\circuito.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\clock.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -77,6 +83,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\database.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\diskette.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Edge.png">
@@ -122,6 +131,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\nidec-icon.jpeg" />
+    <Resource Include="Resources\Images\undo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
   </ItemGroup>
 

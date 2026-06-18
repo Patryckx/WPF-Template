@@ -167,7 +167,7 @@
 
                         <Button Grid.Row="1"
                                 Style="{StaticResource SidebarMenuStyleButton}"
-                                Command="{Binding ConnectionVM.ConnectCommand}" Cursor="Hand">
+                                Command="{Binding ShowconfigurationScreenCommand}" Cursor="Hand" >
 
                             <StackPanel Orientation="Horizontal">
 
@@ -323,7 +323,7 @@
                                                 ToolTip="Cerrar aplicación"
                                                 Command="{Binding CloseCommand}">
 
-                                            <Image Source="/Resources/Images/close.png"
+                                            <Image Source="/Resources/Images/cerrar.png"
                                                    Stretch="Uniform"/>
 
 
