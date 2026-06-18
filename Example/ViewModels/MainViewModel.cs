@@ -83,6 +83,9 @@ namespace Example.ViewModels
             ConnectionVM =new ConnectionViewModel(new ModbusService(), config);
             CurrentView = new FirstScreenViewModel(ConnectionVM);
 
+
+            ConfigVM = new ConfigurationScreenEditViewModel(config);
+
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
             CloseCommand = new RelayCommand(CloseWindow);
@@ -162,7 +165,7 @@ namespace Example.ViewModels
 
 
 
-
+        public ConfigurationScreenEditViewModel ConfigVM { get; }
         public void ShowConfigurationEditScreen()
         {
             CurrentView = new ConfigurationScreenEditViewModel();
