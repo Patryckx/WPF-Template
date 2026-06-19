@@ -54,7 +54,7 @@
 
                  <!--Command="{Binding ShowConfigurationEditScreenCommand}"-->
                      <Button   
-                        Command="{Binding DataContext.ShowConfigurationEditScreenCommand,
+                        Command="{Binding DataContext.ShowConfigScreenCommand,
                          RelativeSource={RelativeSource AncestorType=Window}}"
                         
                         Background="Transparent"
@@ -136,7 +136,7 @@
                     <TextBlock Name="lblDireccionIp" HorizontalAlignment="Center" 
                              Height="auto" Width="350" 
                              Margin="10" FontFamily="Arial" FontSize="28"
-                            FontStyle="Normal" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" >
+                            FontStyle="Normal" Text="{Binding Host }" >
                     </TextBlock>
 
                 </Grid>
@@ -181,7 +181,7 @@
                               Margin="10,10,0,10"
                              FontFamily="Arial" FontSize="28"
                              FontStyle="Normal" Grid.ColumnSpan="2"
-                               Text="{Binding Puerto,UpdateSourceTrigger=PropertyChanged}">
+                               Text="{Binding Puerto}">
                     </TextBlock>
 
                 </Grid>
@@ -249,7 +249,7 @@
                              Height="auto" Width="350" 
                              FontFamily="Arial" FontSize="28"
                             FontStyle="Normal"
-                               Text="{Binding DireccionBD, UpdateSourceTrigger=PropertyChanged}">
+                               Text="{Binding DireccionBD}">
                     </TextBlock>
                 </Grid>
 

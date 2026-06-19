@@ -36,7 +36,7 @@ namespace Example.ViewModels
         public ICommand ShowconfigurationScreenCommand { get; }
         public ICommand ShowConfigurationEditScreenCommand { get; }
 
-
+        public ICommand ShowConfigScreenCommand {  get; }
 
 
         private object? _currentView;
@@ -69,9 +69,14 @@ namespace Example.ViewModels
 
         }
 
+        //config screens
+        private readonly ConfigurationScreenViewModel _configReadVM;
+        private readonly ConfigurationScreenEditViewModel _configEditVM;
 
 
-            //****************************************
+
+
+        //****************************************
         //  CONSTRUCTOR
         //****************************************
 
@@ -82,11 +87,14 @@ namespace Example.ViewModels
             IConfigService config = new AppConfigService(configPath);
 
 
+            _configReadVM = new ConfigurationScreenViewModel(config);
+
+            _configEditVM = new ConfigurationScreenEditViewModel(config);
+
             ConnectionVM =new ConnectionViewModel(new ModbusService(), config);
             CurrentView = new FirstScreenViewModel(ConnectionVM);
 
 
-            ConfigVM = new ConfigurationScreenEditViewModel(config);
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
@@ -101,6 +109,10 @@ namespace Example.ViewModels
 
             //Configuration
             ShowconfigurationScreenCommand = new RelayCommand(ShowConfigurationScreen);
+
+
+
+            ShowConfigScreenCommand = new RelayCommand(ShowConfigScreen);
 
 
             //ShowConfigurationEditScreenCommand = new RelayCommand(ShowConfigurationEditScreen);
@@ -162,13 +174,17 @@ namespace Example.ViewModels
         public void ShowConfigurationScreen()
 
         {
-            CurrentView = new ConfigurationScreenViewModel();
+            //CurrentView = new ConfigurationScreenViewModel();
+            _configReadVM.Refresh();
+            CurrentView = _configReadVM;
         }
 
 
 
-        public ConfigurationScreenEditViewModel ConfigVM { get; }
-        private void ShowConfigScreen() => CurrentView = ConfigVM;
+        private void ShowConfigScreen()
+        {
+            CurrentView = _configEditVM;
+        }
 
         //****************************************
         //    VIEW FUNCTIONS

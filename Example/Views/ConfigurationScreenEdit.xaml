@@ -65,8 +65,7 @@
 
             <Grid Grid.Column="3">
                 <Button   
-                    Command="{Binding DataContext.SaveConfiguration,
-                     RelativeSource={RelativeSource AncestorType=Window}}"
+                    Command="{Binding SaveCommand }"
         
                     Background="Transparent"
                     BorderThickness="0"
@@ -146,7 +145,7 @@
                     <TextBox Name="txtDireccionIp" HorizontalAlignment="Left" 
                          Height="auto" Width="350" BorderBrush="Gray" 
                          Margin="5" FontFamily="Arial" FontSize="28"
-                        FontStyle="Normal" >
+                        FontStyle="Normal" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" >
 
 
                     </TextBox>
@@ -191,7 +190,7 @@
                          Height="auto" Width="350" 
                          BorderBrush="Gray" Margin="5"
                          FontFamily="Arial" FontSize="28"
-                         FontStyle="Normal"
+                         FontStyle="Normal" Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}"
                          >
 
                     </TextBox>
@@ -261,7 +260,7 @@
                          Height="auto" Width="350" 
                          BorderBrush="Gray" Margin="5"
                          FontFamily="Arial" FontSize="28"
-                        FontStyle="Normal">
+                        FontStyle="Normal" Text="{Binding DatabaseAddress, UpdateSourceTrigger=PropertyChanged}">
 
                     </TextBox>
                 </Grid>
