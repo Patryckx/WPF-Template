@@ -74,8 +74,6 @@ namespace Example.ViewModels
         private readonly ConfigurationScreenEditViewModel _configEditVM;
 
 
-
-
         //****************************************
         //  CONSTRUCTOR
         //****************************************
@@ -90,6 +88,8 @@ namespace Example.ViewModels
             _configReadVM = new ConfigurationScreenViewModel(config);
 
             _configEditVM = new ConfigurationScreenEditViewModel(config);
+
+            _configEditVM.ReturnToReadScreen = ShowConfigurationScreen;
 
             ConnectionVM =new ConnectionViewModel(new ModbusService(), config);
             CurrentView = new FirstScreenViewModel(ConnectionVM);

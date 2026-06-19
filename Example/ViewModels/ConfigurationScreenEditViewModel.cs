@@ -17,6 +17,8 @@ namespace Example.ViewModels
     {
         private readonly IConfigService _config;
 
+        public Action? ReturnToReadScreen { get; set; }
+
         public RelayCommand SaveCommand { get;  }
 
 
@@ -78,6 +80,9 @@ namespace Example.ViewModels
             _config.Host = Host;
             _config.Port = Port;
             _config.DatabaseAddress = DatabaseAddress;
+
+            ReturnToReadScreen?.Invoke();
+
         }
 
 

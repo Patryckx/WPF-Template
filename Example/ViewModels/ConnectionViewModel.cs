@@ -290,7 +290,7 @@ namespace Example.ViewModels
                         Thread.Sleep(1500);
 
                         // Ahora Connect() no encontrará IsConnected = true
-                        _modbus.Connect("192.168.4.1", 502);
+                        _modbus.Connect(_config.Host, 502);
 
                     }, token);
 
