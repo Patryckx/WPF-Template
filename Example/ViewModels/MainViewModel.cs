@@ -69,6 +69,8 @@ namespace Example.ViewModels
 
         }
 
+
+
             //****************************************
         //  CONSTRUCTOR
         //****************************************
@@ -101,7 +103,7 @@ namespace Example.ViewModels
             ShowconfigurationScreenCommand = new RelayCommand(ShowConfigurationScreen);
 
 
-            ShowConfigurationEditScreenCommand = new RelayCommand(ShowConfigurationEditScreen);
+            //ShowConfigurationEditScreenCommand = new RelayCommand(ShowConfigurationEditScreen);
 
 
 
@@ -166,10 +168,7 @@ namespace Example.ViewModels
 
 
         public ConfigurationScreenEditViewModel ConfigVM { get; }
-        public void ShowConfigurationEditScreen()
-        {
-            CurrentView = new ConfigurationScreenEditViewModel();
-        }
+        private void ShowConfigScreen() => CurrentView = ConfigVM;
 
         //****************************************
         //    VIEW FUNCTIONS
