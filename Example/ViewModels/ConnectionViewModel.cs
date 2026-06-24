@@ -2,6 +2,8 @@
 using EthModbus.Models.Modbus;
 using EthModbus.Services.Interfaces;
 using Example.Models;
+using Example.Models.Database_registers;
+using Example.Services.Interfaces;
 using Example.ViewModels.Base;
 using Modbus.Device;
 using ModbusTcpLib;
@@ -10,7 +12,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
-using System.Linq; 
+using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -82,10 +86,20 @@ namespace Example.ViewModels
             }
         }
 
-        public ConnectionViewModel(IModbusService modbus,IConfigService config)
+
+
+        //Database register service
+
+        private readonly IRegisterService _registerService;
+
+        public ConnectionViewModel(
+            IModbusService modbus,
+            IConfigService config,
+            IRegisterService registerService)
         {
             _modbus = modbus;
             _config= config;
+            _registerService = registerService;
 
             ConnectCommand = new RelayCommand(
                 execute: Connect,
@@ -178,7 +192,7 @@ namespace Example.ViewModels
         }
 
 
-        private void ToggleCoil(DiscreteCoil coil)
+        private async void ToggleCoil(DiscreteCoil coil)
         {
             if (coil == null) return;
 
@@ -186,8 +200,23 @@ namespace Example.ViewModels
             _modbus.WriteCoil(coil.Address, newValue);
 
             coil.Value = newValue;
+
+
+            await _registerService.AddLogAsync(
+                new Coil_register
+                {
+                    IPAddress = _config.Host,
+
+                    Port = _config.Port.ToString(),
+
+
+                    Action = $"Coil {coil.Address}" + (newValue ? "ON" : "OFF"),
+
+                    Date = DateTime.Now
+                });
+                }
             
-        }
+        
 
         private const int MAX_RETRIES = 3;
         private const int RETRY_DELAY_MS = 2000;

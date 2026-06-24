@@ -20,11 +20,13 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Configuration;
 using SqlUtilityLibrary.Models;
+using Example.Services.Interfaces;
+using Example.Services;
 
 
 namespace Example.ViewModels
 {
-    public class MainViewModel :ViewModelBase 
+    public class MainViewModel : ViewModelBase 
     {
         /// WINDOW FUNCTIONS
         public ICommand MinimizeCommand { get; }
@@ -78,7 +80,7 @@ namespace Example.ViewModels
 
         private readonly IDataService _database;
 
-
+        
         
 
 
@@ -99,10 +101,7 @@ namespace Example.ViewModels
 
             _configEditVM.ReturnToReadScreen = ShowConfigurationScreen;
 
-            ConnectionVM =new ConnectionViewModel(new ModbusService(), config);
             CurrentView = new FirstScreenViewModel(ConnectionVM);
-
-
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
@@ -110,18 +109,12 @@ namespace Example.ViewModels
 
             ShowFirstScreenCommand = new RelayCommand(ShowFirstScreen);
             ShowSecondScreenCommand = new RelayCommand(ShowSecondScreen);
-
-            
-
             ShowInicializeScreenCommand = new RelayCommand(ShowInicializeScreen);
 
             //Configuration
             ShowconfigurationScreenCommand = new RelayCommand(ShowConfigurationScreen);
 
-
-
             ShowConfigScreenCommand = new RelayCommand(ShowConfigScreen);
-
 
             //ShowConfigurationEditScreenCommand = new RelayCommand(ShowConfigurationEditScreen);
 
@@ -145,15 +138,17 @@ namespace Example.ViewModels
             {
                 ConnectionString = connectionString,
             };
-
+            
+            
             _database = new SqlDatabaseService(db_config);
+
+            IRegisterService registerService = new RegisterService(_database);
+
+            ConnectionVM = new ConnectionViewModel(new ModbusService(), config, registerService);
 
 
             Inicialize();
-
-
         }
-
 
         private async void Inicialize()
         {
@@ -166,8 +161,6 @@ namespace Example.ViewModels
             {
                 Console.WriteLine("Conexion fallida con base de datos");
             }
-
-
 
         }
 
