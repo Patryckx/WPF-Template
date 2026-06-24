@@ -60,7 +60,7 @@
                         Background="Transparent"
                         BorderThickness="0"
                         Cursor="Hand"
-                        ToolTip="Editar">
+                        ToolTip="Editar" >
                     <Image Source="/Resources/Images/edit.png" Width="auto" Height="auto"
                         Margin="10"  />
                 </Button>

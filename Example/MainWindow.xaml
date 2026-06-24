@@ -50,9 +50,9 @@
                     <Grid.RowDefinitions>
                         <!--Logo-->
                         <RowDefinition Height=".5*"/>
-                        <RowDefinition Height="1*"/>
-                        <!--Buttons-->
                         <RowDefinition Height=".7*"/>
+                        <!--Buttons-->
+                        <RowDefinition Height="1*"/>
 
                     </Grid.RowDefinitions>
                     
@@ -102,7 +102,7 @@
                             Status="{Binding ConnectionVM.PlcStatus}"
                             Width="180"
                             Height="auto"
-                            Padding="10"/>
+                            Padding="2"/>
 
                         <controls:ProcessIndicator
                             Grid.Row="2"
@@ -111,7 +111,7 @@
                             Status="{Binding SecondStep}"
                             Width="180"
                             Height="auto"
-                            Padding="10"/>
+                            Padding="2"/>
 
                         <controls:ProcessIndicator
                             Grid.Row="3"
@@ -120,7 +120,7 @@
                             Status="{Binding ThirdStep}"
                             Width="180"
                             Height="auto"
-                            Padding="10"/>
+                            Padding="2"/>
 
 
 
@@ -140,7 +140,9 @@
                             <RowDefinition Height="*"/>
                             <!-- BUTTON 3-->
                             <RowDefinition Height="*"/>
-                           
+                            <!-- BUTTON 3-->
+                            <RowDefinition Height="*"/>
+
                         </Grid.RowDefinitions>
 
                         <Button Grid.Row="0" 
@@ -149,13 +151,14 @@
 
                             <StackPanel Orientation="Horizontal">
 
-                                <Image Source="/Resources/Images/folder.png"
+                                <Image Source="/Resources/Images/microchip.png"
                                        Width="32"
                                        Height="32"
                                        Margin="10,0,10,0"/>
                                 
-                                <TextBlock Text="Trazabilidad"
-                                           VerticalAlignment="Center"/>
+                                <TextBlock Text="Gateway"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center" FontSize="28"/>
 
 
                             </StackPanel>
@@ -180,6 +183,26 @@
                         </Button>
 
                         <Button Grid.Row="2"
+                            Style="{StaticResource SidebarMenuStyleButton}"
+                            Command="{Binding ShowSecondScreenCommand}">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Image Source="/Resources/Images/folder.png"
+                                    Width="32"
+                                    Height="32"
+                                    Margin="10,0,10,0"/>
+
+                                <TextBlock Text="Trazabilidad"
+                                       VerticalAlignment="Center"/>
+
+
+                            </StackPanel>
+
+
+                        </Button>
+
+                        <Button Grid.Row="3"
                                 Style="{StaticResource SidebarMenuStyleButton}"
                                 Command="{Binding ShowSecondScreenCommand}">
 
@@ -301,6 +324,7 @@
                                                 BorderThickness="0"
                                                 Padding="0"
                                                 Cursor="Hand"
+
                                                 Margin="5"
                                                 ToolTip="Maximizar pantalla"
                                                 Command="{Binding MaximizeCommand}">
@@ -313,6 +337,7 @@
                                         <Button Grid.Column="2"
                                                 Width="40"
                                                 Height="40"
+                                                Background="Transparent"
                                                 BorderThickness="0"
                                                 Padding="0"
                                                 Cursor="Hand"
@@ -320,7 +345,7 @@
                                                 ToolTip="Cerrar aplicación"
                                                 Command="{Binding CloseCommand}">
 
-                                            <Image Source="/Resources/Images/cerrar.png"
+                                            <Image Source="/Resources/Images/cerrar2.png"
                                                    Stretch="Uniform"/>
 
 

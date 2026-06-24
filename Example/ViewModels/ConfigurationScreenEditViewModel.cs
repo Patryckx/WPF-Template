@@ -13,7 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Example.ViewModels
 {
-    public class ConfigurationScreenEditViewModel :ViewModelBase
+    public class ConfigurationScreenEditViewModel : ViewModelBase
     {
         private readonly IConfigService _config;
 

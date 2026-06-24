@@ -1,37 +1,39 @@
 ﻿using ConfigIniLib;
 using ConfigIniLib.interfaces;
 using EthModbus.Services;
+
 using Example.Models;
 using Example.ViewModels.Base;
 using Example.Views;
+using SqlUtilityLibrary;
+using SqlUtilityLibrary.Services;
+using SqlUtilityLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Extensions.Configuration;
+using SqlUtilityLibrary.Models;
+
 
 namespace Example.ViewModels
 {
     public class MainViewModel :ViewModelBase 
     {
-        
         /// WINDOW FUNCTIONS
-       
         public ICommand MinimizeCommand { get; }
         public ICommand MaximizeCommand { get; }
         public ICommand CloseCommand { get; }
-
         /// VIEWS NAVIGATION FUNCTIONS
-        
         public ICommand ShowFirstScreenCommand { get; }
         public ICommand ShowSecondScreenCommand { get; }
         public ICommand ShowInicializeScreenCommand { get; }
-
-
         //Configuration
         public ICommand ShowconfigurationScreenCommand { get; }
         public ICommand ShowConfigurationEditScreenCommand { get; }
@@ -72,6 +74,12 @@ namespace Example.ViewModels
         //config screens
         private readonly ConfigurationScreenViewModel _configReadVM;
         private readonly ConfigurationScreenEditViewModel _configEditVM;
+
+
+        private readonly IDataService _database;
+
+
+        
 
 
         //****************************************
@@ -117,7 +125,47 @@ namespace Example.ViewModels
 
             //ShowConfigurationEditScreenCommand = new RelayCommand(ShowConfigurationEditScreen);
 
+            //Database config
+            IConfiguration configuration =
+                new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("AppSettings.json")
+                .Build();
 
+            string? connectionString = configuration["Database_settings:ConnectionString"];
+
+
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new Exception(
+                    "No se encontro la cadena de conexion.");
+            }
+
+            DatabaseConfig db_config = new()
+            {
+                ConnectionString = connectionString,
+            };
+
+            _database = new SqlDatabaseService(db_config);
+
+
+            Inicialize();
+
+
+        }
+
+
+        private async void Inicialize()
+        {
+            bool is_db_conected = await _database.TestConnectionAsync();
+            if (is_db_conected)
+            {
+                Console.WriteLine("Conexion correcta con base de datos");
+            }
+            else
+            {
+                Console.WriteLine("Conexion fallida con base de datos");
+            }
 
 
 
