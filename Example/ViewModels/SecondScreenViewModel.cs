@@ -10,18 +10,33 @@ using SqlUtilityLibrary.Models;
 using SqlUtilityLibrary.Services;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Example.ViewModels.Base;
+
 
 namespace Example.ViewModels
 {
-    public class SecondScreenViewModel
+    public class SecondScreenViewModel :ViewModelBase
     {
         public ConnectionViewModel ConnectionVM { get; }
 
         private readonly IDataService _database;
+
+        private DataView? _coilInfo;
+
+        public DataView? CoilInfo
+        {
+            get => _coilInfo;
+            set
+            {
+                _coilInfo = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public SecondScreenViewModel ()
@@ -56,9 +71,19 @@ namespace Example.ViewModels
 
             IRegisterService registerService = new RegisterService(_database);
 
-
-
             ConnectionVM = new ConnectionViewModel(new ModbusService(),config,registerService);
+            
+            LoadCoilsInfo();
+        }
+
+
+        private async void LoadCoilsInfo()
+        {
+            DataTable dt =
+                await _database.ExecuteQueryAsync(
+                    "SELECT * FROM Coils_registers");
+
+            CoilInfo = dt.DefaultView;
         }
 
     }

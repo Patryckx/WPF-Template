@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:Example.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+            
+    
     <Grid Background="White">
 
         <Grid.RowDefinitions>
@@ -42,8 +44,10 @@
 
             <DataGrid
                 x:Name="TraceabilityTable" 
-                AutoGenerateColumns="True" 
-                IsReadOnly="True">
+                ItemsSource="{Binding CoilInfo}"
+                 ColumnWidth="*"
+                AutoGenerateColumns="True"
+                >
                 
             </DataGrid>
         </Grid>
