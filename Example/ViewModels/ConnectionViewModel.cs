@@ -92,14 +92,20 @@ namespace Example.ViewModels
 
         private readonly IRegisterService _registerService;
 
+
+        private readonly IAppStateService _appState;
+
         public ConnectionViewModel(
             IModbusService modbus,
             IConfigService config,
-            IRegisterService registerService)
+            IRegisterService registerService,
+            IAppStateService appState)
         {
             _modbus = modbus;
             _config= config;
             _registerService = registerService;
+            _appState = appState;
+
 
             ConnectCommand = new RelayCommand(
                 execute: Connect,
@@ -163,12 +169,21 @@ namespace Example.ViewModels
                     DisconnectCommand.RaiseCanExecuteChanged();
                     ToggleCoilCommand.RaiseCanExecuteChanged();
 
+
+                    _appState.Status = AppStatus.AllDevicesConnected;
+
                 }
                 catch (Exception ex)
                 {
                     PlcStatus = ProcessStatus.Failed;
                     Debug.WriteLine($"Error: {ex.Message}");
                     MessageBox.Show("Conexion fallida");
+
+
+                    _appState.Status = AppStatus.Error;
+
+
+
                 }
 
             }

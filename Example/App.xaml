@@ -5,10 +5,12 @@
              xmlns:views="clr-namespace:Example.Views"
              xmlns:vm="clr-namespace:Example.ViewModels"
              
-              xmlns:converters="clr-namespace:Example.Converters"
-             
-                  
-             StartupUri="MainWindow.xaml">
+              xmlns:converters="clr-namespace:Example.Converters">
+
+
+    <!--StartupUri="MainWindow.xaml"//Se comenta esta linea debido a que ahora el 
+    constructuro de main window requiere una inyeccion 
+    de dependencia previa al incializarse  >-->
 
     <Application.Resources>
 
@@ -20,6 +22,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:BoolToCoilStatusConverter x:Key="BoolToCoilStatusConverter"/>
+            <converters:ProcessStatusBrushConverter x:Key="StatusBrushConverter"/>
 
             <!-- VIEW ↔ VIEWMODEL LINK -->
                 <DataTemplate DataType="{x:Type vm:InicializeScreenViewModel}">

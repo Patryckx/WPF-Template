@@ -24,26 +24,19 @@ using Example.Services.Interfaces;
 using Example.Services;
 using System.Data;
 
-
-
-
-
 namespace Example.ViewModels
 {
     public class MainViewModel : ViewModelBase 
     {
-        /// WINDOW FUNCTIONS
         public ICommand MinimizeCommand { get; }
         public ICommand MaximizeCommand { get; }
         public ICommand CloseCommand { get; }
-        /// VIEWS NAVIGATION FUNCTIONS
+
         public ICommand ShowFirstScreenCommand { get; }
         public ICommand ShowSecondScreenCommand { get; }
         public ICommand ShowInicializeScreenCommand { get; }
-        //Configuration
         public ICommand ShowconfigurationScreenCommand { get; }
         public ICommand ShowConfigurationEditScreenCommand { get; }
-
         public ICommand ShowConfigScreenCommand {  get; }
 
 
@@ -58,13 +51,7 @@ namespace Example.ViewModels
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
-
-        //****************************************
-        //  CONNECTION VIEWMODEL
-        //****************************************
-
         private ConnectionViewModel _connectionVM;
-
         public ConnectionViewModel ConnectionVM
         {
             get => _connectionVM;
@@ -76,50 +63,32 @@ namespace Example.ViewModels
             }
 
         }
-
         //config screens
         private readonly ConfigurationScreenViewModel _configReadVM;
         private readonly ConfigurationScreenEditViewModel _configEditVM;
 
-
         private readonly IDataService _database;
+        private readonly IAppStateService _appState;
 
+        public IAppStateService AppState => _appState;
 
-
-
-        //****************************************
-        //  CONSTRUCTOR
-        //****************************************
-
-        public MainViewModel()
+        public MainViewModel(IAppStateService appState)
         {
-
             var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
             IConfigService config = new AppConfigService(configPath);
 
-
             _configReadVM = new ConfigurationScreenViewModel(config);
-
             _configEditVM = new ConfigurationScreenEditViewModel(config);
-
             _configEditVM.ReturnToReadScreen = ShowConfigurationScreen;
-
-            CurrentView = new FirstScreenViewModel(ConnectionVM);
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
             CloseCommand = new RelayCommand(CloseWindow);
-
             ShowFirstScreenCommand = new RelayCommand(ShowFirstScreen);
             ShowSecondScreenCommand = new RelayCommand(ShowSecondScreen);
             ShowInicializeScreenCommand = new RelayCommand(ShowInicializeScreen);
-
-            //Configuration
             ShowconfigurationScreenCommand = new RelayCommand(ShowConfigurationScreen);
-
             ShowConfigScreenCommand = new RelayCommand(ShowConfigScreen);
-
-            //ShowConfigurationEditScreenCommand = new RelayCommand(ShowConfigurationEditScreen);
 
             //Database config
             IConfiguration configuration =
@@ -129,7 +98,6 @@ namespace Example.ViewModels
                 .Build();
 
             string? connectionString = configuration["Database_settings:ConnectionString"];
-
 
             if (string.IsNullOrWhiteSpace(connectionString))
             {
@@ -142,13 +110,20 @@ namespace Example.ViewModels
                 ConnectionString = connectionString,
             };
             
-            
+            //DATABASE
             _database = new SqlDatabaseService(db_config);
 
             IRegisterService registerService = new RegisterService(_database);
 
-            ConnectionVM = new ConnectionViewModel(new ModbusService(), config, registerService);
+            //APPSTATE
+            _appState = appState;
 
+            ConnectionVM = new ConnectionViewModel(new ModbusService(), 
+                config, 
+                registerService, 
+                _appState);
+
+            CurrentView = new FirstScreenViewModel(ConnectionVM);
 
             Inicialize();
         }
@@ -159,20 +134,17 @@ namespace Example.ViewModels
             if (is_db_conected)
             {
                 Console.WriteLine("Conexion correcta con base de datos");
+
+                _appState.Status = AppStatus.Idle;
             }
             else
             {
                 Console.WriteLine("Conexion fallida con base de datos");
+                _appState.Status = AppStatus.Error;
+
             }
-
         }
-
-
-        //****************************************
-        //  WINDOW FUNCTIONS
-        //****************************************
-
-
+        
         private void MinimizeWindow()
         {
             Application.Current.MainWindow.WindowState=WindowState.Minimized;
@@ -204,7 +176,7 @@ namespace Example.ViewModels
 
         public void ShowSecondScreen()
         {
-            CurrentView = new SecondScreenViewModel();
+            CurrentView = new SecondScreenViewModel(ConnectionVM, _database, _appState);
         }
 
         public void ShowInicializeScreen()

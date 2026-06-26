@@ -383,9 +383,10 @@
 
         <Grid Grid.Row="1" x:Name="StatusBar" >
 
-            <Border Background="Gray">
+            <Border Background="{Binding AppState.Status,
+                             Converter={StaticResource StatusBrushConverter}}"/>
                 
-            </Border>
+         
             
         </Grid>
 

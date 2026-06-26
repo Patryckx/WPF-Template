@@ -22,7 +22,7 @@ namespace Example.ViewModels
 {
     public class SecondScreenViewModel :ViewModelBase
     {
-        public ConnectionViewModel ConnectionVM { get; }
+        public ConnectionViewModel _ConnectionVM { get; }
 
         private readonly IDataService _database;
 
@@ -39,42 +39,19 @@ namespace Example.ViewModels
         }
 
 
-        public SecondScreenViewModel ()
-        {
+        private readonly IAppStateService _appState;
 
-            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
-            IConfigService config = new AppConfigService(configPath);
+        public SecondScreenViewModel(
+            ConnectionViewModel connectionVM,
+            IDataService database,
+            IAppStateService appState)
+                {
+                    _ConnectionVM = connectionVM;
+                    _database = database;
+                    _appState = appState;
 
-            //Database config
-            IConfiguration configuration =
-                new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("AppSettings.json")
-                .Build();
-
-            string? connectionString = configuration["Database_settings:ConnectionString"];
-
-
-            if (string.IsNullOrWhiteSpace(connectionString))
-            {
-                throw new Exception(
-                    "No se encontro la cadena de conexion.");
-            }
-
-            DatabaseConfig db_config = new()
-            {
-                ConnectionString = connectionString,
-            };
-
-
-            _database = new SqlDatabaseService(db_config);
-
-            IRegisterService registerService = new RegisterService(_database);
-
-            ConnectionVM = new ConnectionViewModel(new ModbusService(),config,registerService);
-            
-            LoadCoilsInfo();
-        }
+                    LoadCoilsInfo();
+                }
 
 
         private async void LoadCoilsInfo()

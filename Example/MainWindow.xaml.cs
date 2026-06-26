@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Example.Services.Interfaces;
 using Example.ViewModels;
 
 
@@ -19,11 +19,16 @@ namespace Example
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+        private readonly IAppStateService _appState;
+
+        public MainWindow(IAppStateService appState)
         {
+            _appState = appState;
+
             InitializeComponent();
 
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(_appState);
         }
 
         
