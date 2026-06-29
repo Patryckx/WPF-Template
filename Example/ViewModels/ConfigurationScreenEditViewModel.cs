@@ -21,7 +21,6 @@ namespace Example.ViewModels
 
         public RelayCommand SaveCommand { get;  }
 
-
         //Propiedades bindeadas a la UI
 
         private string _host;
@@ -64,8 +63,6 @@ namespace Example.ViewModels
             // Carga los valores actuales del .ini al abrir la pantalla
             Load();
         }
-
-
 
         private void Load()
         {

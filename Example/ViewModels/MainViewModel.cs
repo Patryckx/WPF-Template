@@ -1,13 +1,19 @@
 ﻿using ConfigIniLib;
 using ConfigIniLib.interfaces;
-using EthModbus.Services;
 
-using Example.Models;
-using Example.ViewModels.Base;
-using Example.Views;
 using SqlUtilityLibrary;
+using SqlUtilityLibrary.Models;
 using SqlUtilityLibrary.Services;
 using SqlUtilityLibrary.Interfaces;
+
+using EthModbus.Services;
+
+using Example.Views;
+using Example.Models;
+using Example.ViewModels.Base;
+using Example.Services.Interfaces;
+using Example.Services;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,11 +24,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Extensions.Configuration;
-using SqlUtilityLibrary.Models;
-using Example.Services.Interfaces;
-using Example.Services;
 using System.Data;
+
+using Microsoft.Extensions.Configuration;
 
 namespace Example.ViewModels
 {
@@ -164,10 +168,6 @@ namespace Example.ViewModels
             Application.Current.Shutdown();
         }
 
-        //****************************************
-        //    VIEW FUNCTIONS
-        //****************************************
-
         public void ShowFirstScreen()
         {
             CurrentView = new FirstScreenViewModel(ConnectionVM);
@@ -184,9 +184,6 @@ namespace Example.ViewModels
             CurrentView = new InicializeScreenViewModel();
         }
 
-
-
-
         public void ShowConfigurationScreen()
 
         {
@@ -194,21 +191,11 @@ namespace Example.ViewModels
             _configReadVM.Refresh();
             CurrentView = _configReadVM;
         }
-
-
-
         private void ShowConfigScreen()
         {
             CurrentView = _configEditVM;
         }
-
-
-
         
-        //****************************************
-        //    VIEW FUNCTIONS
-        //****************************************
-
         private void Block_gui()
         {
             

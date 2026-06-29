@@ -1,27 +1,33 @@
-﻿using Example.Services.Interfaces;
-using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using Example;
 using Example.Services;
+using Example.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 
-
-namespace Example
+public partial class App : Application
 {
-    public partial class App : Application
+    private ServiceProvider _services;
+
+    protected override void OnStartup(StartupEventArgs e)
     {
+        base.OnStartup(e);
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
+        var services = new ServiceCollection();
 
+        ConfigureServices(services);
 
-            IAppStateService appState = new AppStateService();
+        _services = services.BuildServiceProvider();
 
+        MainWindow window =
+            _services.GetRequiredService<MainWindow>();
 
-            MainWindow window = new MainWindow(appState);
-
-            window.Show();
-        }
+        window.Show();
     }
 
+    private void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton<IAppStateService, AppStateService>();
+
+        services.AddSingleton<MainWindow>();
+    }
 }

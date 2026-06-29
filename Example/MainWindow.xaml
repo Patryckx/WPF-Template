@@ -238,7 +238,7 @@
             <Grid Grid.Column="1" x:Name="Main_and_Header">
                 <Grid.RowDefinitions>
                     <!--Header -->
-                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="100"/>
                     <!--Main -->
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
