@@ -1,32 +1,16 @@
-﻿using ConfigIniLib;
-using ConfigIniLib.interfaces;
+﻿using SqlUtilityLibrary.Interfaces;
 
-using SqlUtilityLibrary;
-using SqlUtilityLibrary.Models;
-using SqlUtilityLibrary.Services;
-using SqlUtilityLibrary.Interfaces;
-
-using EthModbus.Services;
-
-using Example.Views;
 using Example.Models;
 using Example.ViewModels.Base;
 using Example.Services.Interfaces;
-using Example.Services;
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Data;
+using Microsoft.Extensions.DependencyInjection;
+using Example.Navigation.Services;
+using Example.Navigation.Stores;
+using Example.Navigation.Commands;
 
-using Microsoft.Extensions.Configuration;
 
 namespace Example.ViewModels
 {
@@ -42,19 +26,7 @@ namespace Example.ViewModels
         public ICommand ShowconfigurationScreenCommand { get; }
         public ICommand ShowConfigurationEditScreenCommand { get; }
         public ICommand ShowConfigScreenCommand {  get; }
-
-
-        private object? _currentView;
-
-        public object? CurrentView
-        {
-            get => _currentView;
-            set
-            {
-                _currentView = value; 
-                OnPropertyChanged(nameof(CurrentView));
-            }
-        }
+        
         private ConnectionViewModel _connectionVM;
         public ConnectionViewModel ConnectionVM
         {
@@ -65,72 +37,71 @@ namespace Example.ViewModels
                 _connectionVM = value;
                 OnPropertyChanged();
             }
-
         }
-        //config screens
+
+        public ViewModelBase? CurrentView
+        {
+            get => _navigationStore.CurrentViewModel;
+        }
+
         private readonly ConfigurationScreenViewModel _configReadVM;
         private readonly ConfigurationScreenEditViewModel _configEditVM;
 
+        private readonly INavigationService _navigation;
         private readonly IDataService _database;
         private readonly IAppStateService _appState;
+        private readonly NavigationStore _navigationStore;
+
 
         public IAppStateService AppState => _appState;
 
-        public MainViewModel(IAppStateService appState)
+        public MainViewModel(
+            INavigationService navigation,
+            IAppStateService appState, 
+            IDataService database,
+            ConnectionViewModel connection,
+            ConfigurationScreenViewModel configRead,
+            ConfigurationScreenEditViewModel configEdit,
+            NavigationStore navigationStore
+            )
         {
-            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
-            IConfigService config = new AppConfigService(configPath);
 
-            _configReadVM = new ConfigurationScreenViewModel(config);
-            _configEditVM = new ConfigurationScreenEditViewModel(config);
-            _configEditVM.ReturnToReadScreen = ShowConfigurationScreen;
+            _navigation = navigation;
+            _appState = appState;
+            _database = database;
+            _navigationStore= navigationStore;
+            ConnectionVM = connection;
+            _configReadVM = configRead;
+            _configEditVM = configEdit;
+           
+            
+            //_configEditVM.ReturnToReadScreen = ShowConfigurationScreen;
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
             CloseCommand = new RelayCommand(CloseWindow);
-            ShowFirstScreenCommand = new RelayCommand(ShowFirstScreen);
-            ShowSecondScreenCommand = new RelayCommand(ShowSecondScreen);
-            ShowInicializeScreenCommand = new RelayCommand(ShowInicializeScreen);
-            ShowconfigurationScreenCommand = new RelayCommand(ShowConfigurationScreen);
-            ShowConfigScreenCommand = new RelayCommand(ShowConfigScreen);
 
-            //Database config
-            IConfiguration configuration =
-                new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("AppSettings.json")
-                .Build();
+            ShowFirstScreenCommand = new NavigationCommand<FirstScreenViewModel>(_navigation);
 
-            string? connectionString = configuration["Database_settings:ConnectionString"];
+            ShowSecondScreenCommand = new NavigationCommand<SecondScreenViewModel>(_navigation);
 
-            if (string.IsNullOrWhiteSpace(connectionString))
-            {
-                throw new Exception(
-                    "No se encontro la cadena de conexion.");
-            }
+            ShowInicializeScreenCommand = new NavigationCommand<InicializeScreenViewModel>(_navigation);
 
-            DatabaseConfig db_config = new()
-            {
-                ConnectionString = connectionString,
-            };
+            ShowconfigurationScreenCommand = new NavigationCommand<ConfigurationScreenViewModel>(_navigation);
             
-            //DATABASE
-            _database = new SqlDatabaseService(db_config);
+            ShowConfigScreenCommand = new NavigationCommand<ConfigurationScreenEditViewModel>(_navigation);
 
-            IRegisterService registerService = new RegisterService(_database);
+            //CurrentView = new FirstScreenViewModel(ConnectionVM);
 
-            //APPSTATE
-            _appState = appState;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
-            ConnectionVM = new ConnectionViewModel(new ModbusService(), 
-                config, 
-                registerService, 
-                _appState);
 
-            CurrentView = new FirstScreenViewModel(ConnectionVM);
+            //_navigation.Navigate<InicializeScreenViewModel>();
 
-            Inicialize();
+            //Inicialize();
         }
+
+       
 
         private async void Inicialize()
         {
@@ -147,6 +118,7 @@ namespace Example.ViewModels
                 _appState.Status = AppStatus.Error;
 
             }
+
         }
         
         private void MinimizeWindow()
@@ -162,44 +134,59 @@ namespace Example.ViewModels
                 Application.Current.MainWindow.WindowState = WindowState.Maximized;
 
         }
-
         private void CloseWindow()
         {
             Application.Current.Shutdown();
         }
+      //  public void ShowFirstScreen()
+      //  {
+      //      //CurrentView = new FirstScreenViewModel(ConnectionVM);
 
-        public void ShowFirstScreen()
+      //      //_navigationStore.CurrentViewModel =
+      //      //_serviceProvider.GetRequiredService<FirstScreenViewModel>();
+
+      //      _navigation.Navigate<FirstScreenViewModel>();
+      //  }
+      //  public void ShowSecondScreen()
+      //  {
+      //      //CurrentView = new SecondScreenViewModel(ConnectionVM, _database, _appState);
+
+      //       //       _navigationStore.CurrentViewModel =
+      //       //_serviceProvider.GetRequiredService<SecondScreenViewModel>();
+
+      //      _navigation.Navigate<SecondScreenViewModel>();
+
+
+      //  }
+
+      //  public void ShowInicializeScreen()
+      //  {
+      //    //      _navigationStore.CurrentViewModel =
+      //    //_serviceProvider.GetRequiredService<InicializeScreenViewModel>();
+
+      //      _navigation.Navigate<InicializeScreenViewModel> ();
+      //  }
+
+      //  public void ShowConfigurationScreen()
+
+      //  {
+      //      //CurrentView = new ConfigurationScreenViewModel();
+      //      _configReadVM.Refresh();
+
+      ////      _navigationStore.CurrentViewModel =
+      ////_serviceProvider.GetRequiredService<ConfigurationScreenViewModel>();
+      //  }
+      //  private void ShowConfigScreen()
+      //  {
+      ////      _navigationStore.CurrentViewModel =
+      ////_serviceProvider.GetRequiredService<ConfigurationScreenEditViewModel>();
+      //  }
+
+        private void OnCurrentViewModelChanged()
         {
-            CurrentView = new FirstScreenViewModel(ConnectionVM);
+            OnPropertyChanged(nameof(CurrentView));
         }
 
-
-        public void ShowSecondScreen()
-        {
-            CurrentView = new SecondScreenViewModel(ConnectionVM, _database, _appState);
-        }
-
-        public void ShowInicializeScreen()
-        {
-            CurrentView = new InicializeScreenViewModel();
-        }
-
-        public void ShowConfigurationScreen()
-
-        {
-            //CurrentView = new ConfigurationScreenViewModel();
-            _configReadVM.Refresh();
-            CurrentView = _configReadVM;
-        }
-        private void ShowConfigScreen()
-        {
-            CurrentView = _configEditVM;
-        }
-        
-        private void Block_gui()
-        {
-            
-        }
-
+      
     }
 }

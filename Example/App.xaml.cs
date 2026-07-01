@@ -1,8 +1,30 @@
-﻿using Example;
+﻿using ConfigIniLib.interfaces;
+using Example;
+using Example.Models;
 using Example.Services;
 using Example.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SqlUtilityLibrary.Interfaces;
+using SqlUtilityLibrary.Models;
+using SqlUtilityLibrary.Services;
 using System.Windows;
+using System.Windows.Shapes;
+
+
+using ModbusTcpLib;
+
+using System.IO;
+using System.Data;
+using ConfigIniLib;
+
+
+using IOPath = System.IO.Path;
+using Example.ViewModels;
+using EthModbus.Services.Interfaces;
+using Example.Navigation.Services;
+using Example.Navigation.Stores;
+using EthModbus.Services;
 
 public partial class App : Application
 {
@@ -10,18 +32,27 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
+        try
+        {
+            base.OnStartup(e);
 
-        var services = new ServiceCollection();
+            var services = new ServiceCollection();
 
-        ConfigureServices(services);
+            ConfigureServices(services);
 
-        _services = services.BuildServiceProvider();
+            _services = services.BuildServiceProvider();
 
-        MainWindow window =
-            _services.GetRequiredService<MainWindow>();
+            MainWindow window =
+                _services.GetRequiredService<MainWindow>();
 
-        window.Show();
+            window.Show();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                ex.ToString(),
+                "Startup Error");
+        }
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -29,5 +60,69 @@ public partial class App : Application
         services.AddSingleton<IAppStateService, AppStateService>();
 
         services.AddSingleton<MainWindow>();
+
+        services.AddSingleton<IDataService>(provider =>
+
+        {
+            IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("AppSettings.json")
+            .Build();
+
+
+            string? connection = configuration["Database_settings:ConnectionString"];
+
+
+            DatabaseConfig db = new()
+            {
+                ConnectionString = connection
+            };
+
+            return new SqlDatabaseService(db);
+
+        });
+
+        services.AddSingleton<IRegisterService, RegisterService>();
+
+        services.AddSingleton<IConfigService>(provider =>
+        {
+            string path =
+            IOPath.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "config.ini");
+
+
+            return new AppConfigService(path);
+        });
+
+        services.AddSingleton<IModbusService,ModbusService>();
+
+        services.AddSingleton<NavigationStore>();
+
+        services.AddSingleton<INavigationService, NavigationService>();
+
+        services.AddSingleton<IViewModelFactory, ViewModelFactory>();
+
+        //ConnectionViewModels
+
+        services.AddSingleton<ConnectionViewModel>();
+
+        services.AddSingleton<MainViewModel>();
+
+        services.AddSingleton<ConfigurationScreenViewModel>();
+
+        services.AddSingleton<ConfigurationScreenEditViewModel>();
+
+        //Views navigation service
+
+        services.AddTransient<FirstScreenViewModel>();
+
+        services.AddTransient<SecondScreenViewModel>();
+
+        services.AddTransient<InicializeScreenViewModel>();
+
+        services.AddSingleton<MainWindow>();
+
+
     }
 }

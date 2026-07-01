@@ -19,16 +19,11 @@ namespace Example
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private readonly IAppStateService _appState;
-
-        public MainWindow(IAppStateService appState)
+        public MainWindow(MainViewModel viewModel)
         {
-            _appState = appState;
-
             InitializeComponent();
 
-            DataContext = new MainViewModel(_appState);
+            DataContext = viewModel;
         }
 
         

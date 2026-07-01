@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Example.Services.Interfaces
+namespace Example.Navigation.Services
 {
-    public interface INavigationService
+    internal class NavigationFactory
     {
-        void NavigateTo<T>() where T :class;
     }
 }

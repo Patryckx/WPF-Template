@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Example.ViewModels
+namespace Example.Navigation.Services
 {
-    public class InicializeScreenViewModel :ViewModelBase
+    public interface IViewModelFactory
     {
+
+        TViewModel Create<TViewModel>()
+            where TViewModel : ViewModelBase;
     }
 }
