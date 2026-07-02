@@ -1,43 +1,50 @@
-﻿using ConfigIniLib.interfaces;
+﻿using ConfigIniLib;
+using ConfigIniLib.interfaces;
+using EthModbus.Services;
+using EthModbus.Services.Interfaces;
 using Example;
 using Example.Models;
+using Example.Navigation.Services;
+using Example.Navigation.Stores;
 using Example.Services;
 using Example.Services.Interfaces;
+using Example.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ModbusTcpLib;
 using SqlUtilityLibrary.Interfaces;
 using SqlUtilityLibrary.Models;
 using SqlUtilityLibrary.Services;
+using System.Data;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Shapes;
-
-
-using ModbusTcpLib;
-
-using System.IO;
-using System.Data;
-using ConfigIniLib;
-
-
 using IOPath = System.IO.Path;
-using Example.ViewModels;
-using EthModbus.Services.Interfaces;
-using Example.Navigation.Services;
-using Example.Navigation.Stores;
-using EthModbus.Services;
 
 namespace Example; //IMPORTANTE VERIFICAR QUE ESTE ARCHIVO TENGA EL ESPACIO DE NOMBRES DE LO CONTRARIO NO SE EJECUTARA LA CLASE APP DEBIDO,
 
 public partial class App : Application
 {
-    public App()
-    {
-        MessageBox.Show("Constructor App");
-    }
+    //public App()
+    //{
+    //    MessageBox.Show("Constructor App");  IMPORTANTE AL DEFINIR UN CONSTRUCTOR EN APP.XAML.CS ES NECESARIO INDICAR QUE SE EJECUTE 
+   //                                           inicializeComponent ya que al no tener constructor el compilador genera uno en automatico
+    //}
+
+
+
+
+
+
     private ServiceProvider _services;
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        var sb = new StringBuilder();
+
+      
 
         try
         {
@@ -57,7 +64,17 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.ToString());
+            Exception? current = ex;
+
+            while (current != null)
+            {
+                MessageBox.Show(
+                    $"TIPO:\n{current.GetType().FullName}\n\n" +
+                    $"MENSAJE:\n{current.Message}\n\n" +
+                    $"STACK:\n{current.StackTrace}");
+
+                current = current.InnerException;
+            }
         }
     }
 
