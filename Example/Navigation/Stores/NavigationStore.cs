@@ -23,8 +23,8 @@ namespace Example.Navigation.Stores
                     return;
  
                 _currentViewModel = value;
-
-                OnCurrentViewModelChanged();
+                CurrentViewModelChanged?.Invoke();
+                //OnCurrentViewModelChanged();
             }
         }
 

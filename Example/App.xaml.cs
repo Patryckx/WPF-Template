@@ -28,30 +28,40 @@ using EthModbus.Services;
 
 public partial class App : Application
 {
+    public App()
+    {
+        MessageBox.Show("Constructor App");
+    }
     private ServiceProvider _services;
-
     protected override void OnStartup(StartupEventArgs e)
     {
+        base.OnStartup(e);
+
         try
         {
-            base.OnStartup(e);
-
             var services = new ServiceCollection();
 
             ConfigureServices(services);
 
             _services = services.BuildServiceProvider();
 
-            MainWindow window =
-                _services.GetRequiredService<MainWindow>();
+            // Prueba cada servicio manualmente
+            _services.GetRequiredService<IConfigService>();
+            _services.GetRequiredService<IDataService>();
+            _services.GetRequiredService<IRegisterService>();
+            _services.GetRequiredService<ConnectionViewModel>();
+            _services.GetRequiredService<INavigationService>();
+            _services.GetRequiredService<MainViewModel>();
+
+            MessageBox.Show("Todo correcto hasta MainViewModel");
+
+            var window = _services.GetRequiredService<MainWindow>();
 
             window.Show();
         }
         catch (Exception ex)
         {
-            MessageBox.Show(
-                ex.ToString(),
-                "Startup Error");
+            MessageBox.Show(ex.ToString());
         }
     }
 
@@ -121,7 +131,6 @@ public partial class App : Application
 
         services.AddTransient<InicializeScreenViewModel>();
 
-        services.AddSingleton<MainWindow>();
 
 
     }

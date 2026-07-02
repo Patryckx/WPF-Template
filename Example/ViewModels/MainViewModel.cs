@@ -98,7 +98,9 @@ namespace Example.ViewModels
 
             //_navigation.Navigate<InicializeScreenViewModel>();
 
-            //Inicialize();
+            _navigation.Navigate<FirstScreenViewModel>();
+
+            Inicialize();
         }
 
        
