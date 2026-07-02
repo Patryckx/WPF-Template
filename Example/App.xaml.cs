@@ -26,6 +26,8 @@ using Example.Navigation.Services;
 using Example.Navigation.Stores;
 using EthModbus.Services;
 
+namespace Example; //IMPORTANTE VERIFICAR QUE ESTE ARCHIVO TENGA EL ESPACIO DE NOMBRES DE LO CONTRARIO NO SE EJECUTARA LA CLASE APP DEBIDO,
+
 public partial class App : Application
 {
     public App()
@@ -45,15 +47,9 @@ public partial class App : Application
 
             _services = services.BuildServiceProvider();
 
-            // Prueba cada servicio manualmente
-            _services.GetRequiredService<IConfigService>();
-            _services.GetRequiredService<IDataService>();
-            _services.GetRequiredService<IRegisterService>();
-            _services.GetRequiredService<ConnectionViewModel>();
-            _services.GetRequiredService<INavigationService>();
-            _services.GetRequiredService<MainViewModel>();
+            var navigation = _services.GetRequiredService<INavigationService>();
 
-            MessageBox.Show("Todo correcto hasta MainViewModel");
+            navigation.Navigate<FirstScreenViewModel>();
 
             var window = _services.GetRequiredService<MainWindow>();
 

@@ -16,7 +16,7 @@
 
         <ResourceDictionary>
 
-            <!-- GLOBAL STYLES --><!--
+             <!--GLOBAL STYLES--> 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -24,7 +24,7 @@
             <converters:BoolToCoilStatusConverter x:Key="BoolToCoilStatusConverter"/>
             <converters:ProcessStatusBrushConverter x:Key="StatusBrushConverter"/>
 
-            --><!-- VIEW ↔ VIEWMODEL LINK --><!--
+             <!--VIEW ↔ VIEWMODEL LINK--> 
                 <DataTemplate DataType="{x:Type vm:InicializeScreenViewModel}">
                     <views:InicializeScreen/>
                 </DataTemplate>
@@ -43,7 +43,7 @@
 
                 <DataTemplate DataType="{x:Type vm:ConfigurationScreenEditViewModel}">
                        <views:ConfigurationScreenEdit/>
-                   </DataTemplate>-->
+                   </DataTemplate>
 
 
 

@@ -44,9 +44,6 @@ namespace Example.ViewModels
             get => _navigationStore.CurrentViewModel;
         }
 
-        private readonly ConfigurationScreenViewModel _configReadVM;
-        private readonly ConfigurationScreenEditViewModel _configEditVM;
-
         private readonly INavigationService _navigation;
         private readonly IDataService _database;
         private readonly IAppStateService _appState;
@@ -71,11 +68,6 @@ namespace Example.ViewModels
             _database = database;
             _navigationStore= navigationStore;
             ConnectionVM = connection;
-            _configReadVM = configRead;
-            _configEditVM = configEdit;
-           
-            
-            //_configEditVM.ReturnToReadScreen = ShowConfigurationScreen;
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
             MaximizeCommand = new RelayCommand(MaximizeWindow);
@@ -91,14 +83,8 @@ namespace Example.ViewModels
             
             ShowConfigScreenCommand = new NavigationCommand<ConfigurationScreenEditViewModel>(_navigation);
 
-            //CurrentView = new FirstScreenViewModel(ConnectionVM);
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
-
-            //_navigation.Navigate<InicializeScreenViewModel>();
-
-            _navigation.Navigate<FirstScreenViewModel>();
 
             Inicialize();
         }
