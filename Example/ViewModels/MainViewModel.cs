@@ -126,50 +126,7 @@ namespace Example.ViewModels
         {
             Application.Current.Shutdown();
         }
-      //  public void ShowFirstScreen()
-      //  {
-      //      //CurrentView = new FirstScreenViewModel(ConnectionVM);
-
-      //      //_navigationStore.CurrentViewModel =
-      //      //_serviceProvider.GetRequiredService<FirstScreenViewModel>();
-
-      //      _navigation.Navigate<FirstScreenViewModel>();
-      //  }
-      //  public void ShowSecondScreen()
-      //  {
-      //      //CurrentView = new SecondScreenViewModel(ConnectionVM, _database, _appState);
-
-      //       //       _navigationStore.CurrentViewModel =
-      //       //_serviceProvider.GetRequiredService<SecondScreenViewModel>();
-
-      //      _navigation.Navigate<SecondScreenViewModel>();
-
-
-      //  }
-
-      //  public void ShowInicializeScreen()
-      //  {
-      //    //      _navigationStore.CurrentViewModel =
-      //    //_serviceProvider.GetRequiredService<InicializeScreenViewModel>();
-
-      //      _navigation.Navigate<InicializeScreenViewModel> ();
-      //  }
-
-      //  public void ShowConfigurationScreen()
-
-      //  {
-      //      //CurrentView = new ConfigurationScreenViewModel();
-      //      _configReadVM.Refresh();
-
-      ////      _navigationStore.CurrentViewModel =
-      ////_serviceProvider.GetRequiredService<ConfigurationScreenViewModel>();
-      //  }
-      //  private void ShowConfigScreen()
-      //  {
-      ////      _navigationStore.CurrentViewModel =
-      ////_serviceProvider.GetRequiredService<ConfigurationScreenEditViewModel>();
-      //  }
-
+    
         private void OnCurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentView));
