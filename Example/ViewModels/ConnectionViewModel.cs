@@ -98,18 +98,23 @@ namespace Example.ViewModels
 
         private readonly IDialogService _dialogService;
 
+        private readonly ILoggerService _loggerService;
+
         public ConnectionViewModel(
             IModbusService modbus,
             IConfigService config,
             IRegisterService registerService,
             IAppStateService appState,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            ILoggerService loogerService
+            )
         {
             _modbus = modbus;
             _config= config;
             _registerService = registerService;
             _appState = appState;
             _dialogService = dialogService;
+            _loggerService = loogerService;
 
 
 
@@ -150,24 +155,20 @@ namespace Example.ViewModels
         {
             if (_connection_inicialized == false) {
 
-
-                Debug.WriteLine("Iniciando conexión...");
+                _loggerService.Info(LogCategory.Modbus, "Iniciando conexion modbus");
 
                 try
                 {
                     PlcStatus = ProcessStatus.OnProcess;
-                    Debug.WriteLine("Estado: Connecting");
 
                     //await Task.Run(() => _modbus.Connect("192.168.4.1", 502));
                     await Task.Run(() => _modbus.Connect(_config.Host,_config.Port));
 
                     PlcStatus = ProcessStatus.Sucess;
-                    Debug.WriteLine("Estado: Connected");
+                    _loggerService.Info(LogCategory.Modbus, $"Conexion exitosa a {_config.Host}:{_config.Port}");
 
                     _cts = new CancellationTokenSource();
                     _ = MonitorCoils(_cts.Token);
-
-                    Debug.WriteLine("Monitoreo iniciado");
 
                     _connection_inicialized = true;
 
@@ -181,23 +182,26 @@ namespace Example.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    PlcStatus = ProcessStatus.Failed;
-                    Debug.WriteLine($"Error: {ex.Message}");
-
-
-                    //MessageBox.Show("Conexion fallida");
-                    _dialogService.ShowError("Conexion fallida");
-
                     _appState.Status = AppStatus.Error;
+                    
+                    PlcStatus = ProcessStatus.Failed;
 
+                    _loggerService.Error(
+                        LogCategory.Modbus,
+                        $"Timeout while connecting to {_config.Host}:{_config.Port}",
+                        ex);
 
+                    _dialogService.ShowError("Conexion fallida");
 
                 }
 
             }
             else
             {
-                Debug.WriteLine("Connection already inicializaed");
+                _loggerService.Info(LogCategory.Modbus, $"Conexion ya inicializada previamente " +
+                    $"{_config.Host}:{_config.Port}");
+
+                _dialogService.ShowMessage("Conexion ya inicializada...");
             }
         }
 
@@ -261,7 +265,9 @@ namespace Example.ViewModels
                     {
                         // No se pudo reconectar tras los reintentos
                         PlcStatus = ProcessStatus.Failed;
-                        Debug.WriteLine("Monitoreo detenido — sin conexión.");
+
+                        _loggerService.Error(LogCategory.Modbus, "Conexion Modbus interrumpida,monitoreo detenido");
+
                         return;
                     }
                 }
@@ -275,7 +281,8 @@ namespace Example.ViewModels
             //  Verifica el estado del socket antes de intentar leer
             if (!_modbus.IsConnected)
             {
-                Debug.WriteLine("Cliente desconectado detectado antes de leer.");
+                _loggerService.Info(LogCategory.Modbus, "Conexion cancelada,monitoreo detenido");
+
                 return false;
             }
 
@@ -307,7 +314,8 @@ namespace Example.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error de lectura: {ex.GetType().Name} - {ex.Message}");
+
+                _loggerService.Info(LogCategory.Modbus, $"Error de lectura: {ex.GetType().Name} - {ex.Message}");
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
@@ -327,7 +335,7 @@ namespace Example.ViewModels
                 if (token.IsCancellationRequested)
                     return false;
 
-                Debug.WriteLine($"Reconexión intento {attempt}/{MAX_RETRIES}...");
+                _loggerService.Info(LogCategory.Modbus, $"Reconexión intento {attempt}/{MAX_RETRIES}...");
 
                 try
                 {
@@ -346,7 +354,8 @@ namespace Example.ViewModels
 
                     }, token);
 
-                    Debug.WriteLine($"Reconexión exitosa en intento {attempt}.");
+                    _loggerService.Info(LogCategory.Modbus, $"Reconexión exitosa en intento {attempt}.");
+
 
                     Application.Current.Dispatcher.Invoke(() =>
                         PlcStatus = ProcessStatus.Sucess);
@@ -359,10 +368,11 @@ namespace Example.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Intento {attempt}/{MAX_RETRIES} fallido:");
-                    Debug.WriteLine($"  Tipo:    {ex.GetType().Name}");
-                    Debug.WriteLine($"  Mensaje: {ex.Message}");
-                    Debug.WriteLine($"  Inner:   {ex.InnerException?.Message}");
+
+                    _loggerService.Info(LogCategory.Modbus, $"Intento {attempt}/{MAX_RETRIES} fallido:");
+                    _loggerService.Info(LogCategory.Modbus, $"  Tipo:    {ex.GetType().Name}");
+                    _loggerService.Info(LogCategory.Modbus, $"  Mensaje: {ex.Message}");
+                    _loggerService.Info(LogCategory.Modbus, $"  Inner:   {ex.InnerException?.Message}");
 
                     Application.Current.Dispatcher.Invoke(() =>
                         PlcStatus = ProcessStatus.OnProcess);
@@ -371,7 +381,9 @@ namespace Example.ViewModels
                 }
             }
 
-            Debug.WriteLine("Reconexión fallida tras todos los intentos.");
+
+            _loggerService.Info(LogCategory.Modbus, "Reconexión fallida tras todos los intentos.");
+
             return false;
         }
 

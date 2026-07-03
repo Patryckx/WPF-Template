@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Example.Models;
+
 
 namespace Example.Services.Interfaces
 {
     public interface ILoggerService
     {
-        void Log(string message);
+        void Log(LogCategory category ,string message);
 
-        void Error(string message,Exception? ex=null);
+        void Error(LogCategory category, string message,Exception? ex=null);
 
-        void Warn(string message);
+        void Warn(LogCategory category, string message);
 
-        void Info(string message);  
+        void Info(LogCategory category, string message);  
 
 
     }

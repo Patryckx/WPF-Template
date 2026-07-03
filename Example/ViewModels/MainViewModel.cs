@@ -97,20 +97,20 @@ namespace Example.ViewModels
 
         private async void Inicialize()
         {
-            _logger.Info("Inicializando aplicacion");
+            _logger.Info(LogCategory.Application, "Inicializando aplicacion");
 
             bool is_db_conected = await _database.TestConnectionAsync();
             if (is_db_conected)
             {
 
-                _logger.Info("Conexion correcta con la base de datos");
+                _logger.Info(LogCategory.Database,"Conexion correcta con la base de datos");
 
                 _appState.Status = AppStatus.Idle;
             }
             else
             {
 
-                _logger.Info("Conexion fallida con la base de datos");
+                _logger.Info(LogCategory.Database,"Conexion fallida con la base de datos");
 
                 _appState.Status = AppStatus.Error;
 
@@ -133,7 +133,7 @@ namespace Example.ViewModels
         }
         private void CloseWindow()
         {
-            _logger.Info("Cerrando aplicación");
+            _logger.Info(LogCategory.Application,"Cerrando aplicación");
 
             Application.Current.Shutdown();
         }

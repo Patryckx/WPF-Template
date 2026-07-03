@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
-
+using Example.Models;
 
 
 namespace Example.Services
@@ -32,14 +32,15 @@ namespace Example.Services
 
         }
 
-        public void Log(string message) => Write("INFO", message);
-        public void Info(string message) => Write("INFO", message);
-        public void Warn(string message) => Write("WARNING", message);
-        public void Error(string message, Exception? ex = null) => Write("ERROR", message + (ex != null ? $" | {ex}" : ""));
+        public void Log(LogCategory category, string message) => Write("INFO",category, message);
+        public void Info(LogCategory category,  string message) => Write("INFO", category, message);
+        public void Warn(LogCategory category, string message) => Write("WARNING", category, message);
+        public void Error(LogCategory category, string message, Exception? ex = null) => Write("ERROR", category, message + (ex != null ? $" | {ex}" : ""));
 
 
         private void Write(
             string level,
+            LogCategory category,
             string message,
             [CallerMemberName] string member = "",
             [CallerFilePath] string file = "",
@@ -54,6 +55,7 @@ namespace Example.Services
             string logLine =
                 $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] " +
                 $"[{level}] " +
+                $"[{category}] " +
                 $"[Thread:{threadId}] " +
                 $"[{filename}:{member}:{line}] " +
                 $"=> {message}";

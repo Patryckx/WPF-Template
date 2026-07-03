@@ -21,6 +21,7 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using IOPath = System.IO.Path;
 
 namespace Example; //IMPORTANTE VERIFICAR QUE ESTE ARCHIVO TENGA EL ESPACIO DE NOMBRES DE LO CONTRARIO NO SE EJECUTARA LA CLASE APP DEBIDO,
@@ -33,13 +34,26 @@ public partial class App : Application
    //                                           inicializeComponent ya que al no tener constructor el compilador genera uno en automatico
     //}
     private ServiceProvider _services;
+
+    private ILoggerService _logger;
+
     protected override void OnStartup(StartupEventArgs e)
     {
+
+        //******* Subscribe to not controlled exceptions for log service **********
+
+        DispatcherUnhandledException += OnDispatcherUnhandledException;
+
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+        TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+
+        //***************************************************************************
+
+
         base.OnStartup(e);
 
         var sb = new StringBuilder();
-
-      
 
         try
         {
@@ -142,8 +156,50 @@ public partial class App : Application
         services.AddTransient<SecondScreenViewModel>();
 
         services.AddTransient<InicializeScreenViewModel>();
+    }
 
+    //************************  LOG CATCH FUNCTIONS ******************************
+    private void OnDispatcherUnhandledException(
+        object senser,DispatcherUnhandledExceptionEventArgs e )
+    {
+        _logger.Error(LogCategory.System,
+            "Unhandled UI Exception",
+            e.Exception);
 
+        e.Handled = true;
+    }
+
+    private void CurrentDomain_UnhandledException(object sender,
+        UnhandledExceptionEventArgs e)
+    {
+
+        if(e.ExceptionObject is Exception ex)
+        {
+            _logger.Error(
+                LogCategory.System,
+                "Fatal application error",
+                ex);
+        }
 
     }
+
+    private void TaskScheduler_UnobservedTaskException(
+        object? sender,
+        UnobservedTaskExceptionEventArgs e)
+    {
+        _logger.Error(LogCategory.System,
+            "Task exception",
+            e.Exception);
+
+        e.SetObserved();
+    }
+
+
+
+
+
+
+
+
+
 }
