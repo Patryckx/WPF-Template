@@ -48,9 +48,9 @@ namespace Example.ViewModels
         private readonly IDataService _database;
         private readonly IAppStateService _appState;
         private readonly NavigationStore _navigationStore;
-
-
         public IAppStateService AppState => _appState;
+
+        private readonly ILoggerService _logger;
 
         public MainViewModel(
             INavigationService navigation,
@@ -59,7 +59,8 @@ namespace Example.ViewModels
             ConnectionViewModel connection,
             ConfigurationScreenViewModel configRead,
             ConfigurationScreenEditViewModel configEdit,
-            NavigationStore navigationStore
+            NavigationStore navigationStore,
+            ILoggerService logger
             )
         {
 
@@ -67,6 +68,9 @@ namespace Example.ViewModels
             _appState = appState;
             _database = database;
             _navigationStore= navigationStore;
+            _logger = logger;
+
+
             ConnectionVM = connection;
 
             MinimizeCommand = new RelayCommand(MinimizeWindow);
@@ -93,16 +97,21 @@ namespace Example.ViewModels
 
         private async void Inicialize()
         {
+            _logger.Info("Inicializando aplicacion");
+
             bool is_db_conected = await _database.TestConnectionAsync();
             if (is_db_conected)
             {
-                Console.WriteLine("Conexion correcta con base de datos");
+
+                _logger.Info("Conexion correcta con la base de datos");
 
                 _appState.Status = AppStatus.Idle;
             }
             else
             {
-                Console.WriteLine("Conexion fallida con base de datos");
+
+                _logger.Info("Conexion fallida con la base de datos");
+
                 _appState.Status = AppStatus.Error;
 
             }
@@ -124,6 +133,8 @@ namespace Example.ViewModels
         }
         private void CloseWindow()
         {
+            _logger.Info("Cerrando aplicación");
+
             Application.Current.Shutdown();
         }
     

@@ -121,6 +121,10 @@ public partial class App : Application
 
         services.AddSingleton<IViewModelFactory, ViewModelFactory>();
 
+        services.AddSingleton<IDialogService, DialogService>();
+
+        services.AddSingleton<ILoggerService, LoggerService>();
+
         //ConnectionViewModels
 
         services.AddSingleton<ConnectionViewModel>();
