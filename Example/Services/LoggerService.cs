@@ -70,7 +70,10 @@ namespace Example.Services
                 string path =Path.Combine(
                     _config.LogPath,
                     $"log_{DateTime.Now:yyyy-MM-dd}.txt");
-
+                lock (_lock)
+                {
+                    File.AppendAllText(path, logLine + Environment.NewLine);
+                }
 
             } catch (Exception ex)
             {
