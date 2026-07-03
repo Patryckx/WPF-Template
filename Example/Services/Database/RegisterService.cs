@@ -8,7 +8,7 @@ using Example.Services.Interfaces;
 using Microsoft.Data.SqlClient;
 using SqlUtilityLibrary;
 using SqlUtilityLibrary.Interfaces;
-namespace Example.Services
+namespace Example.Services.Database
 {
     public class RegisterService :IRegisterService
     {

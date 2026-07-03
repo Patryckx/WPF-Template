@@ -1,13 +1,14 @@
 ﻿using ConfigIniLib;
 using ConfigIniLib.interfaces;
-using EthModbus.Services;
 using EthModbus.Services.Interfaces;
 using Example;
 using Example.Models;
 using Example.Navigation.Services;
 using Example.Navigation.Stores;
 using Example.Services;
+using Example.Services.Database;
 using Example.Services.Interfaces;
+using Example.Services.Modbus;
 using Example.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,12 +32,6 @@ public partial class App : Application
     //    MessageBox.Show("Constructor App");  IMPORTANTE AL DEFINIR UN CONSTRUCTOR EN APP.XAML.CS ES NECESARIO INDICAR QUE SE EJECUTE 
    //                                           inicializeComponent ya que al no tener constructor el compilador genera uno en automatico
     //}
-
-
-
-
-
-
     private ServiceProvider _services;
     protected override void OnStartup(StartupEventArgs e)
     {

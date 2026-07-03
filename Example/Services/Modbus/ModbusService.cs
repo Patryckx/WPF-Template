@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EthModbus.Services
+namespace Example.Services.Modbus
 {
     public class ModbusService : IModbusService
     {
