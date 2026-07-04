@@ -5,10 +5,12 @@ using Example.Models;
 using Example.Models.Database_registers;
 using Example.Services.Interfaces;
 using Example.ViewModels.Base;
+
 using Modbus.Device;
 using ModbusTcpLib;
 using System;
 using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
@@ -217,8 +219,6 @@ namespace Example.ViewModels
             DisconnectCommand.RaiseCanExecuteChanged();
             ToggleCoilCommand.RaiseCanExecuteChanged();
         }
-
-
         private async void ToggleCoil(DiscreteCoil coil)
         {
             if (coil == null) return;
