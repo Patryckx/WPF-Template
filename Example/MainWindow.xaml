@@ -43,7 +43,7 @@
             <!--  SIDEBAR                                 -->
             <!-- ========================================= -->
             <Border Background="{StaticResource Brush.Header}"
-                    Padding="15">
+                    Padding="15" HorizontalAlignment="Left" Width="250">
                 <Grid Grid.Column="0" x:Name="Sidebar">
                 
                     <Grid.RowDefinitions>
@@ -237,7 +237,7 @@
             <Grid Grid.Column="1" x:Name="Main_and_Header">
                 <Grid.RowDefinitions>
                     <!--Header -->
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="70"/>
                     <!--Main -->
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -276,7 +276,7 @@
                                     <!--Buttons -->
                                     <RowDefinition Height="*"/>
                                     <!--Unused space -->
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height=".6*"/>
 
                                 </Grid.RowDefinitions>
                                 <!--Buttons -->
@@ -298,13 +298,13 @@
 
                                         <!--Minimize -->
                                         <Button Grid.Column="0" 
-                                                Width="40"
-                                                Height="40"
+                                                Width="auto"
+                                                Height="auto"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 Padding="0"
                                                 Cursor="Hand"
-                                                Margin="5"
+                                                Margin="0 7 0 0"
                                                 ToolTip="Minimizar"
                                                 Command="{Binding MinimizeCommand}">
 
@@ -317,14 +317,13 @@
                                         </Button>
                                         <!--Maximize -->
                                         <Button Grid.Column="1"
-                                                Width="40"
-                                                Height="40"
+                                                Width="auto"
+                                                Height="auto"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 Padding="0"
                                                 Cursor="Hand"
-
-                                                Margin="5"
+                                                Margin="0 7 0 0"
                                                 ToolTip="Maximizar pantalla"
                                                 Command="{Binding MaximizeCommand}">
 
@@ -334,13 +333,13 @@
                                         </Button>
                                         <!--Close -->
                                         <Button Grid.Column="2"
-                                                Width="40"
-                                                Height="40"
+                                                Width="auto"
+                                                Height="auto"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 Padding="0"
                                                 Cursor="Hand"
-                                                Margin="5"
+                                                Margin="0 7 0 0"
                                                 ToolTip="Cerrar aplicación"
                                                 Command="{Binding CloseCommand}">
 
