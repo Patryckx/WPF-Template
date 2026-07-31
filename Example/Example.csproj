@@ -38,6 +38,7 @@
     <None Remove="Resources\Images\microchip.png" />
     <None Remove="Resources\Images\minimize.png" />
     <None Remove="Resources\Images\nidec-icon.jpeg" />
+    <None Remove="Resources\Images\Nidec_logo_green.png" />
     <None Remove="Resources\Images\undo.png" />
     <None Remove="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
   </ItemGroup>
@@ -147,6 +148,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\nidec-icon.jpeg" />
+    <Resource Include="Resources\Images\Nidec_logo_green.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\undo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

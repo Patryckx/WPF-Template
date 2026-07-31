@@ -35,20 +35,20 @@
         <Grid Grid.Row="0" x:Name="Sidebar_and_Main">
             <Grid.ColumnDefinitions>
                 <!--Sidebar -->
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="  230"/>
                 <!--Main -->
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
             <!-- ========================================= -->
             <!--  SIDEBAR                                 -->
             <!-- ========================================= -->
-            <Border Background="{StaticResource Brush.Header}"
-                    Padding="15" HorizontalAlignment="Left" Width="250">
-                <Grid Grid.Column="0" x:Name="Sidebar">
+            <Border Background="{StaticResource Brush.Header2}"
+                    Padding="5" HorizontalAlignment="Center" >
+                <Grid Grid.Column="0" x:Name="Sidebar" Margin="15">
                 
                     <Grid.RowDefinitions>
                         <!--Logo-->
-                        <RowDefinition Height=".5*"/>
+                        <RowDefinition Height=".3*"/>
                         <RowDefinition Height=".7*"/>
                         <!--Buttons-->
                         <RowDefinition Height="1*"/>
@@ -58,7 +58,7 @@
                     <!-- 1.- LOGO -->
 
                     <Image Grid.Row="0"
-                           Source="/Resources/Images/vectorseek.com-Nidec Logo Vector.png"
+                           Source="/Resources/Images/Nidec_logo_green.png"
                            Stretch="Uniform"/>
 
 
@@ -85,11 +85,11 @@
                         <TextBlock
                                 Grid.Row="0"
                                    Style="{StaticResource Text.H1}"
-                                   Text="Secuencia"
+                                   Text="Pruebas"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Margin="20,0,0,0"
-                                   FontSize="34"/>
+                                   FontSize="32"/>
 
 
                         <controls:ProcessIndicator 
@@ -97,29 +97,28 @@
                             
                             Text="1"
                             FontSize="24"
-                            Background="#303030"
                             Status="{Binding ConnectionVM.PlcStatus}"
-                            Width="180"
+                            Width="140"
                             Height="auto"
-                            Padding="2"/>
+                            Padding="0"/>
 
                         <controls:ProcessIndicator
                             Grid.Row="2"
                             Text="2"
                             FontSize="24"
                             Status="{Binding SecondStep}"
-                            Width="180"
+                            Width="140"
                             Height="auto"
-                            Padding="2"/>
+                            Padding="0"/>
 
                         <controls:ProcessIndicator
                             Grid.Row="3"
                             Text="3"
                             FontSize="24"
                             Status="{Binding ThirdStep}"
-                            Width="180"
+                            Width="140"
                             Height="auto"
-                            Padding="2"/>
+                            Padding="0"/>
 
 
 
@@ -130,7 +129,7 @@
 
 
                     <!-- 3.- BUTTONS-->
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" >
 
                         <Grid.RowDefinitions>
                             <!-- BUTTON 1-->
@@ -150,12 +149,12 @@
 
                             <StackPanel Orientation="Horizontal">
 
-                                <Image Source="/Resources/Images/microchip.png"
+                                <Image Source="/Resources/Images/home.png"
                                        Width="32"
                                        Height="32"
                                        Margin="10,0,10,0"/>
                                 
-                                <TextBlock Text="Gateway"
+                                <TextBlock Text="Inicio"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center" FontSize="28"/>
 
@@ -175,7 +174,7 @@
                                        Height="32"
                                        Margin="10,0,10,0"/>
                                 <TextBlock Text="Configuración"
-                                           VerticalAlignment="Center"/>
+                                           VerticalAlignment="Center" FontSize="20"/>
 
                             </StackPanel>
 
@@ -193,7 +192,7 @@
                                     Margin="10,0,10,0"/>
 
                                 <TextBlock Text="Trazabilidad"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center" FontSize="24"/>
 
 
                             </StackPanel>
@@ -213,7 +212,7 @@
                                        Margin="10,0,10,0"/>
 
                                 <TextBlock Text="Cerrar sesión"
-                                           VerticalAlignment="Center"/>
+                                           VerticalAlignment="Center" FontSize="20"/>
 
 
                             </StackPanel>
@@ -237,7 +236,7 @@
             <Grid Grid.Column="1" x:Name="Main_and_Header">
                 <Grid.RowDefinitions>
                     <!--Header -->
-                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="80"/>
                     <!--Main -->
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>

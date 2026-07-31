@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border x:Name="IndicatorBorder"
-            Background="#303030"
+            Background="Gray"
             
             BorderBrush="White"
-            BorderThickness="2"
+            BorderThickness="3"
             CornerRadius="10"
             Padding="2"
             Margin="5">
@@ -18,6 +18,7 @@
 
         <TextBlock Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
                    Foreground="White"
+                   FontWeight="Bold"
                    
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>

@@ -7,19 +7,22 @@
     <Color x:Key="Color.Sidebar">#0AA547</Color>
     
     <Color x:Key="Color.Header_background" >#2f2f2f</Color>
-
+    <Color x:Key="Color.Header2_background" >#009b4a</Color>
     
     <Color x:Key="Color.Success">#2ECC71</Color>
     <Color x:Key="Color.Danger">#E74C3C</Color>
 
     <Color x:Key="Color.Text">#FFFFFF</Color>
     <Color x:Key="Color.TextSecondary">#AAAAAA</Color>
+    
 
-
-    <!-- Brushes (usados por controles) -->
+    <!-- Brushes (usados por controles) --> 
 
     <SolidColorBrush x:Key="Brush.Header"
                  Color="{StaticResource Color.Header_background}"/>
+
+    <SolidColorBrush x:Key="Brush.Header2"
+             Color="{StaticResource Color.Header2_background}"/>
 
 
     <SolidColorBrush x:Key="Brush.Sidebar"
