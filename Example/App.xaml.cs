@@ -65,7 +65,8 @@ public partial class App : Application
 
             var navigation = _services.GetRequiredService<INavigationService>();
 
-            navigation.Navigate<FirstScreenViewModel>();
+            navigation.Navigate<InicializeScreenViewModel>();
+            //navigation.Navigate<FirstScreenViewModel>();
 
             var window = _services.GetRequiredService<MainWindow>();
 

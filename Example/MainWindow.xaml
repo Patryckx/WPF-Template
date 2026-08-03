@@ -48,10 +48,10 @@
                 
                     <Grid.RowDefinitions>
                         <!--Logo-->
-                        <RowDefinition Height=".3*"/>
-                        <RowDefinition Height=".7*"/>
+                        <RowDefinition Height=".35*"/>
+                        <RowDefinition Height=".9*"/>
                         <!--Buttons-->
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="230"/>
 
                     </Grid.RowDefinitions>
                     
@@ -76,6 +76,12 @@
                             <RowDefinition Height="*"/>
                             <!--Step 3-->
                             <RowDefinition Height="*"/>
+                            <!--Step 4-->
+                            <RowDefinition Height="*"/>
+                            <!--Step 5-->
+                            <RowDefinition Height="*"/>
+                            <!--Step 6-->
+                            <RowDefinition Height="10"/>
 
 
                         </Grid.RowDefinitions>
@@ -120,7 +126,23 @@
                             Height="auto"
                             Padding="0"/>
 
+                        <controls:ProcessIndicator
+                            Grid.Row="4"
+                            Text="4"
+                            FontSize="24"
+                            Status="{Binding ThirdStep}"
+                            Width="140"
+                            Height="auto"
+                            Padding="0"/>
 
+                        <controls:ProcessIndicator
+                            Grid.Row="5"
+                            Text="5"
+                            FontSize="24"
+                            Status="{Binding ThirdStep}"
+                            Width="140"
+                            Height="auto"
+                            Padding="0"/>
 
 
                     </Grid>
@@ -145,7 +167,7 @@
 
                         <Button Grid.Row="0" 
                                 Style="{StaticResource SidebarMenuStyleButton}"
-                                Command="{Binding ShowFirstScreenCommand}">
+                                Command="{Binding ShowInicializeScreenCommand}">
 
                             <StackPanel Orientation="Horizontal">
 
@@ -275,7 +297,7 @@
                                     <!--Buttons -->
                                     <RowDefinition Height="*"/>
                                     <!--Unused space -->
-                                    <RowDefinition Height=".6*"/>
+                                    <RowDefinition Height=".8*"/>
 
                                 </Grid.RowDefinitions>
                                 <!--Buttons -->

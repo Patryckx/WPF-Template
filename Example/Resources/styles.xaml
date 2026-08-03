@@ -7,13 +7,19 @@
     <Color x:Key="Color.Sidebar">#0AA547</Color>
     
     <Color x:Key="Color.Header_background" >#2f2f2f</Color>
-    <Color x:Key="Color.Header2_background" >#009b4a</Color>
-    
+    <Color x:Key="Color.Header2_background" >#02954A</Color>
+
+    <Color x:Key="Color.Button_sidebar_pressed" >#01582B</Color>
+
     <Color x:Key="Color.Success">#2ECC71</Color>
     <Color x:Key="Color.Danger">#E74C3C</Color>
 
     <Color x:Key="Color.Text">#FFFFFF</Color>
     <Color x:Key="Color.TextSecondary">#AAAAAA</Color>
+    
+    
+    
+    
     
 
     <!-- Brushes (usados por controles) --> 
@@ -34,16 +40,20 @@
     <!-- BRUSHES PARA BOTONES-->
 
     <SolidColorBrush x:Key="Brush.SidebarButton.Background"
-                     Color="#2D2D30"/>
+                     Color="#016C35"/> 
+    <!--017F3F-->
 
     <SolidColorBrush x:Key="Brush.SidebarButton.Hover"
-                     Color="#3A3A3D"/>
+                     Color="#017F3F"/>
 
     <SolidColorBrush x:Key="Brush.SidebarButton.Pressed"
-                     Color="{StaticResource Color.Sidebar}"/>
+                     Color="{StaticResource Color.Button_sidebar_pressed}"/>
 
     <SolidColorBrush x:Key="Brush.SidebarButton.Border"
-                     Color="#3E3E42"/>
+                     Color="#014923"/>
+    
+    
+    
 
     <!-- ========================================= -->
     <!-- TYPOGRAPHY                                -->
