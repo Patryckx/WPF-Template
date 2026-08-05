@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="Example.Views.InnitScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Example.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White" Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.3*"/>
+ 
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Image Source="/Resources/Images/nidec-logo-black-white-no-background.png" 
+                       Width="auto" Height="auto" Margin="0" Stretch="Fill" >
+                </Image>
+            </Grid>
+
+        </Grid>
+
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height=".76*"/>
+            </Grid.RowDefinitions>
+            
+            <!--PROJECT TITLE--> 
+            <Grid Grid.Row="0">
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold" 
+           FontSize="40" Text="ULV 90 Tester" VerticalAlignment="Center" FontFamily="Arial Black"></TextBlock>
+            </Grid>
+
+            <!--PROGRESS BAR -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <ProgressBar
+                            Minimum="0"
+                            Maximum="100"
+                            Value="{Binding Progress}" Margin="10"  />    
+                </Grid>
+                
+            </Grid>
+
+            <!--PROGRESS MESSAGES -->
+            <Grid Grid.Row="2">
+                <TextBlock
+                    Text="{Binding StatusMessage}" />
+            </Grid>
+
+
+
+        </Grid>
+        
+        
+        <!--FOOTER-->
+        <Grid Grid.Row="2" Margin="10" Background="">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                
+            </Grid.ColumnDefinitions>
+            
+            <!--FOOTER DEV + COMPANY INFO-->             
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="2*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <!--LOGO-->
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/logo-smitech.png" 
+                           Width="auto" Height="auto" Stretch="Fill" Margin="0" >
+                    </Image>
+                </Grid>
+                
+                <!--APP + DEV INFO-->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" Name="version"/>
+                        <RowDefinition Height="*" Name="Contact"/>
+                        <RowDefinition Height="*" Name="year"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock HorizontalAlignment="Center" FontWeight="UltraLight" 
+                            FontSize="16" Text="version: 1.0.0" VerticalAlignment="Center" FontFamily="italic"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock HorizontalAlignment="Center" FontWeight="UltraLight" 
+                         FontSize="16" Text="smitech@gmail.com" VerticalAlignment="Center" FontFamily="italic"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <TextBlock HorizontalAlignment="Center" FontWeight="UltraLight" 
+                         FontSize="16" Text="2026 ™" VerticalAlignment="Center" FontFamily="italic"></TextBlock>
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+            
+            
+
+        </Grid>
+        
+        
+        
+        
+            
+    </Grid>
+</UserControl>

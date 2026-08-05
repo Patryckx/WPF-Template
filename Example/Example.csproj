@@ -21,26 +21,37 @@
     <None Remove="Resources\Images\circuito.png" />
     <None Remove="Resources\Images\clock.png" />
     <None Remove="Resources\Images\close.png" />
+    <None Remove="Resources\Images\codigo-qr.png" />
     <None Remove="Resources\Images\cogwheel.png" />
     <None Remove="Resources\Images\correcto.png" />
     <None Remove="Resources\Images\database.png" />
     <None Remove="Resources\Images\diskette.png" />
     <None Remove="Resources\Images\Edge.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\enter.png" />
+    <None Remove="Resources\Images\focus.png" />
     <None Remove="Resources\Images\folder.png" />
     <None Remove="Resources\Images\funnel.png" />
     <None Remove="Resources\Images\home.png" />
     <None Remove="Resources\Images\inicialize_app_icons.png" />
     <None Remove="Resources\Images\lanzadera.png" />
+    <None Remove="Resources\Images\lcd.png" />
     <None Remove="Resources\Images\local-area-network.png" />
+    <None Remove="Resources\Images\logo-smitech.png" />
     <None Remove="Resources\Images\logout.png" />
     <None Remove="Resources\Images\maximize.png" />
     <None Remove="Resources\Images\microchip.png" />
     <None Remove="Resources\Images\minimize.png" />
+    <None Remove="Resources\Images\multimetro.png" />
     <None Remove="Resources\Images\nidec-icon.jpeg" />
+    <None Remove="Resources\Images\nidec-logo-black-white-no-background.png" />
+    <None Remove="Resources\Images\nidec-logo-black_and_white.png" />
     <None Remove="Resources\Images\Nidec_logo_green.png" />
+    <None Remove="Resources\Images\smitech-logo-no-background.png" />
     <None Remove="Resources\Images\undo.png" />
+    <None Remove="Resources\Images\usb.png" />
     <None Remove="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
+    <None Remove="Resources\Images\webcam.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,6 +104,9 @@
     <Resource Include="Resources\Images\clock.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\codigo-qr.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\cogwheel.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -111,6 +125,12 @@
     <Resource Include="Resources\Images\edit.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\enter.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\focus.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\funnel.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -123,7 +143,13 @@
     <Resource Include="Resources\Images\lanzadera.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\lcd.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\local-area-network.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\logo-smitech.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\logout.png">
@@ -147,14 +173,32 @@
     <Resource Include="Resources\Images\minimize.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\multimetro.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\nidec-icon.jpeg" />
+    <Resource Include="Resources\Images\nidec-logo-black-white-no-background.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\nidec-logo-black_and_white.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\Nidec_logo_green.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smitech-logo-no-background.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\undo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\usb.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\vectorseek.com-Nidec Logo Vector.png" />
+    <Resource Include="Resources\Images\webcam.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

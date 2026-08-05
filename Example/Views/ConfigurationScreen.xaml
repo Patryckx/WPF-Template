@@ -17,7 +17,7 @@
     <Grid Background="White" Margin="20">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
@@ -34,7 +34,7 @@
             <!--Icon-->
 
             <Grid Grid.Column="0">
-                <Image Source="/Resources/Images/cogwheel.png" Width="auto" Height="auto" Margin="10" >
+                <Image Source="/Resources/Images/cogwheel.png" Width="auto" Height="auto" Margin="5" >
                 </Image>
             </Grid>
 
@@ -83,6 +83,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
 
@@ -99,54 +101,16 @@
 
                 <Grid Grid.Column="1">
                     <TextBlock HorizontalAlignment="left" FontWeight="Bold" 
-                               FontSize="36" Text="Gateway" VerticalAlignment="Center" Margin="10"></TextBlock>
+                               FontSize="32" Text="Gateway" VerticalAlignment="Center" ></TextBlock>
                 </Grid>
 
             </Grid>
 
-            <Grid Grid.Row="1">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-
-                <!--ICON-->
-
-                <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/microchip.png" Margin="10"></Image>
-                </Grid>
-
-                <!--title (direccion ip) -->
-
-                <Grid Grid.Column="1">
-                    <TextBlock
-                       FontSize="32"
-    
-                       FontWeight="Light"
-                       FontFamily="Arial"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
-                </Grid>
-
-                <!--TEXTBOX-->
-
-                <Grid Grid.Column="2">
-                    <TextBlock Name="lblDireccionIp" HorizontalAlignment="Center" 
-                             Height="auto" Width="350" 
-                             Margin="10" FontFamily="Arial" FontSize="28"
-                            FontStyle="Normal" Text="{Binding Host }" >
-                    </TextBlock>
-
-                </Grid>
-
-            </Grid>
-
+            
 
             <!--TEXTBLOCK-->
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1" Margin="50 0 0 0 ">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
@@ -157,17 +121,17 @@
 
                 <Grid Grid.Column="0">
 
-                    <Image Source="/Resources/Images/local-area-network.png" Margin="10"></Image>
+                    <Image Source="/Resources/Images/local-area-network.png"></Image>
                 </Grid>
                 <!--TITLE-->
                 <Grid Grid.Column="1">
                     <TextBlock
-                       FontSize="32"
+                       FontSize="28"
     
                        FontWeight="light"
                        FontFamily="Arial"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center"><Run Language="es-mx" Text="Puerto"/></TextBlock>
+                       VerticalAlignment="Center"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
                 </Grid>
                 <!--TEXTBOX-->
 
@@ -179,7 +143,7 @@
                     <TextBlock Name="lblPuerto" HorizontalAlignment="Center" 
                              Height="auto" Width="350" 
                               Margin="10,10,0,10"
-                             FontFamily="Arial" FontSize="28"
+                             FontFamily="Arial" FontSize="24"
                              FontStyle="Normal" Grid.ColumnSpan="2"
                                Text="{Binding Puerto}">
                     </TextBlock>
@@ -187,7 +151,7 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="1*"/>
@@ -198,14 +162,14 @@
 
                 <Grid Grid.Column="0">
 
-                    <Image Source="/Resources/Images/database.png" Margin="10"></Image>
+                    <Image Source="/Resources/Images/database.png"></Image>
                 </Grid>
 
                 <!--TITLE-->
 
                 <Grid Grid.Column="1">
                     <TextBlock
-                       FontSize="36"
+                       FontSize="32"
     
                        FontWeight="Bold"
                        FontFamily="Arial"
@@ -216,7 +180,7 @@
 
             </Grid>
 
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="3" Margin="50 0 0 0 ">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="1*"/>
@@ -226,7 +190,7 @@
                 <!--ICON-->
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/local-area-network.png" Margin="10"></Image>
+                    <Image Source="/Resources/Images/local-area-network.png" ></Image>
                 </Grid>
 
                 <!--ICON-->
@@ -234,7 +198,7 @@
                 <Grid Grid.Column="1">
 
                     <TextBlock
-                       FontSize="32"
+                       FontSize="28"
     
                        FontWeight="Light"
                        FontFamily="Arial"
@@ -255,6 +219,122 @@
 
             </Grid>
 
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/multimetro.png"></Image>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock HorizontalAlignment="left" FontWeight="Bold" 
+                               FontSize="32" Text="Multímetro" VerticalAlignment="Center" ></TextBlock>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="5" Margin="50 0 0 0 ">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/usb.png" ></Image>
+                </Grid>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="1">
+
+                    <TextBlock
+                       FontSize="28"
+    
+                       FontWeight="Light"
+                       FontFamily="Arial"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Puerto serial"/></TextBlock>
+
+
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <TextBlock Name="lblPuertoMultimetro" HorizontalAlignment="center" 
+                 Height="auto" Width="350" 
+                 FontFamily="Arial" FontSize="28"
+                FontStyle="Normal"
+                   Text="{Binding DireccionBD}">
+                    </TextBlock>
+                </Grid>
+
+            </Grid>
+
+
+
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/webcam.png"></Image>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock HorizontalAlignment="left" FontWeight="Bold" 
+                   FontSize="32" Text="Sistema de visión" VerticalAlignment="Center" ></TextBlock>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="7" Margin="50 0 0 0 ">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/local-area-network.png" ></Image>
+                </Grid>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="1" >
+
+                    <TextBlock
+           FontSize="28"
+    
+           FontWeight="Light"
+           FontFamily="Arial"
+           HorizontalAlignment="Right"
+           VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
+
+
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <TextBlock Name="lbldireccionCamaraVision" HorizontalAlignment="center" 
+                     Height="auto" Width="350" 
+                     FontFamily="Arial" FontSize="28"
+                    FontStyle="Normal"
+                       Text="{Binding DireccionBD}">
+                    </TextBlock>
+                </Grid>
+
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
