@@ -27,8 +27,7 @@
 
              <!--VIEW ↔ VIEWMODEL LINK--> 
                 <DataTemplate DataType="{x:Type vm:InicializeScreenViewModel}">
-                <!--<views:InicializeScreen/>-->
-                    <views:InnitScreen/>
+                <views:InicializeScreen/>
                 </DataTemplate>
 
                 <DataTemplate DataType="{x:Type vm:FirstScreenViewModel}">

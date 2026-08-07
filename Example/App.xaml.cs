@@ -40,7 +40,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
 
-        //******* Subscribe to not controlled exceptions for log service **********
+        //******* LOGGER SERVICE-> Subscribe to not controlled exceptions for log service **********
 
         DispatcherUnhandledException += OnDispatcherUnhandledException;
 
@@ -90,6 +90,9 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
+
+        services.AddSingleton<IStartupService, StartupService>();
+
         services.AddSingleton<IAppStateService, AppStateService>();
 
         services.AddSingleton<MainWindow>();

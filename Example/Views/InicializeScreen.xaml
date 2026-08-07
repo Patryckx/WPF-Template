@@ -7,101 +7,134 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" Name="Inicialize_title"/>
-            <ColumnDefinition Width="1*" Name="Inicializa_Content"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-        </Grid.ColumnDefinitions>
+        <!--LOGO-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
 
-        <!-- ========================================= -->
-        <!-- SCREEN TITLE                             -->
-        <!-- ========================================= -->
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" >
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" Name="Icon_title"/>
-                    <ColumnDefinition Width="4*" Name="App_Title"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="0">
-                    <Border Padding="5">
-                        <Image
-                        Source="/Resources/Images/lanzadera.png">
-
-                        </Image>
-                    </Border>
-                </Grid>
-
-                <Grid Grid.Column="1">
-
-                    <Border Padding="20">
-
-                        <TextBlock FontSize="42"
- 
-                            FontWeight="Bold"
-                            FontFamily="Segoe UI"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"><Run Language="es-mx" Text="Inicializar App"/></TextBlock>
-
-
-                    </Border>
-
-                </Grid>
-                    
-            </Grid>
-
-            <Grid Grid.Row="1" >
-                <Border Padding="20">
-
-                    <TextBlock FontSize="33"
- 
-                        FontWeight="Normal"
-                        FontFamily="Segoe UI"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top">
-                        <Run Language="es-mx" 
-                            Text="Para inicializar la"/>
-                        <LineBreak/>
-                        <Run Text="aplicación por favor"/>
-                        <LineBreak/>
-                        <Run Text="pulse el siguiente botón"/>
-                        <LineBreak/>
-                        <Run Text="o la barra espaciadora"/>
-
-
-                    </TextBlock>
-
-
-                </Border>
-            </Grid>
-            <Grid Grid.Row="2">
-
-                <Image Source="/Resources/Images/inicialize_app_icons.png"
-                        Height="auto"
-                        Width="auto"
-                       Cursor="Hand">
+            <Grid Grid.Column="1">
+                <Image Source="/Resources/Images/nidec-logo-black-white-no-background.png" 
+               Width="auto" Height="auto" Margin="0" Stretch="Fill" >
                 </Image>
             </Grid>
+
+        </Grid>
+        
+        <!--APP INFO + START BUTTON-->
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+
+            <!--PROJECT TITLE-->
+            <Grid Grid.Row="0">
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold" 
+                FontSize="40" Text="ULV 90 Tester" VerticalAlignment="Center" FontFamily="Arial Black"></TextBlock>
+            </Grid>
+
+            <!--Press start-->
+            <Grid Grid.Row="1">
+                <TextBlock HorizontalAlignment="Center" FontWeight="Light" 
+                 FontSize="28 " Text="Presione el botón ó la barra espaciadora para iniciar" 
+                           VerticalAlignment="Center" FontFamily="Arial"></TextBlock>
+            </Grid>
+
+            <!--PROGRESS BAR -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Image Source="/Resources/Images/inicialize_app_icons.png" 
+                        Width="auto" Height="auto" Margin="0" Stretch="Fill" Cursor="Hand" ToolTip="Presione para iniciar">
+                    </Image>
+                </Grid>
+
+            </Grid>
+
+            <!--PROGRESS MESSAGES -->
+            <Grid Grid.Row="2">
+                <TextBlock
+            Text="{Binding StatusMessage}" />
+            </Grid>
+
+
+
         </Grid>
 
-        <Grid Grid.Column="1">
 
-            <Image Source="/Resources/Images/Edge.png"
-                   
-                   Height="auto"
-                   Width="auto"
-                   >
-                
-            </Image>
-            
-            
+        <!--FOOTER-->
+        <Grid Grid.Row="2" Margin="0" Background="#3C3737">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <!--FOOTER DEV + COMPANY INFO-->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="2*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <!--LOGO-->
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/logo-smitech.png" 
+                           Width="auto" Height="auto" Stretch="Fill" Margin="0" >
+                    </Image>
+                </Grid>
+
+                <!--APP + DEV INFO-->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" Name="version"/>
+                        <RowDefinition Height="*" Name="Contact"/>
+                        <RowDefinition Height="*" Name="year"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock HorizontalAlignment="Center" FontWeight="UltraLight" 
+                            FontSize="16" Foreground="White"   Text="version: 1.0.0" VerticalAlignment="Center" FontFamily="italic"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock HorizontalAlignment="Center" FontWeight="UltraLight" 
+                         FontSize="16" Text="smitech@gmail.com" Foreground="White"  VerticalAlignment="Center" FontFamily="italic"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <TextBlock HorizontalAlignment="Center" FontWeight="UltraLight" 
+                         FontSize="16" Text="2026 ™" Foreground="White"  VerticalAlignment="Center" FontFamily="italic"></TextBlock>
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+
+
+
         </Grid>
+
+
     </Grid>
 </UserControl>
