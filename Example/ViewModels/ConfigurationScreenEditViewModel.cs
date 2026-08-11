@@ -23,23 +23,15 @@ namespace Example.ViewModels
 
         //Propiedades bindeadas a la UI
 
-        private string _host;
+        private string _DAQHost;
 
-        public string Host {
-
-            get => _host;
-            set{ _host = value;OnPropertyChanged(); }
-
-        }
-
-        public int _port;
-
-        public int Port
+        public string DAQHost
         {
-            get => _port;
-            set { _port = value;OnPropertyChanged();  }
-        }
 
+            get => _DAQHost;
+            set{ _DAQHost = value;OnPropertyChanged(); }
+
+        }
 
         private string _DatabaseAddress;
 
@@ -51,6 +43,20 @@ namespace Example.ViewModels
         
 
         }
+
+        private string _DMMPort;
+
+        public string DMMPort
+        {
+            get => _DMMPort;
+
+            set { _DMMPort = value; OnPropertyChanged(); }
+
+
+        }
+
+
+
 
         // ── Constructor ───────────────────────────────
 
@@ -66,16 +72,14 @@ namespace Example.ViewModels
 
         private void Load()
         {
-            Host = _config.Host;
-            Port = _config.Port;
+            DAQHost = _config.Host;
             DatabaseAddress = _config.DatabaseAddress;
           
         }
 
         private void Save()
         {
-            _config.Host = Host;
-            _config.Port = Port;
+            _config.Host = DAQHost;
             _config.DatabaseAddress = DatabaseAddress;
 
             ReturnToReadScreen?.Invoke();

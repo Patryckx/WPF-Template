@@ -13,7 +13,7 @@ namespace Example.Services
     {
         private AppStatus _status;
 
-        public AppStatus Status
+        public AppStatus Status 
         {
             get => _status;
             set
