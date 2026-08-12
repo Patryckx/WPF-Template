@@ -140,7 +140,7 @@
                         <ColumnDefinition Width="84*"/>
                         <ColumnDefinition Width="67*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Name="lblPuerto" HorizontalAlignment="Center" 
+                    <TextBlock Name="lblDAQHost" HorizontalAlignment="Center" 
                              Height="auto" Width="350" 
                               Margin="10,10,0,10"
                              FontFamily="Arial" FontSize="24"

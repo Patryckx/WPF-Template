@@ -16,7 +16,7 @@
     <Grid Background="White" Margin="20">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
@@ -33,7 +33,7 @@
             <!--Icon-->
 
             <Grid Grid.Column="0">
-                <Image Source="/Resources/Images/cogwheel.png" Width="auto" Height="auto" Margin="10" >
+                <Image Source="/Resources/Images/cogwheel.png" Width="auto" Height="auto" Margin="5" >
                 </Image>
             </Grid>
 
@@ -58,8 +58,8 @@
                         BorderThickness="0"
                         Cursor="Hand"
                         ToolTip="Editar">
-                                    <Image Source="/Resources/Images/undo.png" Width="auto" Height="auto"
-                        Margin="10"  />
+                    <Image Source="/Resources/Images/undo.png" Width="auto" Height="auto"
+                        Margin="5"  />
                 </Button>
             </Grid>
 
@@ -71,21 +71,17 @@
                     BorderThickness="0"
                     Cursor="Hand"
                     ToolTip="Editar">
-                                <Image Source="/Resources/Images/diskette.png" Width="auto" Height="auto"
-                    Margin="10"  />
+                    <Image Source="/Resources/Images/diskette.png" Width="auto" Height="auto"
+                    Margin="5"  />
                 </Button>
             </Grid>
-
-
-
-
-
-
 
         </Grid>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -98,66 +94,27 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="227*"/>
+                    <ColumnDefinition Width="330*"/>
+                    <ColumnDefinition Width="124*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
                     <Image Source="/Resources/Images/circuito.png"></Image>
                 </Grid>
 
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,329,0">
                     <TextBlock HorizontalAlignment="left" FontWeight="Bold" 
-                           FontSize="36" VerticalAlignment="Center" Text="Gateway" Margin="10"></TextBlock>
+                       FontSize="32" Text="Gateway" VerticalAlignment="Center" ></TextBlock>
                 </Grid>
 
             </Grid>
 
-            <Grid Grid.Row="1">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-
-                <!--ICON-->
-
-                <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/microchip.png" Margin="10"></Image>
-                </Grid>
-
-                <!--title (direccion ip) -->
-
-                <Grid Grid.Column="1">
-                    <TextBlock
-                   FontSize="32"
-
-                   FontWeight="Light"
-                   FontFamily="Arial"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
-                </Grid>
-
-                <!--TEXTBOX-->
-
-                <Grid Grid.Column="2">
-                    <TextBox Name="txtDireccionIp" HorizontalAlignment="Left" 
-                         Height="auto" Width="350" BorderBrush="Gray" 
-                         Margin="5" FontFamily="Arial" FontSize="28"
-                        FontStyle="Normal" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" >
-
-
-                    </TextBox>
-
-                </Grid>
-
-            </Grid>
 
 
             <!--TEXTBLOCK-->
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1" Margin="50 0 0 0 ">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
@@ -168,37 +125,36 @@
 
                 <Grid Grid.Column="0">
 
-                    <Image Source="/Resources/Images/local-area-network.png" Margin="10"></Image>
+                    <Image Source="/Resources/Images/local-area-network.png"></Image>
                 </Grid>
-
-
-
                 <!--TITLE-->
                 <Grid Grid.Column="1">
                     <TextBlock
-                   FontSize="32"
-
-                   FontWeight="light"
-                   FontFamily="Arial"
-                   HorizontalAlignment="center"
-                   VerticalAlignment="Center"><Run Language="es-mx" Text="Puerto"/></TextBlock>
+               FontSize="28"
+    
+               FontWeight="SemiBold"
+               FontFamily="Arial"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
                 </Grid>
                 <!--TEXTBOX-->
 
                 <Grid Grid.Column="2">
-                    <TextBox Name="txtPuerto" HorizontalAlignment="Left" 
+
+                    <TextBox Name="txtDAQHost" HorizontalAlignment="Left" 
+                         TextAlignment="Center"
+                         VerticalAlignment="Center"
                          Height="auto" Width="350" 
-                         BorderBrush="Gray" Margin="5"
+                         BorderBrush="Transparent" Margin="0"
                          FontFamily="Arial" FontSize="28"
-                         FontStyle="Normal" Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}"
-                         >
+                        FontStyle="Normal" Text="{Binding DAQHost, UpdateSourceTrigger=PropertyChanged}">
 
                     </TextBox>
 
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="1*"/>
@@ -209,25 +165,25 @@
 
                 <Grid Grid.Column="0">
 
-                    <Image Source="/Resources/Images/database.png" Margin="10"></Image>
+                    <Image Source="/Resources/Images/database.png"></Image>
                 </Grid>
 
                 <!--TITLE-->
 
                 <Grid Grid.Column="1">
                     <TextBlock
-                   FontSize="36"
-
-                   FontWeight="Bold"
-                   FontFamily="Arial"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"><Run Language="es-mx" Text="Base de datos" />
+               FontSize="32"
+    
+               FontWeight="Bold"
+               FontFamily="Arial"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"><Run Language="es-mx" Text="Base de datos" />
                     </TextBlock>
                 </Grid>
 
             </Grid>
 
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="3" Margin="50 0 0 0 ">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="1*"/>
@@ -237,7 +193,7 @@
                 <!--ICON-->
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/local-area-network.png" Margin="10"></Image>
+                    <Image Source="/Resources/Images/local-area-network.png" ></Image>
                 </Grid>
 
                 <!--ICON-->
@@ -245,20 +201,23 @@
                 <Grid Grid.Column="1">
 
                     <TextBlock
-                   FontSize="32"
-
-                   FontWeight="Light"
-                   FontFamily="Arial"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
+               FontSize="28"
+    
+               FontWeight="SemiBold"
+               FontFamily="Arial"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
 
 
                 </Grid>
 
                 <Grid Grid.Column="2">
-                    <TextBox Name="TxtdireccionBD" HorizontalAlignment="Left" 
+                    <TextBox Name="txtDatabaseAddress" HorizontalAlignment="Left" 
+                             
+                         TextAlignment="Center"
+                         VerticalAlignment="Center"
                          Height="auto" Width="350" 
-                         BorderBrush="Gray" Margin="5"
+                         BorderBrush="Transparent" Margin="5"
                          FontFamily="Arial" FontSize="28"
                         FontStyle="Normal" Text="{Binding DatabaseAddress, UpdateSourceTrigger=PropertyChanged}">
 
@@ -267,6 +226,131 @@
 
             </Grid>
 
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/multimetro.png"></Image>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock HorizontalAlignment="left" FontWeight="Bold" 
+                       FontSize="32" Text="Multímetro" VerticalAlignment="Center" ></TextBlock>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="5" Margin="50 0 0 0 ">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/usb.png" ></Image>
+                </Grid>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="1">
+
+                    <TextBlock
+               FontSize="28"
+    
+               FontWeight="SemiBold"
+               FontFamily="Arial"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Puerto serial"/></TextBlock>
+
+
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <TextBox Name="txtDMM_port" HorizontalAlignment="Left" 
+                         TextAlignment="Center"
+                         VerticalAlignment="Center"
+                         
+                         Height="auto" Width="350" 
+                         BorderBrush="Transparent" Margin="5"
+                         FontFamily="Arial" FontSize="28"
+                        FontStyle="Normal" Text="{Binding DMMPort, UpdateSourceTrigger=PropertyChanged}">
+
+                    </TextBox>
+                </Grid>
+
+            </Grid>
+
+
+
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/webcam.png"></Image>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock HorizontalAlignment="left" FontWeight="Bold" 
+           FontSize="32" Text="Sistema de visión" VerticalAlignment="Center" ></TextBlock>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="7" Margin="50 0 0 0 ">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/local-area-network.png" ></Image>
+                </Grid>
+
+                <!--ICON-->
+
+                <Grid Grid.Column="1" >
+
+                    <TextBlock
+                       FontSize="28"
+    
+                       FontWeight="SemiBold"
+                       FontFamily="Arial"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
+
+
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <TextBox Name="txtVisionCameraAddress" HorizontalAlignment="Left"
+                     TextAlignment="Center"
+                    VerticalAlignment="Center"
+
+                     Height="auto" Width="350" 
+                     BorderBrush="Transparent" Margin="5"
+                     FontFamily="Arial" FontSize="28"
+                    FontStyle="Normal" Foreground="DarkGray"
+                             Text="{Binding VisionCameraAddress, UpdateSourceTrigger=PropertyChanged}">
+
+                    </TextBox>
+                </Grid>
+
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
