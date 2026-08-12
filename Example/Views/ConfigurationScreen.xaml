@@ -145,7 +145,7 @@
                               Margin="10,10,0,10"
                              FontFamily="Arial" FontSize="24"
                              FontStyle="Normal" Grid.ColumnSpan="2"
-                               Text="{Binding Puerto}">
+                               Text="{Binding DAQHost}">
                     </TextBlock>
 
                 </Grid>
@@ -213,7 +213,7 @@
                              Height="auto" Width="350" 
                              FontFamily="Arial" FontSize="28"
                             FontStyle="Normal"
-                               Text="{Binding DireccionBD}">
+                               Text="{Binding DatabaseAddress}">
                     </TextBlock>
                 </Grid>
 
@@ -271,7 +271,7 @@
                  Height="auto" Width="350" 
                  FontFamily="Arial" FontSize="28"
                 FontStyle="Normal"
-                   Text="{Binding DireccionBD}">
+                   Text="{Binding DMMPort}">
                     </TextBlock>
                 </Grid>
 
@@ -330,7 +330,7 @@
                      Height="auto" Width="350" 
                      FontFamily="Arial" FontSize="28"
                     FontStyle="Normal"
-                       Text="{Binding DireccionBD}">
+                       Text="{Binding VisionCameraAddress}">
                     </TextBlock>
                 </Grid>
 

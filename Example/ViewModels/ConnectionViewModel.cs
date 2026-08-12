@@ -164,10 +164,10 @@ namespace Example.ViewModels
                     PlcStatus = ProcessStatus.OnProcess;
 
                     //await Task.Run(() => _modbus.Connect("192.168.4.1", 502));
-                    await Task.Run(() => _modbus.Connect(_config.Host,_config.Port));
+                    await Task.Run(() => _modbus.Connect(_config.DAQHost,_config.Port));
 
                     PlcStatus = ProcessStatus.Sucess;
-                    _loggerService.Info(LogCategory.Modbus, $"Conexion exitosa a {_config.Host}:{_config.Port}");
+                    _loggerService.Info(LogCategory.Modbus, $"Conexion exitosa a {_config.DAQHost}:{_config.Port}");
 
                     _cts = new CancellationTokenSource();
                     _ = MonitorCoils(_cts.Token);
@@ -190,7 +190,7 @@ namespace Example.ViewModels
 
                     _loggerService.Error(
                         LogCategory.Modbus,
-                        $"Timeout while connecting to {_config.Host}:{_config.Port}",
+                        $"Timeout while connecting to {_config.DAQHost}:{_config.Port}",
                         ex);
 
                     _dialogService.ShowError("Conexion fallida");
@@ -201,7 +201,7 @@ namespace Example.ViewModels
             else
             {
                 _loggerService.Info(LogCategory.Modbus, $"Conexion ya inicializada previamente " +
-                    $"{_config.Host}:{_config.Port}");
+                    $"{_config.DAQHost}:{_config.Port}");
 
                 _dialogService.ShowMessage("Conexion ya inicializada...");
             }
@@ -232,7 +232,7 @@ namespace Example.ViewModels
             await _registerService.AddLogAsync(
                 new Coil_register
                 {
-                    IPAddress = _config.Host,
+                    IPAddress = _config.DAQHost,
 
                     Port = _config.Port.ToString(),
 
@@ -350,7 +350,7 @@ namespace Example.ViewModels
                         Thread.Sleep(1500);
 
                         // Ahora Connect() no encontrará IsConnected = true
-                        _modbus.Connect(_config.Host, _config.Port);
+                        _modbus.Connect(_config.DAQHost, _config.Port);
 
                     }, token);
 

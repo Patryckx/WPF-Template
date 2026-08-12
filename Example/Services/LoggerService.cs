@@ -108,7 +108,7 @@ namespace Example.Services
             sb.AppendLine("Configuración");
             sb.AppendLine("--------------------------------------------");
 
-            sb.AppendLine($"Host PLC          : {_config.Host}");
+            sb.AppendLine($"Host PLC          : {_config.DAQHost}");
             sb.AppendLine($"Puerto            : {_config.Port}");
             sb.AppendLine($"Base de datos     : {_config.DatabaseAddress}");
             sb.AppendLine($"Logs habilitados  : {_config.LogginEnabled}");

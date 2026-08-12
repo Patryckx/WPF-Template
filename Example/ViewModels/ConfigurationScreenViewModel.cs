@@ -12,35 +12,47 @@ namespace Example.ViewModels
     {
         private readonly IConfigService _config;
 
-        private string _host;
-        public string Host
+        private string _DAQHost;
+        public string DAQHost
         {
-            get => _host;
+            get => _DAQHost;
             set
             {
-                _host = value;
+                _DAQHost = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _puerto;
-        public int Puerto
+        private string _DatabaseAddress;
+        public string DatabaseAddress
         {
-            get => _puerto;
+            get => _DatabaseAddress;
             set
             {
-                _puerto = value;
+                _DatabaseAddress = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _direccionBD;
-        public string DireccionBD
+        private string _DMMPort;
+        public string DMMPort
         {
-            get => _direccionBD;
+            get => _DMMPort;
             set
             {
-                _direccionBD = value;
+                _DMMPort = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private string _VisionCameraAddress;
+        public string VisionCameraAddress
+        {
+            get => _VisionCameraAddress;
+            set
+            {
+                _VisionCameraAddress = value;
                 OnPropertyChanged();
             }
         }
@@ -54,9 +66,10 @@ namespace Example.ViewModels
 
         private void Load()
         {
-            Host = _config.Host;
-            Puerto = _config.Port;
-            DireccionBD = _config.DatabaseAddress;
+            DAQHost = _config.DatabaseAddress;
+            DatabaseAddress = _config.DatabaseAddress;
+            DMMPort=_config.DMM_port;
+            VisionCameraAddress=_config.Camera_address;
         }
 
         public void Refresh()

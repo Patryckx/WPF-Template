@@ -56,6 +56,19 @@ namespace Example.ViewModels
         }
 
 
+        private string _VisionCameraAddress;
+
+        public string VisionCameraAddress
+        {
+            get => _VisionCameraAddress;
+
+            set { _VisionCameraAddress = value; OnPropertyChanged(); }
+
+
+        }
+
+
+
 
 
         // ── Constructor ───────────────────────────────
@@ -72,15 +85,21 @@ namespace Example.ViewModels
 
         private void Load()
         {
-            DAQHost = _config.Host;
+            DAQHost = _config.DAQHost;
             DatabaseAddress = _config.DatabaseAddress;
+            DMMPort = _config.DMM_port;
+            VisionCameraAddress = _config.Camera_address;
+
           
         }
 
         private void Save()
         {
-            _config.Host = DAQHost;
+            _config.DAQHost = DAQHost;
             _config.DatabaseAddress = DatabaseAddress;
+            _config.DMM_port = DMMPort;
+            _config.Camera_address = VisionCameraAddress;   
+
 
             ReturnToReadScreen?.Invoke();
 
