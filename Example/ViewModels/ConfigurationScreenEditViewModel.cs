@@ -1,5 +1,6 @@
 ﻿using ConfigIniLib;
 using ConfigIniLib.interfaces;
+using Example.Navigation.Services;
 using Example.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,10 @@ namespace Example.ViewModels
     {
         private readonly IConfigService _config;
 
-        public Action? ReturnToReadScreen { get; set; }
+        private readonly INavigationService _navigationService;
 
         public RelayCommand SaveCommand { get;  }
+        public RelayCommand CancelCommand { get; }
 
         //Propiedades bindeadas a la UI
 
@@ -73,11 +75,14 @@ namespace Example.ViewModels
 
         // ── Constructor ───────────────────────────────
 
-        public ConfigurationScreenEditViewModel(IConfigService config)
+        public ConfigurationScreenEditViewModel(IConfigService config,INavigationService navigationService)
         {
             _config = config;
+            _navigationService = navigationService;
 
             SaveCommand = new RelayCommand(Save);
+
+            CancelCommand = new RelayCommand(Cancel);
 
             // Carga los valores actuales del .ini al abrir la pantalla
             Load();
@@ -98,11 +103,17 @@ namespace Example.ViewModels
             _config.DAQHost = DAQHost;
             _config.DatabaseAddress = DatabaseAddress;
             _config.DMM_port = DMMPort;
-            _config.Camera_address = VisionCameraAddress;   
+            _config.Camera_address = VisionCameraAddress;
 
 
-            ReturnToReadScreen?.Invoke();
+            _navigationService.Navigate<ConfigurationScreenViewModel>();
+        }
 
+
+
+        private void Cancel()
+        {
+            _navigationService.Navigate<ConfigurationScreenViewModel>();
         }
 
 

@@ -66,7 +66,7 @@ namespace Example.ViewModels
 
         private void Load()
         {
-            DAQHost = _config.DatabaseAddress;
+            DAQHost = _config.DAQHost;
             DatabaseAddress = _config.DatabaseAddress;
             DMMPort=_config.DMM_port;
             VisionCameraAddress=_config.Camera_address;

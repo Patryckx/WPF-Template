@@ -51,8 +51,7 @@
 
             <Grid Grid.Column="2">
                 <Button   
-                        Command="{Binding DataContext.ShowconfigurationScreenCommand,
-                         RelativeSource={RelativeSource AncestorType=Window}}"
+                        Command="{Binding CancelCommand}"
         
                         Background="Transparent"
                         BorderThickness="0"
@@ -132,7 +131,7 @@
                     <TextBlock
                FontSize="28"
     
-               FontWeight="SemiBold"
+               FontWeight="UltraLight"
                FontFamily="Arial"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
@@ -146,6 +145,7 @@
                          VerticalAlignment="Center"
                          Height="auto" Width="350" 
                          BorderBrush="Transparent" Margin="0"
+                         Foreground="DarkGreen"
                          FontFamily="Arial" FontSize="28"
                         FontStyle="Normal" Text="{Binding DAQHost, UpdateSourceTrigger=PropertyChanged}">
 
@@ -203,7 +203,7 @@
                     <TextBlock
                FontSize="28"
     
-               FontWeight="SemiBold"
+               FontWeight="UltraLight"
                FontFamily="Arial"
                HorizontalAlignment="Right"
                VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
@@ -216,6 +216,7 @@
                              
                          TextAlignment="Center"
                          VerticalAlignment="Center"
+                         Foreground="DarkGreen"
                          Height="auto" Width="350" 
                          BorderBrush="Transparent" Margin="5"
                          FontFamily="Arial" FontSize="28"
@@ -265,7 +266,7 @@
                     <TextBlock
                FontSize="28"
     
-               FontWeight="SemiBold"
+               FontWeight="UltraLight"
                FontFamily="Arial"
                HorizontalAlignment="Right"
                VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Puerto serial"/></TextBlock>
@@ -277,7 +278,7 @@
                     <TextBox Name="txtDMM_port" HorizontalAlignment="Left" 
                          TextAlignment="Center"
                          VerticalAlignment="Center"
-                         
+                         Foreground="DarkGreen"
                          Height="auto" Width="350" 
                          BorderBrush="Transparent" Margin="5"
                          FontFamily="Arial" FontSize="28"
@@ -328,7 +329,7 @@
                     <TextBlock
                        FontSize="28"
     
-                       FontWeight="SemiBold"
+                       FontWeight="UltraLight"
                        FontFamily="Arial"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center" Margin="0,0,34,0"><Run Language="es-mx" Text="Dirección IP"/></TextBlock>
@@ -340,11 +341,10 @@
                     <TextBox Name="txtVisionCameraAddress" HorizontalAlignment="Left"
                      TextAlignment="Center"
                     VerticalAlignment="Center"
-
                      Height="auto" Width="350" 
                      BorderBrush="Transparent" Margin="5"
                      FontFamily="Arial" FontSize="28"
-                    FontStyle="Normal" Foreground="DarkGray"
+                    FontStyle="Normal" Foreground="DarkGreen"
                              Text="{Binding VisionCameraAddress, UpdateSourceTrigger=PropertyChanged}">
 
                     </TextBox>

@@ -141,6 +141,7 @@
                         <ColumnDefinition Width="67*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Name="lblDAQHost" HorizontalAlignment="Center" 
+                               TextAlignment="Center"
                              Height="auto" Width="350" 
                               Margin="10,10,0,10"
                              FontFamily="Arial" FontSize="24"
@@ -210,6 +211,7 @@
 
                 <Grid Grid.Column="2">
                     <TextBlock Name="lblDireccionBD" HorizontalAlignment="center" 
+                               TextAlignment="Center"
                              Height="auto" Width="350" 
                              FontFamily="Arial" FontSize="28"
                             FontStyle="Normal"
@@ -268,6 +270,7 @@
 
                 <Grid Grid.Column="2">
                     <TextBlock Name="lblPuertoMultimetro" HorizontalAlignment="center" 
+                      TextAlignment="Center"
                  Height="auto" Width="350" 
                  FontFamily="Arial" FontSize="28"
                 FontStyle="Normal"
@@ -326,7 +329,8 @@
                 </Grid>
 
                 <Grid Grid.Column="2">
-                    <TextBlock Name="lbldireccionCamaraVision" HorizontalAlignment="center" 
+                    <TextBlock Name="lbldireccionCamaraVision" HorizontalAlignment="center"
+                     TextAlignment="Center"          
                      Height="auto" Width="350" 
                      FontFamily="Arial" FontSize="28"
                     FontStyle="Normal"

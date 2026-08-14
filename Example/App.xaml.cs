@@ -149,9 +149,11 @@ public partial class App : Application
 
         services.AddSingleton<MainViewModel>();
 
-        services.AddSingleton<ConfigurationScreenViewModel>();
+        //services.AddSingleton<ConfigurationScreenViewModel>();
+        services.AddTransient<ConfigurationScreenViewModel>();
 
-        services.AddSingleton<ConfigurationScreenEditViewModel>();
+        //services.AddSingleton<ConfigurationScreenEditViewModel>();
+        services.AddTransient<ConfigurationScreenEditViewModel>();
 
         //Views navigation service
 
