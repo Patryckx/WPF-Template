@@ -162,6 +162,8 @@ public partial class App : Application
         services.AddTransient<SecondScreenViewModel>();
 
         services.AddTransient<InicializeScreenViewModel>();
+
+        services.AddTransient<InnitScreenViewModel>();
     }
 
     //************************  LOG CATCH FUNCTIONS ******************************

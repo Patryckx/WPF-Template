@@ -96,7 +96,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/circuito.png"></Image>
+                    <Image Source="/Resources/Images/circuito.png" Margin="5"></Image>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -121,7 +121,7 @@
 
                 <Grid Grid.Column="0">
 
-                    <Image Source="/Resources/Images/local-area-network.png"></Image>
+                    <Image Source="/Resources/Images/local-area-network.png" Margin="5"></Image>
                 </Grid>
                 <!--TITLE-->
                 <Grid Grid.Column="1">
@@ -144,7 +144,7 @@
                                TextAlignment="Center"
                              Height="auto" Width="350" 
                               Margin="10,10,0,10"
-                             FontFamily="Arial" FontSize="24"
+                             FontFamily="Arial" FontSize="28"
                              FontStyle="Normal" Grid.ColumnSpan="2"
                                Text="{Binding DAQHost}">
                     </TextBlock>
@@ -163,7 +163,7 @@
 
                 <Grid Grid.Column="0">
 
-                    <Image Source="/Resources/Images/database.png"></Image>
+                    <Image Source="/Resources/Images/database.png" Margin="5"></Image>
                 </Grid>
 
                 <!--TITLE-->
@@ -191,7 +191,7 @@
                 <!--ICON-->
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/local-area-network.png" ></Image>
+                    <Image Source="/Resources/Images/local-area-network.png" Margin="5" ></Image>
                 </Grid>
 
                 <!--ICON-->
@@ -230,7 +230,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/multimetro.png"></Image>
+                    <Image Source="/Resources/Images/multimetro.png" Margin="5"></Image>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -250,7 +250,7 @@
                 <!--ICON-->
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/usb.png" ></Image>
+                    <Image Source="/Resources/Images/usb.png" Margin="5" ></Image>
                 </Grid>
 
                 <!--ICON-->
@@ -290,7 +290,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/webcam.png"></Image>
+                    <Image Source="/Resources/Images/webcam.png" Margin="5"></Image>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -310,7 +310,7 @@
                 <!--ICON-->
 
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/local-area-network.png" ></Image>
+                    <Image Source="/Resources/Images/local-area-network.png" Margin="5"></Image>
                 </Grid>
 
                 <!--ICON-->

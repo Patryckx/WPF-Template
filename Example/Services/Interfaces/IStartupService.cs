@@ -4,15 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Example.Models;
+
 
 namespace Example.Services.Interfaces
 {
-    public interface IStartupService :INotifyPropertyChanged
+    public interface IStartupService 
     {
-        double Progress { get; }
-
-        string StatusMessage { get; }
-
-        Task StartAsync();
+        Task InitializeAsync(
+             IProgress<StartupProgress> progress);
     }
 }

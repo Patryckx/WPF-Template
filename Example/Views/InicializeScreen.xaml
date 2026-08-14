@@ -61,19 +61,23 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="1">
-                    <Image Source="/Resources/Images/inicialize_app_icons.png" 
-                        Width="auto" Height="auto" Margin="0" Stretch="Fill" Cursor="Hand" ToolTip="Presione para iniciar">
-                    </Image>
+                    <Button
+                        Command="{Binding StartCommand}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        ToolTip="Presione para iniciar">
+
+                        <Image
+                                Source="/Resources/Images/inicialize_app_icons.png"
+                                Stretch="Fill" />
+
+                    </Button>
                 </Grid>
 
             </Grid>
 
-            <!--PROGRESS MESSAGES -->
-            <Grid Grid.Row="2">
-                <TextBlock
-            Text="{Binding StatusMessage}" />
-            </Grid>
-
+           
 
 
         </Grid>

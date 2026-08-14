@@ -46,6 +46,10 @@
                        <views:ConfigurationScreenEdit/>
                    </DataTemplate>
 
+                <DataTemplate DataType="{x:Type vm:InnitScreenViewModel}">
+                    <views:InnitScreen/>
+                </DataTemplate>
+
 
 
         </ResourceDictionary>
