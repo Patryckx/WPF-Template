@@ -57,7 +57,7 @@
                     <ProgressBar
                             Minimum="0"
                             Maximum="100"
-                            Value="{Binding Progress}" Margin="10"  />    
+                            Value="{Binding Progress}" Margin="10"  MaxHeight="40"/>    
                 </Grid>
                 
             </Grid>
@@ -65,7 +65,10 @@
             <!--PROGRESS MESSAGES -->
             <Grid Grid.Row="2">
                 <TextBlock
-                    Text="{Binding StatusMessage}" />
+                    Text="{Binding StatusMessage}" 
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    FontSize="32" FontFamily="Arial"
+                    />
             </Grid>
 
 

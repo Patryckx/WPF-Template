@@ -38,7 +38,7 @@ namespace Example.Services
                 Message = "Iniciando aplicación..."
             });
 
-            await Task.Delay(300);
+            await Task.Delay(1000);
 
             progress.Report(new StartupProgress
             {
@@ -47,6 +47,7 @@ namespace Example.Services
             });
 
             await InitializeConfigurationAsync();
+            await Task.Delay(1000);
 
             progress.Report(new StartupProgress
             {
@@ -55,6 +56,7 @@ namespace Example.Services
             });
 
             await InitializeServicesAsync();
+            await Task.Delay(1000);
 
             progress.Report(new StartupProgress
             {
@@ -63,6 +65,7 @@ namespace Example.Services
             });
 
             await TestDatabaseAsync();
+            await Task.Delay(1000);
 
             progress.Report(new StartupProgress
             {
@@ -71,6 +74,7 @@ namespace Example.Services
             });
 
             await FinalizeStartupAsync();
+            await Task.Delay(1000);
 
             progress.Report(new StartupProgress
             {

@@ -63,6 +63,8 @@ public partial class App : Application
 
             _services = services.BuildServiceProvider();
 
+            _logger = _services.GetRequiredService < ILoggerService >();
+
             var navigation = _services.GetRequiredService<INavigationService>();
 
             navigation.Navigate<InicializeScreenViewModel>();

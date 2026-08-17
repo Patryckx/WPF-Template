@@ -1,19 +1,13 @@
 ﻿using Example.Models;
 using Example.Services.Interfaces;
 using Example.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace Example.ViewModels
 {
     public class InnitScreenViewModel : ViewModelBase
     {
         private readonly IStartupService _startupService;
-
-        public RelayCommand StartCommand { get; }
 
         private double _progress;
 
@@ -26,7 +20,6 @@ namespace Example.ViewModels
                 OnPropertyChanged();
             }
         }
-
 
         private string _statusMessage = string.Empty;
 
@@ -45,18 +38,32 @@ namespace Example.ViewModels
             IStartupService startupService)
         {
             _startupService = startupService;
-            StartCommand = new RelayCommand(() => _ = StartAsync());
+
+            _ = StartAsync();
         }
+
 
         private async Task StartAsync()
         {
-            var progress = new Progress<StartupProgress>(value =>
+            try
             {
-                Progress = value.Progress;
-                StatusMessage = value.Message;
-            });
+                var progress = new Progress<StartupProgress>(value =>
+                {
+                    Progress = value.Progress;
+                    StatusMessage = value.Message;
+                });
 
-            await _startupService.InitializeAsync(progress);
+                await _startupService.InitializeAsync(progress);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Error durante la inicialización.";
+
+                // Temporalmente para depuración
+                System.Windows.MessageBox.Show(
+                    ex.ToString(),
+                    "Error de inicialización");
+            }
         }
     }
 }
