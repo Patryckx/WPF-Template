@@ -1,13 +1,17 @@
 ﻿using Example.Models;
+using Example.Navigation.Services;
 using Example.Services.Interfaces;
 using Example.ViewModels.Base;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace Example.ViewModels
 {
     public class InnitScreenViewModel : ViewModelBase
     {
         private readonly IStartupService _startupService;
+
+        private readonly INavigationService _navigation;
 
         private double _progress;
 
@@ -35,10 +39,10 @@ namespace Example.ViewModels
 
 
         public InnitScreenViewModel(
-            IStartupService startupService)
+            IStartupService startupService, INavigationService navigation)
         {
             _startupService = startupService;
-
+            _navigation = navigation;
             _ = StartAsync();
         }
 
@@ -54,6 +58,10 @@ namespace Example.ViewModels
                 });
 
                 await _startupService.InitializeAsync(progress);
+
+
+                _navigation.Navigate<DCVoltage_test_ViewModel>();
+
             }
             catch (Exception ex)
             {

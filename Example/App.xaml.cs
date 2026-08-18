@@ -166,6 +166,8 @@ public partial class App : Application
         services.AddTransient<InicializeScreenViewModel>();
 
         services.AddTransient<InnitScreenViewModel>();
+
+        services.AddTransient<DCVoltage_test_ViewModel>();
     }
 
     //************************  LOG CATCH FUNCTIONS ******************************

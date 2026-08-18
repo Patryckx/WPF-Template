@@ -50,6 +50,10 @@
                     <views:InnitScreen/>
                 </DataTemplate>
 
+                <DataTemplate DataType="{x:Type vm:DCVoltage_test_ViewModel}">
+                    <views:DCVoltage_test_Screen/>
+                </DataTemplate>
+
 
 
         </ResourceDictionary>

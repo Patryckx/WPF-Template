@@ -33,6 +33,7 @@
     <None Remove="Resources\Images\folder.png" />
     <None Remove="Resources\Images\funnel.png" />
     <None Remove="Resources\Images\home.png" />
+    <None Remove="Resources\Images\informacion.png" />
     <None Remove="Resources\Images\inicialize_app_icons.png" />
     <None Remove="Resources\Images\lanzadera.png" />
     <None Remove="Resources\Images\lcd.png" />
@@ -47,6 +48,16 @@
     <None Remove="Resources\Images\nidec-logo-black-white-no-background.png" />
     <None Remove="Resources\Images\nidec-logo-black_and_white.png" />
     <None Remove="Resources\Images\Nidec_logo_green.png" />
+    <None Remove="Resources\Images\number-1 %281%29.png" />
+    <None Remove="Resources\Images\number-10.png" />
+    <None Remove="Resources\Images\number-2.png" />
+    <None Remove="Resources\Images\number-3.png" />
+    <None Remove="Resources\Images\number-4.png" />
+    <None Remove="Resources\Images\number-5.png" />
+    <None Remove="Resources\Images\number-6.png" />
+    <None Remove="Resources\Images\number-7.png" />
+    <None Remove="Resources\Images\number-8.png" />
+    <None Remove="Resources\Images\number-9.png" />
     <None Remove="Resources\Images\smitech-logo-no-background.png" />
     <None Remove="Resources\Images\undo.png" />
     <None Remove="Resources\Images\usb.png" />
@@ -61,6 +72,15 @@
     <Content Include="config.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\informacion.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -184,6 +204,33 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Nidec_logo_green.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-1 (1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\number-9.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\smitech-logo-no-background.png">

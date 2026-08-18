@@ -58,6 +58,7 @@
                             Minimum="0"
                             Maximum="100"
                             Value="{Binding Progress}" Margin="10"  MaxHeight="40"/>    
+                    
                 </Grid>
                 
             </Grid>

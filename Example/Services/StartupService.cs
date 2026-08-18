@@ -81,6 +81,8 @@ namespace Example.Services
                 Progress = 100,
                 Message = "Inicialización completada."
             });
+
+
         }
 
 
@@ -171,6 +173,8 @@ namespace Example.Services
                 "Inicialización de la aplicación finalizada.");
 
             return Task.CompletedTask;
+
+
         }
     }
 }
