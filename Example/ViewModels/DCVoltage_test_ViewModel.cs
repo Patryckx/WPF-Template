@@ -3,6 +3,8 @@ using Example.Models;
 using Example.Navigation.Services;
 using Example.Services.Interfaces;
 using Example.ViewModels.Base;
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,8 @@ namespace Example.ViewModels
 
         private readonly IConfigService _config;
         private readonly ILoggerService _logger;
+        public RelayCommand DC_Voltage_Meassure_Command { get; }
+
 
         private double _DC_voltage_test_upper_limit;
         public double DC_voltage_test_upper_limit
@@ -44,6 +48,9 @@ namespace Example.ViewModels
             _config = config;
             _logger = looger;
 
+
+            DC_Voltage_Meassure_Command = new RelayCommand(DC_Voltage_Meassure);
+
             load_test_configuration();
 
         }
@@ -53,17 +60,29 @@ namespace Example.ViewModels
             DC_voltage_test_upper_limit = _config.dc_voltage_test_upper_limit;
             DC_voltage_test_lower_limit = _config.dc_voltage_test_lower_limit;
 
-
             Console.WriteLine(DC_voltage_test_upper_limit);
 
             Console.WriteLine(DC_voltage_test_lower_limit);
 
             _logger.Info(LogCategory.Application, $"DC Voltage test");
 
+            _logger.Info(LogCategory.Application, $"Upper limit: {DC_voltage_test_upper_limit}");
+
+            _logger.Info(LogCategory.Application, $"Lower limit: {DC_voltage_test_lower_limit}");
+        }
+
+
+
+        private void DC_Voltage_Meassure()
+        {
+
+            _logger.Info(LogCategory.Application, "Performing DMM DC voltage test ");
 
             _logger.Info(LogCategory.Application, $"Upper limit: {DC_voltage_test_upper_limit}");
 
             _logger.Info(LogCategory.Application, $"Lower limit: {DC_voltage_test_lower_limit}");
+
+
 
         }
 
