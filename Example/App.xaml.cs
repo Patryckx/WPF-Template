@@ -10,6 +10,9 @@ using Example.Services.Database;
 using Example.Services.Interfaces;
 using Example.Services.Modbus;
 using Example.ViewModels;
+using IndustrialSerialTool.Devices;
+using IndustrialSerialTool.Interfaces;
+using IndustrialSerialTool.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ModbusTcpLib;
@@ -144,6 +147,24 @@ public partial class App : Application
         services.AddSingleton<IDialogService, DialogService>();
 
         services.AddSingleton<ILoggerService, LoggerService>();
+
+        services.AddSingleton<ISerialDevice>(provider =>
+        {
+            // 1. Obtenemos el IConfigService para leer la configuración del puerto (si existe allí)
+            var config = provider.GetRequiredService<IConfigService>();
+
+            // 2. Creamos los settings (puedes mapear las propiedades de tu config.ini o usar valores por defecto)
+            var settings = new SerialSettings
+            {
+                PortName = config.DMM_port ?? "COM5", // Reemplaza por la propiedad real de tu config.ini
+                baudRate = config.DMM_Bauds > 0 ? config.DMM_Bauds : 115200,
+                ReadTimeout = 2000,
+                WriteTimeout = 2000
+            };
+
+            // 3. Retornamos la instancia de SerialDevice asignada a la interfaz ISerialDevice
+            return new SerialDevice(settings);
+        });
 
         //ConnectionViewModels
 

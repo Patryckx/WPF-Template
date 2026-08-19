@@ -93,6 +93,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Config__ni_lib\Config__ni_lib\ConfigIniLib.csproj" />
     <ProjectReference Include="..\..\ModbusTcpLib\ModbusTcpLib\ModbusTcpLib.csproj" />
+    <ProjectReference Include="..\..\SerialLib\SerialLib\IndustrialSerialTool.csproj" />
     <ProjectReference Include="..\..\SqlUtilityLibrary\SqlUtilityLibrary\SqlUtilityLibrary.csproj" />
   </ItemGroup>
 

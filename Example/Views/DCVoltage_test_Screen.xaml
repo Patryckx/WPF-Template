@@ -107,7 +107,8 @@
                         FontSize="24"
                         FontWeight="Bold"
                         BorderBrush="DarkGreen"
-                        Background="{StaticResource Brush.Header2}"/>
+                        Background="{StaticResource Brush.Header2}"
+                        Command="{Binding DC_Voltage_Meassure_Command}"/>
                     
                 </Grid>
 
