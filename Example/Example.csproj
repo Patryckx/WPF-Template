@@ -25,6 +25,9 @@
     <None Remove="Resources\Images\cogwheel.png" />
     <None Remove="Resources\Images\correcto.png" />
     <None Remove="Resources\Images\database.png" />
+    <None Remove="Resources\Images\dc_test_fail_visual_help.png" />
+    <None Remove="Resources\Images\dc_test_pass_visual_help.png" />
+    <None Remove="Resources\Images\dc_test_wait_visual_help.png" />
     <None Remove="Resources\Images\diskette.png" />
     <None Remove="Resources\Images\Edge.png" />
     <None Remove="Resources\Images\edit.png" />
@@ -75,6 +78,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\dc_test_wait_visual_help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\dc_test_pass_visual_help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\dc_test_fail_visual_help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\informacion.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

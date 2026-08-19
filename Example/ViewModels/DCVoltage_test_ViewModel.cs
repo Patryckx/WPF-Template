@@ -26,6 +26,19 @@ namespace Example.ViewModels
         private readonly ISerialDevice _serialDevice;
         private readonly OwonXdm1041Driver _multimeter;
 
+        private DCVoltageTestState _currentTestState =
+            DCVoltageTestState.Waiting;
+
+        public DCVoltageTestState CurrentTestState
+        {
+            get => _currentTestState;
+            set
+            {
+                _currentTestState = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand DC_Voltage_Meassure_Command { get; }
 
 

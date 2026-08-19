@@ -115,6 +115,126 @@
 
             </Grid>
             
+            <!--RESULTS-->
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <!--Aqui iria el stacked widget-->
+                <Grid Grid.Row="0">
+
+                    <!-- WAITING -->
+
+                    <Image
+                        Source="/Resources/Images/dc_test_wait_visual_help.png"
+                        Stretch="Uniform">
+
+                        <Image.Style>
+
+                            <Style TargetType="Image">
+
+                                <Setter
+                    Property="Visibility"
+                    Value="Collapsed"/>
+
+                                <Style.Triggers>
+
+                                    <DataTrigger
+                        Binding="{Binding CurrentTestState}"
+                        Value="Waiting">
+
+                                        <Setter
+                            Property="Visibility"
+                            Value="Visible"/>
+
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+
+                            </Style>
+
+                        </Image.Style>
+
+                    </Image>
+
+
+                    <!-- MEASURING -->
+
+                    <Image
+                        Source="/Resources/Images/dc_test_pass_visual_help.png"
+                        Stretch="Uniform">
+
+                        <Image.Style>
+
+                            <Style TargetType="Image">
+
+                                <Setter
+                    Property="Visibility"
+                    Value="Collapsed"/>
+
+                                <Style.Triggers>
+
+                                    <DataTrigger
+                        Binding="{Binding CurrentTestState}"
+                        Value="Measuring">
+
+                                        <Setter
+                            Property="Visibility"
+                            Value="Visible"/>
+
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+
+                            </Style>
+
+                        </Image.Style>
+
+                    </Image>
+
+
+                    <!-- SUCCESS -->
+
+                    <Image
+                        Source="/Resources/Images/dc_test_pass_visual_help.png"
+                        Stretch="Uniform">
+
+                        <Image.Style>
+
+                            <Style TargetType="Image">
+
+                                <Setter
+                    Property="Visibility"
+                    Value="Collapsed"/>
+
+                                <Style.Triggers>
+
+                                    <DataTrigger
+                        Binding="{Binding CurrentTestState}"
+                        Value="Success">
+
+                                        <Setter
+                            Property="Visibility"
+                            Value="Visible"/>
+
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+
+                            </Style>
+
+                        </Image.Style>
+
+                    </Image>
+
+
+                </Grid>
+                
+            </Grid>
+            
         </Grid>
             
     </Grid>
