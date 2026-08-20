@@ -103,6 +103,10 @@ namespace Example.ViewModels
 
             _logger.Info(LogCategory.Application, "Performing DMM DC voltage test ");
 
+            CurrentTestState = DCVoltageTestState.Waiting;
+
+            await Task.Delay(1500);
+
             try
             {
 
@@ -142,11 +146,21 @@ namespace Example.ViewModels
 
                     {
                         _logger.Info(LogCategory.Application, $"Resultado :PASS (medicion dentro del rango permitido");
+
+                        CurrentTestState = DCVoltageTestState.Success;
+
+                        await Task.Delay(4000);
+
+                        CurrentTestState = DCVoltageTestState.Waiting;
+
+
                     }
                     else
                     {
                         _logger.Warn(LogCategory.Application, $"Resultado :FAIL (medicion fuera del rango permitido [{DC_voltage_test_lower_limit} V - {DC_voltage_test_upper_limit} V]).");
-
+                        CurrentTestState = DCVoltageTestState.Failed;
+                        await Task.Delay(4000);
+                        CurrentTestState = DCVoltageTestState.Waiting;
                     }
                 }
                 else

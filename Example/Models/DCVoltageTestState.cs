@@ -10,7 +10,7 @@ namespace Example.Models
     {
         Waiting,
         Measuring,
-        Sucess,
+        Success,
         Failed
 
     }
