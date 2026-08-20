@@ -64,6 +64,33 @@ namespace Example.ViewModels
             }
         }
 
+        private string _lastDCVoltageMeassure;
+
+        public string LastDCVoltageMeassure
+        {
+            get => _lastDCVoltageMeassure;
+
+            set
+            {
+                _lastDCVoltageMeassure = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private ProcessStatus _testStatus;
+
+        public ProcessStatus testStatus
+        {
+            get => _testStatus;
+            set
+            {
+                _testStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public DCVoltage_test_ViewModel(IConfigService config ,ILoggerService looger,ISerialDevice serialDevice)
         {
             _config = config;
@@ -105,6 +132,9 @@ namespace Example.ViewModels
 
             CurrentTestState = DCVoltageTestState.Waiting;
 
+
+            testStatus = ProcessStatus.Idle;
+
             await Task.Delay(1500);
 
             try
@@ -126,6 +156,8 @@ namespace Example.ViewModels
                 if (string.IsNullOrWhiteSpace(rawResponse))
                 {
                     _logger.Warn(LogCategory.Application, "El multimetro no devolvio respuesta");
+
+                    LastDCVoltageMeassure = "No se obtuvo una respuesta valida";
                     return;
                 }
                 _logger.Info(LogCategory.Application, $"Lectura raw recibida {rawResponse}");
@@ -137,6 +169,7 @@ namespace Example.ViewModels
                 {
                     _logger.Info(LogCategory.Application, $"Voltaje DC medido: {measuredVoltage}");
 
+                    LastDCVoltageMeassure = measuredVoltage.ToString();
 
                     //Verificar evaluacion con valores limites 
 
@@ -149,6 +182,8 @@ namespace Example.ViewModels
 
                         CurrentTestState = DCVoltageTestState.Success;
 
+                        testStatus =ProcessStatus.Sucess;
+
                         await Task.Delay(4000);
 
                         CurrentTestState = DCVoltageTestState.Waiting;
@@ -159,6 +194,7 @@ namespace Example.ViewModels
                     {
                         _logger.Warn(LogCategory.Application, $"Resultado :FAIL (medicion fuera del rango permitido [{DC_voltage_test_lower_limit} V - {DC_voltage_test_upper_limit} V]).");
                         CurrentTestState = DCVoltageTestState.Failed;
+                        testStatus = ProcessStatus.Failed;
                         await Task.Delay(4000);
                         CurrentTestState = DCVoltageTestState.Waiting;
                     }

@@ -39,6 +39,20 @@ namespace Example.ViewModels
             }
         }
 
+        //DC VOLTAGE TEST 1
+        private DCVoltage_test_ViewModel _DCVoltageVM;
+        public DCVoltage_test_ViewModel DCVoltageVM
+        {
+            get => _DCVoltageVM;
+
+            set
+            {
+                _DCVoltageVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public ViewModelBase? CurrentView
         {
             get => _navigationStore.CurrentViewModel;

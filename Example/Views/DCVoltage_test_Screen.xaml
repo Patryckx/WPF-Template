@@ -89,7 +89,7 @@
                         FontWeight="Regular"
                         Margin="10"
                         FontFamily="Segoe UI"
-                        TextWrapping="Wrap"
+                        TextWrapping="WrapWithOverflow"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"><Run Language="es-mx"
                         Text="Realizando prueba de voltaje directo por favor, 
@@ -117,38 +117,159 @@
             
             <!--RESULTS-->
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="15">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"/>
                     <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
                 <!--Aqui iria el stacked widget-->
+                <!--LIMITES-->
                 <Grid Grid.Row="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--Limite inferior-->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!--Title-->
+
+                        <Grid Grid.Row="0">
+                            <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Margin="10"
+                            Foreground="DarkCyan"
+                            FontFamily="Segoe UI"
+                            HorizontalAlignment="center"
+                            VerticalAlignment="Center"><Run Language="es-mx"
+                            Text="Limite inferior"/>
+                            </TextBlock>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Margin="10"
+                            Text="{Binding DC_voltage_test_lower_limit}" 
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Arial"
+                            />              
+                        </Grid>
+
+                    </Grid>
+
+                    <!--Limite superior-->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <TextBlock
+                        FontSize="24"
+                        FontWeight="Bold"
+                        Margin="10"
+                        Foreground="DarkCyan"
+                        FontFamily="Segoe UI"
+                        HorizontalAlignment="center"
+                        VerticalAlignment="Center"><Run Language="es-mx"
+                        Text="Limite superior"/>
+                            </TextBlock>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Margin="10"
+                            Text="{Binding DC_voltage_test_upper_limit}" 
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Arial"
+                            />      
+                        </Grid>
+
+
+
+                    </Grid>
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <!--VOLTAGE VALUE-->
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+
+                        <TextBlock
+                        FontSize="24"
+                        FontWeight="Bold"
+                        Margin="10"
+                        Foreground="DarkGreen"
+                        FontFamily="Segoe UI"
+                        HorizontalAlignment="center"
+                        VerticalAlignment="Center"><Run Language="es-mx"
+                        Text="Ultima medida obtenida VDC "/>
+                        </TextBlock>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Margin="10"
+                            Text="{Binding LastDCVoltageMeassure}" 
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Arial"
+                            />              
+                    </Grid>
+
+                </Grid>
+
+
+                 
+
+                <Grid Grid.Row="2">
 
                     <!-- WAITING -->
 
                     <Image
-                        Source="/Resources/Images/dc_test_wait_visual_help.png"
-                        Stretch="Uniform">
+                            Source="/Resources/Images/dc_test_wait_visual_help.png"
+                            Stretch="Uniform">
 
                         <Image.Style>
 
                             <Style TargetType="Image">
 
                                 <Setter
-                    Property="Visibility"
-                    Value="Collapsed"/>
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
 
                                 <Style.Triggers>
 
                                     <DataTrigger
-                        Binding="{Binding CurrentTestState}"
-                        Value="Waiting">
+                                        Binding="{Binding CurrentTestState}"
+                                        Value="Waiting">
 
                                         <Setter
-                            Property="Visibility"
-                            Value="Visible"/>
+                                            Property="Visibility"
+                                            Value="Visible"/>
 
                                     </DataTrigger>
 
@@ -172,18 +293,18 @@
                             <Style TargetType="Image">
 
                                 <Setter
-                    Property="Visibility"
-                    Value="Collapsed"/>
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
 
                                 <Style.Triggers>
 
                                     <DataTrigger
-                        Binding="{Binding CurrentTestState}"
-                        Value="Measuring">
+                                        Binding="{Binding CurrentTestState}"
+                                        Value="Measuring">
 
                                         <Setter
-                            Property="Visibility"
-                            Value="Visible"/>
+                                        Property="Visibility"
+                                        Value="Visible"/>
 
                                     </DataTrigger>
 
@@ -207,18 +328,18 @@
                             <Style TargetType="Image">
 
                                 <Setter
-                    Property="Visibility"
-                    Value="Collapsed"/>
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
 
                                 <Style.Triggers>
 
                                     <DataTrigger
-                        Binding="{Binding CurrentTestState}"
-                        Value="Success">
+                                        Binding="{Binding CurrentTestState}"
+                                        Value="Success">
 
                                         <Setter
-                            Property="Visibility"
-                            Value="Visible"/>
+                                            Property="Visibility"
+                                            Value="Visible"/>
 
                                     </DataTrigger>
 
@@ -242,18 +363,18 @@
                             <Style TargetType="Image">
 
                                 <Setter
-                                        Property="Visibility"
-                                        Value="Collapsed"/>
+                        Property="Visibility"
+                        Value="Collapsed"/>
 
                                 <Style.Triggers>
 
                                     <DataTrigger
-                                        Binding="{Binding CurrentTestState}"
-                                        Value="Failed">
+                        Binding="{Binding CurrentTestState}"
+                        Value="Failed">
 
                                         <Setter
-                                            Property="Visibility"
-                                            Value="Visible"/>
+                            Property="Visibility"
+                            Value="Visible"/>
 
                                     </DataTrigger>
 
@@ -267,8 +388,10 @@
 
 
                 </Grid>
-                
+
             </Grid>
+
+            
             
         </Grid>
             

@@ -103,7 +103,7 @@
                             
                             Text="1"
                             FontSize="24"
-                            Status="{Binding ConnectionVM.PlcStatus}"
+                            Status="{Binding DCVoltageVM.testStatus}"
                             Width="140"
                             Height="auto"
                             Padding="0"/>

@@ -14,18 +14,17 @@ namespace Example.Converters
     {
         public object Convert (object value, Type targetType,object parameter, CultureInfo culture)
         {
-            if (value is not AppStatus status)
+            if (value is not ProcessStatus status)
                 return Brushes.Gray;
 
             return status switch
             {
-                AppStatus.Error => Brushes.Red,
+                ProcessStatus.Idle => Brushes.Orange,
+                ProcessStatus.OnProcess => Brushes.DodgerBlue,
+                ProcessStatus.Sucess => Brushes.Green,
+                ProcessStatus.Failed => Brushes.Red,
 
-                AppStatus.Idle => Brushes.Orange,
-
-                AppStatus.AllDevicesConnected => Brushes.Green,
-
-                _ => Brushes.DarkGray
+                _ => Brushes.Gray
             };
         }
 
