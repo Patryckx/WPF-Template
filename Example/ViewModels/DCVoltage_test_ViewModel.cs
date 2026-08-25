@@ -1,26 +1,25 @@
 ﻿using ConfigIniLib.interfaces;
 using Example.Models;
 using Example.Navigation.Services;
+using Example.Services;
 using Example.Services.Interfaces;
 using Example.ViewModels.Base;
-
-
 using IndustrialSerialTool.Devices;
-using IndustrialSerialTool.Interfaces;
 using IndustrialSerialTool.Drivers;
-
+using IndustrialSerialTool.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Globalization;
 
 namespace Example.ViewModels
 {
     public class DCVoltage_test_ViewModel :ViewModelBase
     {
 
+        private readonly IAppStateService _appStateService;
         private readonly IConfigService _config;
         private readonly ILoggerService _logger;
         private readonly ISerialDevice _serialDevice;
@@ -91,8 +90,9 @@ namespace Example.ViewModels
         }
 
 
-        public DCVoltage_test_ViewModel(IConfigService config ,ILoggerService looger,ISerialDevice serialDevice)
+        public DCVoltage_test_ViewModel(IAppStateService appStateService, IConfigService config ,ILoggerService looger,ISerialDevice serialDevice)
         {
+            _appStateService = appStateService;
             _config = config;
             _logger = looger;
             _serialDevice = serialDevice;
@@ -147,6 +147,10 @@ namespace Example.ViewModels
                     if (!connected)
                     {
                         _logger.Error(LogCategory.Application, "No se pudo conectar al puerto serial");
+
+
+                        _appStateService.DCVoltageStatus = ProcessStatus.Failed;
+
                         return;
                     }
                 }
@@ -158,6 +162,8 @@ namespace Example.ViewModels
                     _logger.Warn(LogCategory.Application, "El multimetro no devolvio respuesta");
 
                     LastDCVoltageMeassure = "No se obtuvo una respuesta valida";
+
+
                     return;
                 }
                 _logger.Info(LogCategory.Application, $"Lectura raw recibida {rawResponse}");
@@ -188,6 +194,9 @@ namespace Example.ViewModels
 
                         CurrentTestState = DCVoltageTestState.Waiting;
 
+                        _appStateService.DCVoltageStatus = ProcessStatus.Sucess;
+
+
 
                     }
                     else
@@ -197,7 +206,11 @@ namespace Example.ViewModels
                         testStatus = ProcessStatus.Failed;
                         await Task.Delay(4000);
                         CurrentTestState = DCVoltageTestState.Waiting;
+
+                        _appStateService.DCVoltageStatus = ProcessStatus.Failed;
+
                     }
+
                 }
                 else
                 {

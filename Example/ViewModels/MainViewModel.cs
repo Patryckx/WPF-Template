@@ -119,14 +119,14 @@ namespace Example.ViewModels
 
                 _logger.Info(LogCategory.Database,"Conexion correcta con la base de datos");
 
-                _appState.Status = AppStatus.Idle;
+                _appState.AppGeneralStatus = ProcessStatus.Sucess;
             }
             else
             {
 
                 _logger.Info(LogCategory.Database,"Conexion fallida con la base de datos");
 
-                _appState.Status = AppStatus.Error;
+                _appState.AppGeneralStatus = ProcessStatus.Failed;
 
             }
 

@@ -179,12 +179,12 @@ namespace Example.ViewModels
                     ToggleCoilCommand.RaiseCanExecuteChanged();
 
 
-                    _appState.Status = AppStatus.AllDevicesConnected;
+                    _appState.AppGeneralStatus = ProcessStatus.Sucess;
 
                 }
                 catch (Exception ex)
                 {
-                    _appState.Status = AppStatus.Error;
+                    _appState.AppGeneralStatus = ProcessStatus.Failed;
                     
                     PlcStatus = ProcessStatus.Failed;
 

@@ -103,7 +103,7 @@
                             
                             Text="1"
                             FontSize="24"
-                            Status="{Binding DCVoltageVM.testStatus}"
+                            Status="{Binding AppState.DCVoltageStatus}"
                             Width="140"
                             Height="auto"
                             Padding="0"/>
@@ -112,7 +112,7 @@
                             Grid.Row="2"
                             Text="2"
                             FontSize="24"
-                            Status="{Binding SecondStep}"
+                            Status="{Binding AppState.ResistanceTestStatus}"
                             Width="140"
                             Height="auto"
                             Padding="0"/>
@@ -121,7 +121,7 @@
                             Grid.Row="3"
                             Text="3"
                             FontSize="24"
-                            Status="{Binding ThirdStep}"
+                            Status="{Binding AppState.LCDVisionTestStatus}"
                             Width="140"
                             Height="auto"
                             Padding="0"/>
@@ -402,7 +402,7 @@
 
         <Grid Grid.Row="1" x:Name="StatusBar" >
 
-            <Border Background="{Binding AppState.Status,
+            <Border Background="{Binding AppState.AppGeneralStatus,
                              Converter={StaticResource StatusBrushConverter}}"/>
                 
          

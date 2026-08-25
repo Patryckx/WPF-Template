@@ -9,10 +9,13 @@ namespace Example.Services.Interfaces
 {
     public interface IAppStateService
     {
+        ProcessStatus AppGeneralStatus { get; set; }
+
         ProcessStatus DCVoltageStatus { get; set; }
 
-        ProcessStatus SecondTestStatus { get; set; }
+        ProcessStatus ResistanceTestStatus{ get; set; }
+        
+        ProcessStatus LCDVisionTestStatus { get; set; }
 
-        ProcessStatus ThirdTestStatus { get; set; }
     }
 }
