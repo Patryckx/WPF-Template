@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using LocalStorageLibrary.Interfaces;
 
 namespace Example.Services
 {
@@ -18,15 +19,19 @@ namespace Example.Services
         private readonly IConfigService _config;
         private readonly ILoggerService _logger;
         private readonly IDataService _database;
+        private readonly ILocalDatabase _localDatabase;
+
 
         public StartupService(
             IConfigService config,
             ILoggerService logger,
-            IDataService database)
+            IDataService database,
+            ILocalDatabase localDatabase)
         {
             _config = config;
             _logger = logger;
             _database = database;
+            _localDatabase = localDatabase;
         }
 
         public async Task InitializeAsync(
@@ -70,7 +75,16 @@ namespace Example.Services
             progress.Report(new StartupProgress
             {
                 Progress = 80,
-                Message = "Finalizando inicialización..."
+                Message = "Verificando almacenamiento local..."
+            });
+
+            await InitializeLocalDatabaseAsync();
+            await Task.Delay(1000);
+
+            progress.Report(new StartupProgress
+            {
+                Progress = 90,
+                Message = "Finalizando inicializacion"
             });
 
             await FinalizeStartupAsync();
@@ -81,6 +95,7 @@ namespace Example.Services
                 Progress = 100,
                 Message = "Inicialización completada."
             });
+
 
 
         }
@@ -137,7 +152,7 @@ namespace Example.Services
 
 
 
-
+        //SERVER DATABASE TASK
         private async Task TestDatabaseAsync()
         {
             _logger.Info(
@@ -162,7 +177,18 @@ namespace Example.Services
         }
 
 
+        //LOCAL DATABASE TASK
 
+        private async Task InitializeLocalDatabaseAsync()
+        {
+            _logger.Info(LogCategory.Database, "Inicializando almacenamiento local (SQLITE)");
+
+            await _localDatabase.InitializeAsync();
+
+
+            _logger.Info(LogCategory.Database, "Almacenamiento Inicializado");
+
+        }
 
 
 

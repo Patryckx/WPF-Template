@@ -13,6 +13,8 @@ using Example.ViewModels;
 using IndustrialSerialTool.Devices;
 using IndustrialSerialTool.Interfaces;
 using IndustrialSerialTool.Models;
+using LocalStorageLibrary.Interfaces;
+using LocalStorageLibrary.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ModbusTcpLib;
@@ -102,6 +104,9 @@ public partial class App : Application
 
         services.AddSingleton<MainWindow>();
 
+
+
+        //SERVER DATABASE STORAGE
         services.AddSingleton<IDataService>(provider =>
 
         {
@@ -122,6 +127,24 @@ public partial class App : Application
             return new SqlDatabaseService(db);
 
         });
+
+        //LOCAL STORAGE DATABASE SERVICE
+
+        services.AddSingleton<ILocalDatabase>(provider =>
+        {
+            string databasePath = IOPath.Combine(
+               Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+
+               "Example",//SOLUTION NAME
+               "Data" ,//Folder for local storage .db file
+               "production.db"     
+                );
+
+            return new SQLiteDatabase(databasePath);
+        });
+
+
+
 
         services.AddSingleton<IRegisterService, RegisterService>();
 

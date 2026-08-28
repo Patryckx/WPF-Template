@@ -2,6 +2,7 @@
   <Project Path="../Config__ni_lib/Config__ni_lib/ConfigIniLib.csproj" />
   <Project Path="../ModbusTcpLib/ModbusTcpLib/ModbusTcpLib.csproj" />
   <Project Path="../SerialLib/SerialLib/IndustrialSerialTool.csproj" />
+  <Project Path="../SqlLiteLib/SqlLiteLib/LocalStorageLibrary.csproj" />
   <Project Path="../SqlUtilityLibrary/SqlUtilityLibrary/SqlUtilityLibrary.csproj" />
   <Project Path="Example/Example.csproj" />
 </Solution>
