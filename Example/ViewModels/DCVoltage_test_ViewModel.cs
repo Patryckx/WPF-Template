@@ -7,6 +7,9 @@ using Example.ViewModels.Base;
 using IndustrialSerialTool.Devices;
 using IndustrialSerialTool.Drivers;
 using IndustrialSerialTool.Interfaces;
+using LocalStorageLibrary.Interfaces;
+using LocalStorageLibrary.Models;
+using LocalStorageLibrary.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,6 +27,8 @@ namespace Example.ViewModels
         private readonly ILoggerService _logger;
         private readonly ISerialDevice _serialDevice;
         private readonly OwonXdm1041Driver _multimeter;
+
+        private readonly IProductionRepository _productionRepository;
 
         private DCVoltageTestState _currentTestState =
             DCVoltageTestState.Waiting;
@@ -90,7 +95,13 @@ namespace Example.ViewModels
         }
 
 
-        public DCVoltage_test_ViewModel(IAppStateService appStateService, IConfigService config ,ILoggerService looger,ISerialDevice serialDevice)
+        public DCVoltage_test_ViewModel(
+            IAppStateService appStateService,
+            IConfigService config ,
+            ILoggerService looger,
+            ISerialDevice serialDevice,
+            IProductionRepository productionRepository
+            )
         {
             _appStateService = appStateService;
             _config = config;
@@ -98,6 +109,8 @@ namespace Example.ViewModels
             _serialDevice = serialDevice;
 
             _multimeter = new OwonXdm1041Driver(_serialDevice);
+
+            _productionRepository = productionRepository;
 
             //comandos asíncronos en MVVM, considera un AsyncRelayCommand
             //DC_Voltage_Meassure_Command = new RelayCommand(DC_Voltage_Meassure);
@@ -196,7 +209,14 @@ namespace Example.ViewModels
 
                         _appStateService.DCVoltageStatus = ProcessStatus.Sucess;
 
+                        var record = new ProductionRecord
+                        {
+                            TimeStamp = DateTime.Now,
+                            Quantity = 1
+                        };
 
+
+                        long id = await _productionRepository.InsertAsync(record);
 
                     }
                     else
@@ -208,6 +228,16 @@ namespace Example.ViewModels
                         CurrentTestState = DCVoltageTestState.Waiting;
 
                         _appStateService.DCVoltageStatus = ProcessStatus.Failed;
+
+
+                        var record = new ProductionRecord
+                        {
+                            TimeStamp = DateTime.Now,
+                            Quantity = 1
+                        };
+
+
+                        long id = await _productionRepository.InsertAsync(record);
 
                     }
 

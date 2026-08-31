@@ -14,6 +14,7 @@ using IndustrialSerialTool.Devices;
 using IndustrialSerialTool.Interfaces;
 using IndustrialSerialTool.Models;
 using LocalStorageLibrary.Interfaces;
+using LocalStorageLibrary.Repositories;
 using LocalStorageLibrary.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -143,7 +144,9 @@ public partial class App : Application
             return new SQLiteDatabase(databasePath);
         });
 
+        //LOCAL STORAGE REPOSITORY RECORD
 
+        services.AddSingleton<IProductionRepository, ProductionRepository>();
 
 
         services.AddSingleton<IRegisterService, RegisterService>();
