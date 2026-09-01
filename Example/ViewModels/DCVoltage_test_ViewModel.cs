@@ -1,4 +1,6 @@
 ﻿using ConfigIniLib.interfaces;
+using CSVTraceabilityLibrary.Interfaces;
+using CSVTraceabilityLibrary.Models;
 using Example.Models;
 using Example.Navigation.Services;
 using Example.Services;
@@ -29,6 +31,10 @@ namespace Example.ViewModels
         private readonly OwonXdm1041Driver _multimeter;
 
         private readonly IProductionRepository _productionRepository;
+        
+        private readonly ITraceabilityService _traceabilityService;
+
+
 
         private DCVoltageTestState _currentTestState =
             DCVoltageTestState.Waiting;
@@ -100,7 +106,8 @@ namespace Example.ViewModels
             IConfigService config ,
             ILoggerService looger,
             ISerialDevice serialDevice,
-            IProductionRepository productionRepository
+            IProductionRepository productionRepository,
+            ITraceabilityService traceabilityService
             )
         {
             _appStateService = appStateService;
@@ -111,6 +118,8 @@ namespace Example.ViewModels
             _multimeter = new OwonXdm1041Driver(_serialDevice);
 
             _productionRepository = productionRepository;
+
+            _traceabilityService = traceabilityService;
 
             //comandos asíncronos en MVVM, considera un AsyncRelayCommand
             //DC_Voltage_Meassure_Command = new RelayCommand(DC_Voltage_Meassure);
@@ -218,6 +227,19 @@ namespace Example.ViewModels
 
                         long id = await _productionRepository.InsertAsync(record);
 
+
+                        var csv_record = new TraceabilityRecord
+                        {
+                            Timestamp = DateTime.Now,
+                            SerialNumber="SNOOO",
+                            Product="ST02",
+                            Result="OK",
+                            ErrorCode=string.Empty
+                        };
+                            
+                        await _traceabilityService.RegisterAsync(csv_record);
+                            
+
                     }
                     else
                     {
@@ -238,6 +260,17 @@ namespace Example.ViewModels
 
 
                         long id = await _productionRepository.InsertAsync(record);
+
+                        var csv_record = new TraceabilityRecord
+                        {
+                            Timestamp = DateTime.Now,
+                            SerialNumber = "SNOOO",
+                            Product = "ST02",
+                            Result = "OK",
+                            ErrorCode = string.Empty
+                        };
+
+                        await _traceabilityService.RegisterAsync(csv_record);
 
                     }
 

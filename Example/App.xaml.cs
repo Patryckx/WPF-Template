@@ -1,5 +1,8 @@
 ﻿using ConfigIniLib;
 using ConfigIniLib.interfaces;
+using CSVTraceabilityLibrary.Configuration;
+using CSVTraceabilityLibrary.Interfaces;
+using CSVTraceabilityLibrary.Services;
 using EthModbus.Services.Interfaces;
 using Example;
 using Example.Models;
@@ -161,6 +164,15 @@ public partial class App : Application
 
             return new AppConfigService(path);
         });
+
+        //CSV SERVICE
+
+        services.AddSingleton(new CsvTraceabilityOptions
+        {
+            RootDirectory=@"C:\Registros Tester ULV90"
+        });
+
+        services.AddSingleton<ITraceabilityService, CsvTraceabilityService > ();
 
         services.AddSingleton<IModbusService,ModbusService>();
 
