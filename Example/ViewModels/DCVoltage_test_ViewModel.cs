@@ -203,6 +203,19 @@ namespace Example.ViewModels
 
                     bool isPass = measuredVoltage >= DC_voltage_test_lower_limit && measuredVoltage <= DC_voltage_test_upper_limit;
 
+
+                    var csvRecord = new TraceabilityRecord
+                    {
+                        Timestamp = DateTime.Now,
+                        SerialNumber = "SNOOO",
+                        Product = "PRODUCT_A",
+                        Station = "ST02",
+                        Result = isPass ? "OK" : "NOK",
+                        ErrorCode = isPass ? string.Empty : "DC_VOLTAGE_OUT_OF_RANGE"
+                    };
+
+                    await _traceabilityService.RegisterAsync(csvRecord);
+
                     if (isPass)
 
                     {
@@ -227,17 +240,7 @@ namespace Example.ViewModels
 
                         long id = await _productionRepository.InsertAsync(record);
 
-
-                        var csv_record = new TraceabilityRecord
-                        {
-                            Timestamp = DateTime.Now,
-                            SerialNumber="SNOOO",
-                            Product="ST02",
-                            Result="OK",
-                            ErrorCode=string.Empty
-                        };
-                            
-                        await _traceabilityService.RegisterAsync(csv_record);
+                        await _traceabilityService.RegisterAsync(csvRecord);
                             
 
                     }
@@ -261,16 +264,8 @@ namespace Example.ViewModels
 
                         long id = await _productionRepository.InsertAsync(record);
 
-                        var csv_record = new TraceabilityRecord
-                        {
-                            Timestamp = DateTime.Now,
-                            SerialNumber = "SNOOO",
-                            Product = "ST02",
-                            Result = "OK",
-                            ErrorCode = string.Empty
-                        };
+                        await _traceabilityService.RegisterAsync(csvRecord);
 
-                        await _traceabilityService.RegisterAsync(csv_record);
 
                     }
 
